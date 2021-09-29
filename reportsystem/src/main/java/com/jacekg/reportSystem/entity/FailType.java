@@ -1,10 +1,18 @@
 package com.jacekg.reportSystem.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +26,15 @@ public class FailType {
 	
 	@Column(name = "name")
 	private String name;
+	
+	@ManyToMany(fetch = FetchType.LAZY,
+			cascade = {CascadeType.DETACH, CascadeType.MERGE,
+					CascadeType.PERSIST, CascadeType.REFRESH})
+	@JoinTable(
+			name = "report_fail_type",
+			joinColumns = @JoinColumn(name = "fail_type_id"),
+			inverseJoinColumns = @JoinColumn(name = "report_id"))
+	private List<Report> reports;
 	
 	public FailType() {
 		
@@ -39,4 +56,21 @@ public class FailType {
 		this.name = name;
 	}
 
+	public List<Report> getReports() {
+		return reports;
+	}
+
+	public void setReports(List<Report> reports) {
+		this.reports = reports;
+	}
+	
+	private void addReport(Report report) {
+		
+		if (reports == null) {
+			reports = new ArrayList<>();
+		}
+		
+		reports.add(report);
+	}
+	
 }

@@ -3,11 +3,14 @@ package com.jacekg.reportSystem.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,7 +25,17 @@ public class ProductionLine {
 	@Column(name = "name")
 	private String name;
 	
+	@OneToMany(fetch = FetchType.LAZY,
+			mappedBy = "productionLine",
+			cascade = {CascadeType.DETACH, CascadeType.MERGE,
+					CascadeType.PERSIST, CascadeType.REFRESH})
 	private List<ProductionMachine> productionMachines;
+	
+	@OneToMany(fetch = FetchType.LAZY,
+			mappedBy = "productionLine",
+			cascade = {CascadeType.DETACH, CascadeType.MERGE,
+					CascadeType.PERSIST, CascadeType.REFRESH})
+	private List<Report> reports;
 	
 	public ProductionLine() {
 		
@@ -57,6 +70,17 @@ public class ProductionLine {
 		productionMachines.add(productionMachine);
 		
 		productionMachine.setProductionLine(this);
+	}
+	
+	private void addReport(Report report) {
+		
+		if (reports == null) {
+			reports = new ArrayList<>();
+		}
+		
+		reports.add(report);
+		
+		report.setProductionLine(this);
 	}
 	
 }

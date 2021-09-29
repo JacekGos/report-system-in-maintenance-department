@@ -1,6 +1,8 @@
 package com.jacekg.reportSystem.entity;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,12 +12,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.ManyToAny;
 
 @Entity
 @Table(name = "\"user\"")
@@ -58,6 +59,12 @@ public class User {
 	joinColumns = @JoinColumn(name = "user_id"),
 	inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Collection<Role> roles;
+	
+	@OneToMany(fetch = FetchType.LAZY,
+			mappedBy = "user",
+			cascade = {CascadeType.DETACH, CascadeType.MERGE,
+					CascadeType.PERSIST, CascadeType.REFRESH})
+	private List<Report> reports;
 	
 	public User() {
 		
@@ -181,6 +188,16 @@ public class User {
 		this.roles = roles;
 	}
 	
+	private void addReport(Report report) {
+		
+		if (reports == null) {
+			reports = new ArrayList<>();
+		}
+		
+		reports.add(report);
+		
+		report.setUser(this);
+	}
 	
 }
 
