@@ -20,12 +20,14 @@
 				</h5>
 
 				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" href="#"> <span data-feather="home"></span>
+					aria-current="page" href="${pageContext.request.contextPath}/report/showAddReportForm"> 
+					<span data-feather="home"></span>
 						<i class="bi bi-receipt"></i> Dodaj raport
 				</a></li>
 
 				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" href="#"> <span data-feather="home"></span>
+					aria-current="page" href="${pageContext.request.contextPath}/report/showReportList"> 
+					<span data-feather="home"></span>
 						<i class="bi bi-calendar2-minus"></i> Historia raportów
 				</a></li>
 
@@ -38,12 +40,12 @@
 
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page"
-						href="${pageContext.request.contextPath}/book/showAddBookForm"> <span
+						href="${pageContext.request.contextPath}/user/showAddUserForm"> <span
 							data-feather="home"></span><i class="bi bi-person-plus-fill"></i> Dodaj użytkownika
 					</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page"
-						href="${pageContext.request.contextPath}/book/showAddBookForm"> <span
+						href="${pageContext.request.contextPath}/user/showUsersList"> <span
 							data-feather="home"></span> <i class="bi bi-person-lines-fill"></i> Dane użytkowników
 					</a></li>
 					
@@ -54,20 +56,19 @@
 
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page"
-						href="${pageContext.request.contextPath}/book/showAddBookForm"> <span
+						href="${pageContext.request.contextPath}/production/showAddProdLineForm"> <span
 							data-feather="home"></span><i class="bi bi-grid-3x3-gap-fill"></i> Dodaj linie
 					</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page"
-						href="${pageContext.request.contextPath}/book/showAddBookForm"> <span
+						href="${pageContext.request.contextPath}/production/showAddProdMachineForm"> <span
 							data-feather="home"></span><i class="bi bi-grid-3x3-gap-fill"></i> Dodaj stacje
 					</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page"
-						href="${pageContext.request.contextPath}/book/showAddBookForm"> <span
+						href="${pageContext.request.contextPath}/production/showProdMachinesList"> <span
 							data-feather="home"></span><i class="bi bi-grid-3x3-gap-fill"></i> Dane linii
 					</a></li>
-					
 
 				</security:authorize>
 
