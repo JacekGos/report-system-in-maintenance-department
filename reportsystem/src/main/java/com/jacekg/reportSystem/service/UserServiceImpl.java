@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
 				user.getUserName(), 
 				user.getPassword(),
 				user.isEnabled(),
-				user.isExpired(),
+				user.isNonExpired(),
 				user.isCredentialsNonExpired(),
 				user.isNonLocked(),
 				mapRolesToAuthorities(user.getRoles()));

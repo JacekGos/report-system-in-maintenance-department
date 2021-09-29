@@ -44,8 +44,8 @@ public class User {
 	@Column(name = "is_enabled")
 	private boolean isEnabled;
 	
-	@Column(name = "is_expired")
-	private boolean isExpired;
+	@Column(name = "is_non_expired")
+	private boolean isNonExpired;
 	 
 	@Column(name = "is_credentials_non_expired")
 	private boolean isCredentialsNonExpired;
@@ -64,7 +64,7 @@ public class User {
 	}
 
 	public User(Long id, String userName, String password, String firstName, String lastName, String email,
-			boolean isEnabled, boolean isExpired, boolean isCredentialsNonExpired, boolean isNonLocked) {
+			boolean isEnabled, boolean isNonExpired, boolean isCredentialsNonExpired, boolean isNonLocked) {
 		this.id = id;
 		this.userName = userName;
 		this.password = password;
@@ -72,13 +72,13 @@ public class User {
 		this.lastName = lastName;
 		this.email = email;
 		this.isEnabled = isEnabled;
-		this.isExpired = isExpired;
+		this.isNonExpired = isNonExpired;
 		this.isCredentialsNonExpired = isCredentialsNonExpired;
 		this.isNonLocked = isNonLocked;
 	}
 
 	public User(Long id, String userName, String password, String firstName, String lastName, String email,
-			boolean isEnabled, boolean isExpired, boolean isCredentialsNonExpired, boolean isNonLocked,
+			boolean isEnabled, boolean isNonExpired, boolean isCredentialsNonExpired, boolean isNonLocked,
 			Collection<Role> roles) {
 		this.id = id;
 		this.userName = userName;
@@ -87,7 +87,7 @@ public class User {
 		this.lastName = lastName;
 		this.email = email;
 		this.isEnabled = isEnabled;
-		this.isExpired = isExpired;
+		this.isNonExpired = isNonExpired;
 		this.isCredentialsNonExpired = isCredentialsNonExpired;
 		this.isNonLocked = isNonLocked;
 		this.roles = roles;
@@ -149,12 +149,12 @@ public class User {
 		this.isEnabled = isEnabled;
 	}
 	
-	public boolean isExpired() {
-		return isExpired;
+	public boolean isNonExpired() {
+		return isNonExpired;
 	}
 
-	public void setExpired(boolean isExpired) {
-		this.isExpired = isExpired;
+	public void setNonExpired(boolean isNonExpired) {
+		this.isNonExpired = isNonExpired;
 	}
 
 	public boolean isCredentialsNonExpired() {
