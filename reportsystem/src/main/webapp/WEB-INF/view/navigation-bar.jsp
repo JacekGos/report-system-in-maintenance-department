@@ -23,7 +23,7 @@
 
 			<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
 				<li><button class="dropdown-item" type="button">
-						<i class="bi bi-gear-fill"></i> Options ćął
+						<i class="bi bi-gear-fill"></i> Options
 					</button></li>
 
 				<form:form action="${pageContext.request.contextPath}/logout"

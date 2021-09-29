@@ -41,6 +41,18 @@ public class User {
 	@Column(name = "email")
 	private String email;
 	
+	@Column(name = "is_enabled")
+	private boolean isEnabled;
+	
+	@Column(name = "is_expired")
+	private boolean isExpired;
+	 
+	@Column(name = "is_credentials_non_expired")
+	private boolean isCredentialsNonExpired;
+	 
+	@Column(name = "is_non_locked")
+	private boolean isNonLocked;
+	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "users_roles",
 	joinColumns = @JoinColumn(name = "user_id"),
@@ -50,17 +62,23 @@ public class User {
 	public User() {
 		
 	}
-	
-	public User(Long id, String userName, String password, String firstName, String lastName, String email) {
+
+	public User(Long id, String userName, String password, String firstName, String lastName, String email,
+			boolean isEnabled, boolean isExpired, boolean isCredentialsNonExpired, boolean isNonLocked) {
 		this.id = id;
 		this.userName = userName;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.isEnabled = isEnabled;
+		this.isExpired = isExpired;
+		this.isCredentialsNonExpired = isCredentialsNonExpired;
+		this.isNonLocked = isNonLocked;
 	}
 
 	public User(Long id, String userName, String password, String firstName, String lastName, String email,
+			boolean isEnabled, boolean isExpired, boolean isCredentialsNonExpired, boolean isNonLocked,
 			Collection<Role> roles) {
 		this.id = id;
 		this.userName = userName;
@@ -68,6 +86,10 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.isEnabled = isEnabled;
+		this.isExpired = isExpired;
+		this.isCredentialsNonExpired = isCredentialsNonExpired;
+		this.isNonLocked = isNonLocked;
 		this.roles = roles;
 	}
 
@@ -118,6 +140,38 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public boolean isEnabled() {
+		return isEnabled;
+	}
+
+	public void setEnabled(boolean isEnabled) {
+		this.isEnabled = isEnabled;
+	}
+	
+	public boolean isExpired() {
+		return isExpired;
+	}
+
+	public void setExpired(boolean isExpired) {
+		this.isExpired = isExpired;
+	}
+
+	public boolean isCredentialsNonExpired() {
+		return isCredentialsNonExpired;
+	}
+
+	public void setCredentialsNonExpired(boolean isCredentialsNonExpired) {
+		this.isCredentialsNonExpired = isCredentialsNonExpired;
+	}
+
+	public boolean isNonLocked() {
+		return isNonLocked;
+	}
+
+	public void setNonLocked(boolean isNonLocked) {
+		this.isNonLocked = isNonLocked;
+	}
 
 	public Collection<Role> getRoles() {
 		return roles;
@@ -126,7 +180,8 @@ public class User {
 	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
 	}
-
+	
+	
 }
 
 

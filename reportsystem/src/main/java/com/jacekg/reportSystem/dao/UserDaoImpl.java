@@ -26,7 +26,6 @@ public class UserDaoImpl implements UserDao {
 		
 		User user = null;
 		try {
-			
 			user = query.getSingleResult();
 		} catch (Exception e) {
 			user = null;
