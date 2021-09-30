@@ -81,7 +81,7 @@ public class ProductionServiceImpl implements ProductionService {
 		
 		ProductionLine productionLine = productionLineDao.getProdLine(lineId);
 		
-		productionLine.getProductionMachines();
+		productionLine.getProductionMachines().get(0);
 				
 		return productionLine;
 	}

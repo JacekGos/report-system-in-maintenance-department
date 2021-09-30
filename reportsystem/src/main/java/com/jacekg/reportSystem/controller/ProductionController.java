@@ -154,6 +154,12 @@ public class ProductionController {
 		
 		ProductionLine productionLine = productionService.getProdLine(lineId);
 		
+		List<ProductionMachine> productionMachines = productionLine.getProductionMachines();
+		
+		if (productionMachines != null) {
+			model.addAttribute("productionMachines", productionMachines);
+		}
+		
 		model.addAttribute("productionLine", productionLine);
 		
 		return "prod-line-details";
