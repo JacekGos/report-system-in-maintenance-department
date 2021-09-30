@@ -7,8 +7,8 @@ public class FormProductionLine {
 	
 	private int id;
 	
-	@NotNull(message = "is required")
-	@Size(min = 1, message = "is required")
+	@NotNull(message = "wymagane")
+	@Size(min = 1, max = 20, message = "za długa/krótka nazwa")
 	private String name;
 	
 	public FormProductionLine() {

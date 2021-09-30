@@ -46,22 +46,27 @@
 						<form:form class="row g-3"
 							action="${pageContext.request.contextPath}/production/processProdLineForm"
 							modelAttribute="formProdLine" accept-charset="UTF-8">
-							<div class="col-md-6">
+							<div class="col-md-4">
 
-<%-- 								<form:hidden path="prodLineId" /> --%>
+								<form:hidden path="id" />
+
+								<label class="form-label">Nazwa linii</label>
+								<form:input path="name" placeholder="Nazwa" class="form-control" />
 
 								<form:errors path="name" cssClass="error" />
 
-								<label class="form-label">Nazwa linii</label>
-								<form:input path="name" placeholder="Nazwa"
-									class="form-control" />
-
 							</div>
-
 							<div class="col-12">
 								<button type="submit" class="btn btn-primary">Dodaj</button>
 							</div>
 						</form:form>
+						<c:if test="${errorMessage != null}">
+
+							<div class="alert alert-danger col-sm-4 col-xs-offset-4 col-xs-10">
+								${errorMessage}</div>
+
+						</c:if>
+
 					</aside>
 					<aside class="col-sm-4"></aside>
 				</div>
