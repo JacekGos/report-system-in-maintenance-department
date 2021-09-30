@@ -109,11 +109,18 @@ public class ProductionController {
 			return "prod-machine-form";
 		}
 		
-		ProductionMachine productionMachine = productionService.findProdMachineByName(formProductionMachine.getName());
+		ProductionMachine productionMachine = 
+				productionService.findProdMachineByNameAndLine(formProductionMachine.getName(), formProductionMachine.getProdLineId());
+		
 		if (productionMachine != null) {
 			
-			model.addAttribute("formProdMachine", new FormProductionLine());
+			model.addAttribute("formProdMachine", new FormProductionMachine());
 			model.addAttribute("errorMessage", "Podana maszyna już istnieje");
+			
+			prodLines = new LinkedHashMap<Integer, String>();
+			prodLines = loadProdLines();
+			
+			model.addAttribute("prodLines", prodLines);
 			
 			return "prod-machine-form";
 		}
@@ -121,6 +128,7 @@ public class ProductionController {
 		try {
 			productionService.save(formProductionMachine);
 		} catch (Exception e) {
+			
 			System.out.println("MY log ---> Unique value violated");
 			
 			String errorMessage = "Coś poszło nie tak";

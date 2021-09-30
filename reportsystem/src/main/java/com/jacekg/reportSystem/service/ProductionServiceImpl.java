@@ -38,7 +38,7 @@ public class ProductionServiceImpl implements ProductionService {
 	@Transactional
 	public void save(FormProductionMachine formProductionMachine) {
 		
-		System.out.println("My logs ---> Production service");
+//		System.out.println("My logs ---> Production service");
 		
 		ProductionMachine productionMachine = new ProductionMachine();
 		ProductionLine productionLine = productionLineDao.findProdLineById(formProductionMachine.getProdLineId());
@@ -60,8 +60,8 @@ public class ProductionServiceImpl implements ProductionService {
 
 	@Override
 	@Transactional
-	public ProductionMachine findProdMachineByName(String name) {
-		return productionMachineDao.findProdMachineByName(name);
+	public ProductionMachine findProdMachineByNameAndLine(String name, int lineId) {
+		return productionMachineDao.findProdMachineByNameAndLine(name, lineId);
 	}
 
 	@Override

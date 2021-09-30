@@ -40,5 +40,5 @@ public class FormProductionMachine {
 	public void setProdLineId(int prodLineId) {
 		this.prodLineId = prodLineId;
 	}
-	
+
 }

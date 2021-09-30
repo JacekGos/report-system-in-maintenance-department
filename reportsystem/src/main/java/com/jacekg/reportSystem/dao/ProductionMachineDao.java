@@ -4,7 +4,7 @@ import com.jacekg.reportSystem.entity.ProductionMachine;
 
 public interface ProductionMachineDao {
 
-	ProductionMachine findProdMachineByName(String name);
+	ProductionMachine findProdMachineByNameAndLine(String name, int lineId);
 
 	void save(ProductionMachine productionMachine);
 

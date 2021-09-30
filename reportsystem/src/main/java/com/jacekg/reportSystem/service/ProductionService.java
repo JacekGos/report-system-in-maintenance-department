@@ -17,7 +17,7 @@ public interface ProductionService {
 
 	ProductionLine findProdLineByName(String name);
 
-	ProductionMachine findProdMachineByName(String name);
+	ProductionMachine findProdMachineByNameAndLine(String name, int lineId);
 
 	List<ProductionLine> getProdLines();
 }
