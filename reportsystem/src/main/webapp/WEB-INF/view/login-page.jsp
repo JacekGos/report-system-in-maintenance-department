@@ -40,21 +40,21 @@
 
 						<article class="card-body">
 
-							<h4 class="card-title text-center mb-4 mt-1">Sign in</h4>
+							<h4 class="card-title text-center mb-4 mt-1">Zaloguj się</h4>
 							<hr>
 							<p class="text-success text-center">
 
 								<c:if test="${param.error != null}">
 
 									<div class="alert alert-danger col-xs-offset-1 col-xs-10">
-										Invalid username or password.</div>
+										Zły login lub hasło.</div>
 
 								</c:if>
 
 								<c:if test="${param.logout != null}">
 
 									<div class="alert alert-success col-xs-offset-1 col-xs-10">
-										You have been logged out.</div>
+										Zostałeś wylogowany.</div>
 
 								</c:if>
 
@@ -93,7 +93,7 @@
 								</div>
 
 								<p class="text-center">
-									<a href="#" class="btn">Forgot password?</a>
+									<a href="#" class="btn">Zapomniałeś hasła?</a>
 								</p>
 							</form:form>
 

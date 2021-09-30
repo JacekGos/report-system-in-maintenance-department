@@ -1,5 +1,6 @@
 package com.jacekg.reportSystem.service;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -38,18 +39,19 @@ public class ProductionServiceImpl implements ProductionService {
 	@Transactional
 	public void save(FormProductionMachine formProductionMachine) {
 		
-//		System.out.println("My logs ---> Production service");
-		
 		ProductionMachine productionMachine = new ProductionMachine();
 		ProductionLine productionLine = productionLineDao.findProdLineById(formProductionMachine.getProdLineId());
 		
 		productionMachine.setName(formProductionMachine.getName());
 
 		if (productionLine != null) {
+			
 			productionMachine.setProductionLine(productionLine);
+			productionLine.addProductionMachine(productionMachine);
 		}
-
+		
 		productionMachineDao.save(productionMachine);
+		productionLineDao.save(productionLine);
 	}
 	
 	@Override
@@ -67,8 +69,16 @@ public class ProductionServiceImpl implements ProductionService {
 	@Override
 	@Transactional
 	public List<ProductionLine> getProdLines() {
-
-		return productionLineDao.getProdLines();
+		
+		List<ProductionLine> productionLines = productionLineDao.getProdLines();
+		
+		
+//		ProductionLine productionLine = productionLines.get(0);
+//		System.out.println(productionLines.get(0).getName());
+//		
+//		List<ProductionMachine> machines = productionLine.getProductionMachines();
+//		System.out.println(machines.get(1).getName());
+		
+		return productionLines;
 	}
-
 }

@@ -66,7 +66,7 @@
 					</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page"
-						href="${pageContext.request.contextPath}/production/showProdMachinesList"> <span
+						href="${pageContext.request.contextPath}/production/showProdLinesList"> <span
 							data-feather="home"></span><i class="bi bi-grid-3x3-gap-fill"></i> Dane linii
 					</a></li>
 

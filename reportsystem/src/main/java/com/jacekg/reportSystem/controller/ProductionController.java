@@ -114,13 +114,12 @@ public class ProductionController {
 		
 		if (productionMachine != null) {
 			
-			model.addAttribute("formProdMachine", new FormProductionMachine());
-			model.addAttribute("errorMessage", "Podana maszyna już istnieje");
-			
 			prodLines = new LinkedHashMap<Integer, String>();
 			prodLines = loadProdLines();
 			
 			model.addAttribute("prodLines", prodLines);
+			model.addAttribute("formProdMachine", new FormProductionMachine());
+			model.addAttribute("errorMessage", "Podana maszyna już istnieje");
 			
 			return "prod-machine-form";
 		}
@@ -138,6 +137,19 @@ public class ProductionController {
 		
 		return "home";
 	}
+	
+	@GetMapping("/showProdLinesList")
+	public String showProdLinesList(Model model) {
+		
+		List<ProductionLine> prodLines = productionService.getProdLines();
+		
+		model.addAttribute("prodLines", prodLines);
+		
+		return "prod-lines-list";
+	}
+	
+	@GetMapping("/showProdLineDetails")
+	pub
 	
 	private Map<Integer, String> loadProdLines() {
 

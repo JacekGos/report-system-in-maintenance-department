@@ -69,6 +69,7 @@ public class ProductionLineDaoImpl implements ProductionLineDao {
 		Query<ProductionLine> query = 
 				currentSession.createQuery("FROM ProductionLine ORDER BY id", ProductionLine.class);
 		
+		
 		return query.getResultList();
 	}
 

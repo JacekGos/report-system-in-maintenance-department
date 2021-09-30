@@ -62,7 +62,23 @@ public class ProductionLine {
 		this.name = name;
 	}
 	
-	private void addProductionMachine(ProductionMachine productionMachine) {
+	public List<ProductionMachine> getProductionMachines() {
+		return productionMachines;
+	}
+
+	public void setProductionMachines(List<ProductionMachine> productionMachines) {
+		this.productionMachines = productionMachines;
+	}
+
+	public List<Report> getReports() {
+		return reports;
+	}
+
+	public void setReports(List<Report> reports) {
+		this.reports = reports;
+	}
+
+	public void addProductionMachine(ProductionMachine productionMachine) {
 		
 		if (productionMachines == null) {
 			productionMachines = new ArrayList<>();
@@ -73,7 +89,7 @@ public class ProductionLine {
 		productionMachine.setProductionLine(this);
 	}
 	
-	private void addReport(Report report) {
+	public void addReport(Report report) {
 		
 		if (reports == null) {
 			reports = new ArrayList<>();
