@@ -40,49 +40,40 @@
 				</div>
 
 
-				<%-- <div class="row">
-					<aside class="col-sm-2"></aside>
+				<div class="row">
+					<aside class="col-sm-4"></aside>
 					<aside class="col-sm-6">
-						<form:form class="row g-3" action="${pageContext.request.contextPath}/production/processProdLineForm"
+						<form:form class="row g-3"
+							action="${pageContext.request.contextPath}/production/processProdLineForm"
 							modelAttribute="formProdLine" accept-charset="UTF-8">
 							<div class="col-md-6">
-							
-								<form:hidden path="prodLineId"/>
-								
+
+<%-- 								<form:hidden path="prodLineId" /> --%>
+
 								<form:errors path="name" cssClass="error" />
-							
-								<label class="form-label">Title</label> 
-								<form:input path="title" placeholder="title" class="form-control" />
-							
+
+								<label class="form-label">Nazwa linii</label>
+								<form:input path="name" placeholder="Nazwa"
+									class="form-control" />
+
 							</div>
 
-							<div class="col-6">
-								<form:errors path="pagesNr" cssClass="error" />
-								<label class="form-label">Number of pages</label> 
-								<form:input path="pagesNr" placeholder="123" class="form-control" />
-							</div>
-							<div class="col-md-4">
-								<label for="inputState" class="form-label">Sector</label>
-								<form:select path="formSector" items="${sectors}" class="form-select" />
-							</div>
 							<div class="col-12">
-								<button type="submit" class="btn btn-primary">Add</button>
+								<button type="submit" class="btn btn-primary">Dodaj</button>
 							</div>
 						</form:form>
-
 					</aside>
-
 					<aside class="col-sm-4"></aside>
-				</div> --%>
+				</div>
 		</div>
 		</main>
 	</div>
 	</div>
 
-	
-	
 
-	
+
+
+
 
 
 	<%-- 
