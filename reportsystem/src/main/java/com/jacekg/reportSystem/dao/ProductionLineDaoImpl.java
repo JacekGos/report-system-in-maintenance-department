@@ -73,4 +73,14 @@ public class ProductionLineDaoImpl implements ProductionLineDao {
 		return query.getResultList();
 	}
 
+	@Override
+	public ProductionLine getProdLine(int lineId) {
+
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		ProductionLine productionLine = currentSession.get(ProductionLine.class, lineId);
+		
+		return productionLine;
+	}
+
 }

@@ -14,5 +14,7 @@ public interface ProductionLineDao {
 
 	ProductionLine findProdLineById(int prodLineId);
 
+	ProductionLine getProdLine(int lineId);
+
 
 }

@@ -20,4 +20,6 @@ public interface ProductionService {
 	ProductionMachine findProdMachineByNameAndLine(String name, int lineId);
 
 	List<ProductionLine> getProdLines();
+
+	ProductionLine getProdLine(int lineId);
 }

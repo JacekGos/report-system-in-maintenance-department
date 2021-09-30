@@ -72,13 +72,17 @@ public class ProductionServiceImpl implements ProductionService {
 		
 		List<ProductionLine> productionLines = productionLineDao.getProdLines();
 		
-		
-//		ProductionLine productionLine = productionLines.get(0);
-//		System.out.println(productionLines.get(0).getName());
-//		
-//		List<ProductionMachine> machines = productionLine.getProductionMachines();
-//		System.out.println(machines.get(1).getName());
-		
 		return productionLines;
+	}
+
+	@Override
+	@Transactional
+	public ProductionLine getProdLine(int lineId) {
+		
+		ProductionLine productionLine = productionLineDao.getProdLine(lineId);
+		
+		productionLine.getProductionMachines();
+				
+		return productionLine;
 	}
 }

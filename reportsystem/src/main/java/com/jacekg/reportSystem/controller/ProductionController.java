@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jacekg.reportSystem.entity.ProductionLine;
 import com.jacekg.reportSystem.entity.ProductionMachine;
@@ -149,7 +150,14 @@ public class ProductionController {
 	}
 	
 	@GetMapping("/showProdLineDetails")
-	pub
+	public String showProdLineDetails(@RequestParam("id") int lineId, Model model) {
+		
+		ProductionLine productionLine = productionService.getProdLine(lineId);
+		
+		model.addAttribute("productionLine", productionLine);
+		
+		return "prod-line-details";
+	}
 	
 	private Map<Integer, String> loadProdLines() {
 
