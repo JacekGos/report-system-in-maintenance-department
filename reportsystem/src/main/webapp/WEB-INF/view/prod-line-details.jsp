@@ -52,7 +52,7 @@
 								</thead>
 								<tbody>
 								
-									<c:if test="${productionMachines != null}">
+									<c:if test="${!productionMachines.isEmpty()}">
 										<c:forEach var="machine" items="${productionMachines}">
 											<tr>
 

@@ -1,6 +1,7 @@
 package com.jacekg.reportSystem.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -156,10 +157,11 @@ public class ProductionController {
 		
 		List<ProductionMachine> productionMachines = productionLine.getProductionMachines();
 		
-		if (productionMachines != null) {
-			model.addAttribute("productionMachines", productionMachines);
+		if (!productionMachines.isEmpty()) {
+			System.out.println("My log: is not empty");
 		}
 		
+		model.addAttribute("productionMachines", productionMachines);
 		model.addAttribute("productionLine", productionLine);
 		
 		return "prod-line-details";
