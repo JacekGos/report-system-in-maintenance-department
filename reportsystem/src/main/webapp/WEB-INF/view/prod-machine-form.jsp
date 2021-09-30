@@ -26,7 +26,7 @@
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 				<div
 					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-					<h1 class="h2">Dodaj linie</h1>
+					<h1 class="h2">Dodaj stacje</h1>
 					<div class="btn-toolbar mb-2 mb-md-0">
 						<div class="btn-group me-2">
 							<button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -44,37 +44,43 @@
 					<aside class="col-sm-4"></aside>
 					<aside class="col-sm-6">
 						<form:form class="row g-3"
-							action="${pageContext.request.contextPath}/production/processProdLineForm"
-							modelAttribute="formProdLine" accept-charset="UTF-8">
+							action="${pageContext.request.contextPath}/production/processProdMachineForm"
+							modelAttribute="formProdMachine" accept-charset="UTF-8">
+
 							<div class="col-md-4">
 
 								<form:hidden path="id" />
 
-								<label class="form-label">Nazwa linii</label>
+								<label class="form-label">Nazwa stacji</label>
 								<form:input path="name" placeholder="Nazwa" class="form-control" />
-
+								
 								<form:errors path="name" cssClass="error" />
+								
+								<div class="col-md-4">
+									<label for="inputState" class="form-label">Sector</label>
+									<form:select path="prodLineId" items="${prodLines}"
+										class="form-select" />
+								</div>
 
 							</div>
+							
 							<div class="col-12">
 								<button type="submit" class="btn btn-primary">Dodaj</button>
 							</div>
-							
+
 						</form:form>
-						
+
 						<c:if test="${errorMessage != null}">
-
-							<div class="alert alert-danger col-sm-4 col-xs-offset-4 col-xs-10">
+							<div
+								class="alert alert-danger col-sm-4 col-xs-offset-4 col-xs-10">
 								${errorMessage}</div>
-
 						</c:if>
 
 					</aside>
 					<aside class="col-sm-4"></aside>
 				</div>
+			</main>
 		</div>
-		</main>
-	</div>
 	</div>
 
 

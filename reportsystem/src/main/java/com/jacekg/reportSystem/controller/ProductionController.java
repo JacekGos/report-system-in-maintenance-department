@@ -1,7 +1,11 @@
 package com.jacekg.reportSystem.controller;
 
 import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +21,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jacekg.reportSystem.entity.ProductionLine;
+import com.jacekg.reportSystem.entity.ProductionMachine;
 import com.jacekg.reportSystem.form_entity.FormProductionLine;
+import com.jacekg.reportSystem.form_entity.FormProductionMachine;
 import com.jacekg.reportSystem.service.ProductionService;
 
 @Controller
@@ -26,6 +32,8 @@ public class ProductionController {
 	
 	@Autowired
 	private ProductionService productionService;
+	
+	private Map<Integer, String> prodLines;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder dataBinder) {
@@ -52,6 +60,7 @@ public class ProductionController {
 		}
 		
 		ProductionLine productionLine = productionService.findProdLineByName(formProductionLine.getName());
+		
 		if (productionLine != null) {
 			
 			model.addAttribute("formProdLine", new FormProductionLine());
@@ -76,9 +85,73 @@ public class ProductionController {
 	@GetMapping("/showAddProdMachineForm")
 	public String showAddProdMachineForm(Model model) {
 		
-		return "prod-line-form";
+		model.addAttribute("formProdMachine", new FormProductionMachine());
+		
+		prodLines = new LinkedHashMap<Integer, String>();
+		prodLines = loadProdLines();
+		
+		model.addAttribute("prodLines", prodLines);
+		
+		return "prod-machine-form";
 	}
 	
+	@PostMapping("/processProdMachineForm")
+	public String processProdMachineForm(@Valid @ModelAttribute("formProdMachine") FormProductionMachine formProductionMachine,
+			BindingResult bindingResult, Model model) {
+		
+		if (bindingResult.hasErrors()) {
+			
+			prodLines = new LinkedHashMap<Integer, String>();
+			prodLines = loadProdLines();
+			
+			model.addAttribute("prodLines", prodLines);
+			
+			return "prod-machine-form";
+		}
+		
+		ProductionMachine productionMachine = productionService.findProdMachineByName(formProductionMachine.getName());
+		if (productionMachine != null) {
+			
+			model.addAttribute("formProdMachine", new FormProductionLine());
+			model.addAttribute("errorMessage", "Podana maszyna już istnieje");
+			
+			return "prod-machine-form";
+		}
+		
+		try {
+			productionService.save(formProductionMachine);
+		} catch (Exception e) {
+			System.out.println("MY log ---> Unique value violated");
+			
+			String errorMessage = "Coś poszło nie tak";
+			
+			model.addAttribute("errorMessage", errorMessage);
+		}
+		
+		return "home";
+	}
 	
+	private Map<Integer, String> loadProdLines() {
+
+		List<ProductionLine> prodLineList = productionService.getProdLines();
+
+		Map<Integer, String> prodLines = new LinkedHashMap<Integer, String>();
+
+		prodLines = getProdLineNames(prodLineList);
+
+		return prodLines;
+	}
+
+	private Map<Integer, String> getProdLineNames(List<ProductionLine> prodLineList) {
+
+		LinkedHashMap<Integer, String> prodLineNames = new LinkedHashMap();
+
+		for (ProductionLine productionLine : prodLineList) {
+
+			prodLineNames.put(productionLine.getId(), productionLine.getName());
+		}
+
+		return prodLineNames;
+	}
 
 }
