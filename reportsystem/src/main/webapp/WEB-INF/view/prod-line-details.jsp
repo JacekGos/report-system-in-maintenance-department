@@ -36,14 +36,15 @@
 						</button>
 					</div>
 				</div>
-				
+
 				<h2>Linia: ${productionLine.name}</h2>
-				
+
 				<div class="row">
 					<aside class="col-sm-3"></aside>
 					<aside class="col-sm-3">
 						<div class="table-responsive">
-							<table class="table table-striped table-sm table-bordered table-hover">
+							<table
+								class="table table-striped table-sm table-bordered table-hover">
 								<thead class="table-dark">
 									<tr>
 										<th scope="col" class="col-sm-5">Maszyna</th>
@@ -51,30 +52,65 @@
 									</tr>
 								</thead>
 								<tbody>
-								
+
 									<c:if test="${!productionMachines.isEmpty()}">
 										<c:forEach var="machine" items="${productionMachines}">
 											<tr>
 
-												<c:url var="detailsLink" value="/production/showProdLineDetails">
+												<c:url var="detailsLink"
+													value="/production/showProdLineDetails">
 													<c:param name="id" value="${machine.id}" />
 												</c:url>
-												
+
 												<td>${machine.name}</td>
-												<td>
-													<a href="${detailsLink}"><i class="bi bi-search"></i></a>
-												</td>
-												
+												<td><a href="${detailsLink}"><i
+														class="bi bi-search"></i></a></td>
+
 											</tr>
 										</c:forEach>
 									</c:if>
-									
+
 								</tbody>
 							</table>
 						</div>
 					</aside>
 					<aside class="col-sm-4"></aside>
 				</div>
+			</main>
+			
+			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+			<div class="row">
+				<aside class="col-sm-3"></aside>
+				<aside class="col-sm-6">
+					<form:form class="row g-3"
+						action="${pageContext.request.contextPath}/production/processProdLineForm"
+						modelAttribute="formProdLine" accept-charset="UTF-8">
+						<div class="col-md-4">
+
+							<form:hidden path="id" />
+
+							<label class="form-label">Nazwa linii</label>
+							<form:input path="name" placeholder="Nazwa" class="form-control" />
+
+							<form:errors path="name" cssClass="error" />
+
+						</div>
+						<div class="col-12">
+							<button type="submit" class="btn btn-primary">Edytuj</button>
+						</div>
+
+					</form:form>
+
+					<c:if test="${errorMessage != null}">
+
+						<div class="alert alert-danger col-sm-4 col-xs-offset-4 col-xs-10">
+							${errorMessage}</div>
+
+					</c:if>
+
+				</aside>
+				<aside class="col-sm-4"></aside>
+			</div>
 			</main>
 		</div>
 	</div>

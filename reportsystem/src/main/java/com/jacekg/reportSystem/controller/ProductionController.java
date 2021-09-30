@@ -161,6 +161,7 @@ public class ProductionController {
 			System.out.println("My log: is not empty");
 		}
 		
+		model.addAttribute("formProdLine", new FormProductionLine());
 		model.addAttribute("productionMachines", productionMachines);
 		model.addAttribute("productionLine", productionLine);
 		
