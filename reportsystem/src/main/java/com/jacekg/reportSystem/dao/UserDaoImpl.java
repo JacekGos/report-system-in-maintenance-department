@@ -1,5 +1,7 @@
 package com.jacekg.reportSystem.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -40,6 +42,16 @@ public class UserDaoImpl implements UserDao {
 		Session currentSession = sessionFactory.getCurrentSession();
 		
 		currentSession.saveOrUpdate(user);
+	}
+
+	@Override
+	public List<User> getUsers() {
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		Query<User> query = currentSession.createQuery("FROM User ORDER BY id", User.class);
+		
+		return query.getResultList();
 	}
 
 }
