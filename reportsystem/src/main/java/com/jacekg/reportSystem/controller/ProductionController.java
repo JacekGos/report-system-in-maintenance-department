@@ -75,7 +75,7 @@ public class ProductionController {
 		
 		if (productionLine != null && productionLine.getId() != formProdLineId) {
 			
-			model.addAttribute("formProdLine", new FormProductionLine());
+			model.addAttribute("formProdLine", formProductionLine);
 			model.addAttribute("errorMessage", "Podana linia już istnieje");
 			
 			return "prod-line-form";
@@ -115,12 +115,15 @@ public class ProductionController {
 		FormProductionMachine formProductionMachine = new FormProductionMachine();
 		formProductionMachine.setId(machineId);
 		formProductionMachine.setName(productionMachine.getName());
+		formProductionMachine.setProdLineName(productionMachine.getProductionLine().getName());
+		
+		System.out.println("prodLineName: " + formProductionMachine.getProdLineName());
 		
 		prodLines = new LinkedHashMap<Integer, String>();
 		prodLines = loadProdLines();
 		
 		model.addAttribute("prodLines", prodLines);
-		model.addAttribute("prodLineName", productionMachine.getProductionLine().getName());
+		model.addAttribute("prodLineName", formProductionMachine.getProdLineName());
 		model.addAttribute("formProdMachine", formProductionMachine);
 		
 		return "prod-machine-form";
@@ -151,7 +154,8 @@ public class ProductionController {
 			prodLines = loadProdLines();
 			
 			model.addAttribute("prodLines", prodLines);
-			model.addAttribute("formProdMachine", new FormProductionMachine());
+			model.addAttribute("formProdMachine", formProductionMachine);
+			model.addAttribute("prodLineName", formProductionMachine.getProdLineName());
 			model.addAttribute("errorMessage", "Podana maszyna już istnieje");
 			
 			return "prod-machine-form";

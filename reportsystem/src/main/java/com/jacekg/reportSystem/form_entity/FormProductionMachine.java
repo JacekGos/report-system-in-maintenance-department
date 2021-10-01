@@ -13,6 +13,8 @@ public class FormProductionMachine {
 	
 	private int prodLineId;
 	
+	private String prodLineName;
+	
 	public FormProductionMachine() {
 		
 	}
@@ -41,4 +43,12 @@ public class FormProductionMachine {
 		this.prodLineId = prodLineId;
 	}
 
+	public String getProdLineName() {
+		return prodLineName;
+	}
+
+	public void setProdLineName(String prodLineName) {
+		this.prodLineName = prodLineName;
+	}
+	
 }
