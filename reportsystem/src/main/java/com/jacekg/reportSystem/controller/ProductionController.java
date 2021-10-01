@@ -107,6 +107,25 @@ public class ProductionController {
 		return "prod-machine-form";
 	}
 	
+	@GetMapping("/showUpdateProdMachineForm")
+	public String showUpdateProdMachineForm(@RequestParam("id") int machineId, Model model) {
+		
+		ProductionMachine productionMachine = productionService.getProdMachine(machineId);
+		
+		FormProductionMachine formProductionMachine = new FormProductionMachine();
+		formProductionMachine.setId(machineId);
+		formProductionMachine.setName(productionMachine.getName());
+		
+		prodLines = new LinkedHashMap<Integer, String>();
+		prodLines = loadProdLines();
+		
+		model.addAttribute("prodLines", prodLines);
+		model.addAttribute("prodLineName", productionMachine.getProductionLine().getName());
+		model.addAttribute("formProdMachine", formProductionMachine);
+		
+		return "prod-machine-form";
+	}
+	
 	@PostMapping("/processProdMachineForm")
 	public String processProdMachineForm(@Valid @ModelAttribute("formProdMachine") FormProductionMachine formProductionMachine,
 			BindingResult bindingResult, Model model) {
@@ -124,7 +143,9 @@ public class ProductionController {
 		ProductionMachine productionMachine = 
 				productionService.findProdMachineByNameAndLine(formProductionMachine.getName(), formProductionMachine.getProdLineId());
 		
-		if (productionMachine != null) {
+		int formProdMachineId = formProductionMachine.getId();
+		
+		if (productionMachine != null && productionMachine.getId() != formProdMachineId) {
 			
 			prodLines = new LinkedHashMap<Integer, String>();
 			prodLines = loadProdLines();

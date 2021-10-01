@@ -75,7 +75,7 @@
 											<tr>
 
 												<c:url var="detailsLink"
-													value="/production/showProdLineDetails">
+													value="/production/showUpdateProdMachineForm">
 													<c:param name="id" value="${machine.id}" />
 												</c:url>
 

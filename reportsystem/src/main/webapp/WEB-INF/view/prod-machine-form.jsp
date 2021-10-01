@@ -55,9 +55,18 @@
 								<form:input path="name" placeholder="Nazwa" class="form-control" />
 								
 								<form:errors path="name" cssClass="error" />
-								
+
 								<div class="col-md-4">
-									<label for="inputState" class="form-label">Linia</label>
+
+						<%-- 			<label class="form-label">Linia</label>
+									<form:input path="productionLine" placeholder=""
+										class="form-control" /> --%>
+
+									<label class="form-label">Linia</label>
+									<input type="text" placeholder="${prodLineName}"
+										class="form-control" disabled readonly>
+
+<!-- 									<label for="inputState" class="form-label">Linia</label> -->
 									<form:select path="prodLineId" items="${prodLines}"
 										class="form-select" />
 								</div>

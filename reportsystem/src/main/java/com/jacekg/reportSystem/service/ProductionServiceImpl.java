@@ -39,6 +39,7 @@ public class ProductionServiceImpl implements ProductionService {
 		ProductionMachine productionMachine = new ProductionMachine();
 		ProductionLine productionLine = productionLineDao.findProdLineById(formProductionMachine.getProdLineId());
 		
+		productionMachine.setId(formProductionMachine.getId());
 		productionMachine.setName(formProductionMachine.getName());
 
 		if (productionLine != null) {
@@ -90,5 +91,14 @@ public class ProductionServiceImpl implements ProductionService {
 		ProductionLine productionLine = productionLineDao.getProdLine(lineId);
 		
 		return productionLine;
+	}
+
+	@Override
+	@Transactional
+	public ProductionMachine getProdMachine(int machineId) {
+
+		ProductionMachine productionMachine = productionMachineDao.getProdMachine(machineId);
+		
+		return productionMachine;
 	}
 }

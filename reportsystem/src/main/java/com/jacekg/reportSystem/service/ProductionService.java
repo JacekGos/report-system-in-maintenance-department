@@ -24,4 +24,6 @@ public interface ProductionService {
 	ProductionLine getProdLine(int lineId);
 
 	ProductionLine getProdLineOnly(int lineId);
+
+	ProductionMachine getProdMachine(int machineId);
 }

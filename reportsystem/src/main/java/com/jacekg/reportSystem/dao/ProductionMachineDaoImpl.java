@@ -6,6 +6,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jacekg.reportSystem.entity.ProductionLine;
 import com.jacekg.reportSystem.entity.ProductionMachine;
 
 @Repository
@@ -32,6 +33,26 @@ public class ProductionMachineDaoImpl implements ProductionMachineDao {
 						ProductionMachine.class);
 		query.setParameter("name", name);
 		query.setParameter("lineId", lineId);
+
+		ProductionMachine productionMachine = null;
+
+		try {
+			productionMachine = query.getSingleResult();
+		} catch (Exception e) {
+			productionMachine = null;
+		}
+
+		return productionMachine;
+	}
+
+	@Override
+	public ProductionMachine getProdMachine(int machineId) {
+
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Query<ProductionMachine> query = 
+				currentSession.createQuery("FROM ProductionMachine WHERE id=:machineId", ProductionMachine.class);
+		query.setParameter("machineId", machineId);
 
 		ProductionMachine productionMachine = null;
 

@@ -9,4 +9,6 @@ public interface ProductionMachineDao {
 	ProductionMachine findProdMachineByNameAndLine(String name, int lineId);
 
 	void save(ProductionMachine productionMachine);
+
+	ProductionMachine getProdMachine(int machineId);
 }
