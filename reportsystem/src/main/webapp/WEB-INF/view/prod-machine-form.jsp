@@ -57,7 +57,7 @@
 								<form:errors path="name" cssClass="error" />
 								
 								<div class="col-md-4">
-									<label for="inputState" class="form-label">Sector</label>
+									<label for="inputState" class="form-label">Linia</label>
 									<form:select path="prodLineId" items="${prodLines}"
 										class="form-select" />
 								</div>
@@ -65,7 +65,7 @@
 							</div>
 							
 							<div class="col-12">
-								<button type="submit" class="btn btn-primary">Dodaj</button>
+								<button type="submit" class="btn btn-outline-primary">Zatwierdź</button>
 							</div>
 
 						</form:form>

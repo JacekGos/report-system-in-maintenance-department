@@ -37,7 +37,24 @@
 					</div>
 				</div>
 
-				<h2>Linia: ${productionLine.name}</h2>
+
+
+				<div class="row">
+					<aside class="col-sm-3">
+						<h2>Linia: ${productionLine.name}</h2>
+
+						<c:url var="detailsLink"
+							value="/production/showUpdateProdLineForm">
+							<c:param name="id" value="${prodLineId}" />
+						</c:url>
+
+						<a class="btn btn-outline-primary" href="${detailsLink}"
+							role="button"> Edycja</a>
+
+					</aside>
+					<aside class="col-sm-6"></aside>
+					<aside class="col-sm-4"></aside>
+				</div>
 
 				<div class="row">
 					<aside class="col-sm-3"></aside>
@@ -77,41 +94,7 @@
 					<aside class="col-sm-4"></aside>
 				</div>
 			</main>
-			
-			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-			<div class="row">
-				<aside class="col-sm-3"></aside>
-				<aside class="col-sm-6">
-					<form:form class="row g-3"
-						action="${pageContext.request.contextPath}/production/processProdLineForm"
-						modelAttribute="formProdLine" accept-charset="UTF-8">
-						<div class="col-md-4">
 
-							<form:hidden path="id" />
-
-							<label class="form-label">Nazwa linii</label>
-							<form:input path="name" placeholder="Nazwa" class="form-control" />
-
-							<form:errors path="name" cssClass="error" />
-
-						</div>
-						<div class="col-12">
-							<button type="submit" class="btn btn-primary">Edytuj</button>
-						</div>
-
-					</form:form>
-
-					<c:if test="${errorMessage != null}">
-
-						<div class="alert alert-danger col-sm-4 col-xs-offset-4 col-xs-10">
-							${errorMessage}</div>
-
-					</c:if>
-
-				</aside>
-				<aside class="col-sm-4"></aside>
-			</div>
-			</main>
 		</div>
 	</div>
 

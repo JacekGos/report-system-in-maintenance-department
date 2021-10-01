@@ -22,4 +22,6 @@ public interface ProductionService {
 	List<ProductionLine> getProdLines();
 
 	ProductionLine getProdLine(int lineId);
+
+	ProductionLine getProdLineOnly(int lineId);
 }

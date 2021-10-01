@@ -1,13 +1,9 @@
 package com.jacekg.reportSystem.service;
 
-import java.util.Iterator;
 import java.util.List;
-
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.jacekg.reportSystem.dao.ProductionLineDao;
 import com.jacekg.reportSystem.dao.ProductionMachineDao;
 import com.jacekg.reportSystem.entity.ProductionLine;
@@ -30,6 +26,7 @@ public class ProductionServiceImpl implements ProductionService {
 		
 		ProductionLine productionLine = new ProductionLine();
 		
+		productionLine.setId(formProductionLine.getId());
 		productionLine.setName(formProductionLine.getName());
 		
 		productionLineDao.save(productionLine);
@@ -82,9 +79,16 @@ public class ProductionServiceImpl implements ProductionService {
 		ProductionLine productionLine = productionLineDao.getProdLine(lineId);
 		
 		System.out.println(productionLine.getProductionMachines());
-		
-//		List<ProductionMachine> productionMachines = productionLine.getProductionMachines();
 				
+		return productionLine;
+	}
+
+	@Override
+	@Transactional
+	public ProductionLine getProdLineOnly(int lineId) {
+		
+		ProductionLine productionLine = productionLineDao.getProdLine(lineId);
+		
 		return productionLine;
 	}
 }

@@ -57,7 +57,7 @@
 
 							</div>
 							<div class="col-12">
-								<button type="submit" class="btn btn-primary">Dodaj</button>
+								<button type="submit" class="btn btn-outline-primary">Zatwierdź</button>
 							</div>
 							
 						</form:form>

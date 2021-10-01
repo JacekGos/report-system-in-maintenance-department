@@ -1,14 +1,9 @@
 package com.jacekg.reportSystem.controller;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.annotation.PostConstruct;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -21,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.jacekg.reportSystem.entity.ProductionLine;
 import com.jacekg.reportSystem.entity.ProductionMachine;
 import com.jacekg.reportSystem.form_entity.FormProductionLine;
@@ -53,6 +47,20 @@ public class ProductionController {
 		return "prod-line-form";
 	}
 	
+	@GetMapping("/showUpdateProdLineForm")
+	public String showUpdateProdLineForm(@RequestParam("id") int lineId, Model model) {
+		
+		ProductionLine productionLine = productionService.getProdLineOnly(lineId);
+		
+		FormProductionLine formProductionLine = new FormProductionLine();
+		formProductionLine.setId(lineId);
+		formProductionLine.setName(productionLine.getName());
+		
+		model.addAttribute("formProdLine", formProductionLine);
+		
+		return "prod-line-form";
+	}
+	
 	@PostMapping("/processProdLineForm")
 	public String processProdLineForm(@Valid @ModelAttribute("formProdLine") FormProductionLine formProductionLine,
 			BindingResult bindingResult, Model model) {
@@ -63,7 +71,9 @@ public class ProductionController {
 		
 		ProductionLine productionLine = productionService.findProdLineByName(formProductionLine.getName());
 		
-		if (productionLine != null) {
+		int formProdLineId = formProductionLine.getId();
+		
+		if (productionLine != null && productionLine.getId() != formProdLineId) {
 			
 			model.addAttribute("formProdLine", new FormProductionLine());
 			model.addAttribute("errorMessage", "Podana linia już istnieje");
@@ -157,11 +167,7 @@ public class ProductionController {
 		
 		List<ProductionMachine> productionMachines = productionLine.getProductionMachines();
 		
-		if (!productionMachines.isEmpty()) {
-			System.out.println("My log: is not empty");
-		}
-		
-		model.addAttribute("formProdLine", new FormProductionLine());
+		model.addAttribute("prodLineId", lineId);		
 		model.addAttribute("productionMachines", productionMachines);
 		model.addAttribute("productionLine", productionLine);
 		
