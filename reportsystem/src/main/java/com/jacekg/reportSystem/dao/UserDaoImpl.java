@@ -49,7 +49,9 @@ public class UserDaoImpl implements UserDao {
 		
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		Query<User> query = currentSession.createQuery("FROM User ORDER BY id", User.class);
+		Query<User> query = 
+				currentSession.createQuery("SELECT u FROM User u"
+						+ " JOIN FETCH u.roles ORDER BY u.id", User.class);
 		
 		return query.getResultList();
 	}
