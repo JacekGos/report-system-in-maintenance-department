@@ -1,5 +1,6 @@
 package com.jacekg.reportSystem.service;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,6 +18,7 @@ import com.jacekg.reportSystem.dao.RoleDao;
 import com.jacekg.reportSystem.dao.UserDao;
 import com.jacekg.reportSystem.entity.Role;
 import com.jacekg.reportSystem.entity.User;
+import com.jacekg.reportSystem.form_entity.FormUser;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -37,28 +39,26 @@ public class UserServiceImpl implements UserService {
 		return userDao.findByUserName(userName);
 	}
 	
-//	@Override
-//	@Transactional("appTransactionManager")
-//	public void save(FormUser formUser) {
-//		
-//		User user = new User();
-//		
-//		user.setUserName(formUser.getUserName());
-//		user.setPassword(passwordEncoder.encode(formUser.getPassword()));
-//		user.setFirstName(formUser.getFirstName());
-//		user.setLastName(formUser.getLastName());
-//		user.setEmail(formUser.getEmail());
-//		if (!formUser.getFormRole().equals("ROLE_EMPLOYEE")) {
-//			
-//			user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_EMPLOYEE")
-//					, roleDao.findRoleByName(formUser.getFormRole())));
-//		} else {
-//			
-//			user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_EMPLOYEE")));
-//		}
-//		
-//		userDao.save(user);
-//	}
+	@Override
+	@Transactional
+	public void save(FormUser formUser) {
+		
+		User user = new User();
+		
+		user.setUserName(formUser.getUserName());
+		user.setPassword(passwordEncoder.encode(formUser.getPassword()));
+		user.setFirstName(formUser.getFirstName());
+		user.setLastName(formUser.getLastName());
+		user.setEmail(formUser.getEmail());
+		if (!formUser.getRole().equals("ROLE_EMPLOYEE")) {
+			user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_EMPLOYEE")
+					, roleDao.findRoleByName(formUser.getRole())));
+		} else {
+			user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_EMPLOYEE")));
+		}
+		
+		userDao.save(user);
+	}
 
 	@Override
 	@Transactional("appTransactionManager")
@@ -94,6 +94,11 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public User getUser(long userId) {
 		return userDao.getUser(userId);
+	}
+
+	@Override
+	public User getUser(String userName) {
+		return userDao.getUser(userName);
 	}
 
 }

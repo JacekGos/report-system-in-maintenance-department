@@ -41,7 +41,7 @@
 						<div class="col-md-7 col-lg-8">
 							<%-- 					<form class="needs-validation" novalidate> --%>
 							<form:form class="row g-3"
-								action="${pageContext.request.contextPath}/production/processProdMachineForm"
+								action="${pageContext.request.contextPath}/user/processUserForm"
 								modelAttribute="formUser" accept-charset="UTF-8">
 
 								<div class="row g-3">
@@ -49,18 +49,21 @@
 										<label class="form-label">Imię</label>
 										<form:input path="firstName" placeholder="Imię"
 											class="form-control" />
+										<form:errors path="firstName" cssClass="error" />	
 									</div>
 
 									<div class="col-sm-6">
 										<label class="form-label">Nazwisko</label>
 										<form:input path="lastName" placeholder="Nazwisko"
 											class="form-control" />
+										<form:errors path="lastName" cssClass="error" />
 									</div>
 
 									<div class="col-12">
 										<label class="form-label">Email</label>
 										<form:input path="email" placeholder="name@example.com"
 											class="form-control" />
+										<form:errors path="email" cssClass="error" />
 									</div>
 
 									<div class="col-md-5">
