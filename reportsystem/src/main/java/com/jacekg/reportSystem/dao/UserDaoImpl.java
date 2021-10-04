@@ -78,23 +78,19 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User getUser(String userName) {
+	public Long getUsersAmount(String firstName, String lastName) {
 		
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		Query<User> query = 
-				currentSession.createQuery("FROM User WHERE userName=:userName", User.class);
-		query.setParameter("userName", userName);
+		Query<Long> query = 
+				currentSession.createQuery("SELECT count(u) FROM User u WHERE "
+						+ "firstName=:firstName AND lastName=:lastName", Long.class);
+		query.setParameter("firstName", firstName);
+		query.setParameter("lastName", lastName);
 		
-		User user = null;
+		Long usersAmount = query.getSingleResult();
 		
-		try {
-			user = query.getSingleResult();
-		} catch (Exception e) {
-			user = null;
-		}
-		
-		return user;
+		return usersAmount;
 	}
 
 }

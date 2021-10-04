@@ -94,27 +94,6 @@ public class UserController {
 			System.out.println("My log: " + formUser.getEmail());
 			System.out.println("My log: " + formUser.getRole());
 			
-			
-			for (Object object : bindingResult.getAllErrors()) {
-			    if(object instanceof FieldError) {
-			        FieldError fieldError = (FieldError) object;
-
-			        System.out.println(fieldError.getCode());
-			    }
-
-//			    if(object instanceof ObjectError) {
-//			        ObjectError objectError = (ObjectError) object;
-//
-//			        System.out.println(objectError.getCode());
-//			    }
-			}
-			
-			
-			
-			
-			
-			
-			
 			return "user-form";
 		}
 		
@@ -131,19 +110,10 @@ public class UserController {
 		char firstPart = firstName.toLowerCase().charAt(0);
 		
 		String userName = firstPart + lastName.toLowerCase();
-		System.out.println("MY Log: " + userName);
-		User user = userService.getUser(userName);
+		Long userNumber = userService.getUsersAmount(firstName, lastName);
+		System.out.println("MY Log: " + userName + " number: " + userNumber);
 		
-		if (user != null) {
-			
-			String userNameString = user.getUserName();
-			
-			int userNumber = Integer.parseInt(userNameString.substring(userNameString.length()-1));
-			
-			userName = userName + userNumber++;
-		}
-		
-		return userName;
+		return userName + ++userNumber;
 	}
 	
 }

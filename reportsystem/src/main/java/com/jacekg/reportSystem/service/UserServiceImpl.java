@@ -111,8 +111,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public User getUser(String userName) {
-		return userDao.getUser(userName);
+	public Long getUsersAmount(String firstName, String lastName) {
+		return userDao.getUsersAmount(firstName, lastName);
 	}
 
 }

@@ -15,7 +15,7 @@ public interface UserService extends UserDetailsService {
 
 	User getUser(long userId);
 	
-	User getUser(String userName);
+	Long getUsersAmount(String firstName, String lastName);
 		
 	void save(FormUser formUser);
 	
