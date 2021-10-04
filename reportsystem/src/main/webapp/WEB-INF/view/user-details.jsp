@@ -42,7 +42,7 @@
 
 				<div class="row">
 					<aside class="col-sm-4"></aside>
-					<aside class="col-sm-3">
+					<aside class="col-sm-4">
 						<div class="table-responsive">
 							<table
 								class="table table-striped table-sm table-bordered table-hover">
