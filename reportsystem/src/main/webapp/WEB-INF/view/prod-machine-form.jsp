@@ -66,13 +66,13 @@
 											class="form-control" disabled readonly>
 
 									</c:if>
-
+					
 									<form:select path="prodLineId" items="${prodLines}"
 										class="form-select" />
 								</div>
 
 							</div>
-
+							
 							<div class="col-12">
 								<button type="submit" class="btn btn-outline-primary">Zatwierdź</button>
 							</div>

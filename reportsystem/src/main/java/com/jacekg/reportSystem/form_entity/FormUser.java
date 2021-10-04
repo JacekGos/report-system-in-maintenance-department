@@ -32,7 +32,7 @@ public class FormUser {
 	@Size(min = 1, message = "is required")
 	private String email;
 	
-	private String formRole;
+	private String role;
 	
 	public FormUser() {
 		
@@ -86,12 +86,12 @@ public class FormUser {
 		this.email = email;
 	}
 
-	public String getFormRole() {
-		return formRole;
+	public String getRole() {
+		return role;
 	}
 
-	public void setFormRole(String formRole) {
-		this.formRole = formRole;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 }
