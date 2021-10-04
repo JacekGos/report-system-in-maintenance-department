@@ -62,7 +62,7 @@
 											<td>${user.firstName}</td>
 											<td>${user.lastName}</td>
 											<td>${user.email}</td>
-											<td> <security:authentication property="principal.authorities" /></td>
+											<td>${user.getRoleName()}</td>
 										</tr>
 									</c:forEach>
 								</c:if>

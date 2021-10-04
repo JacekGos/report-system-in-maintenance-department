@@ -188,6 +188,17 @@ public class User {
 		this.roles = roles;
 	}
 	
+	public String getRoleName() {
+		
+		List<Role> roleList = (List<Role>) getRoles();
+		
+		String roleName = roleList.get(roleList.size() -1).getName();
+		int indexOf = roleName.indexOf("_");
+		String convertedName = roleName.substring(indexOf + 1);
+				
+		return convertedName;
+	}
+	
 	private void addReport(Report report) {
 		
 		if (reports == null) {
