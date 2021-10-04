@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -87,17 +87,14 @@ public class UserController {
 				BindingResult bindingResult, Model model) {
 		
 		if (bindingResult.hasErrors()) {
-			
-			model.addAttribute("roles", roles);
-			System.out.println("My log: " + formUser.getFirstName());
-			System.out.println("My log: " + formUser.getLastName());
-			System.out.println("My log: " + formUser.getEmail());
-			System.out.println("My log: " + formUser.getRole());
-			
 			return "user-form";
 		}
 		
-		formUser.setUserName(generateUserName(formUser.getFirstName(), formUser.getLastName()));
+		formUser.setUserName(generateUserName(
+				StringUtils.capitalize(formUser.getFirstName()), 
+				StringUtils.capitalize(formUser.getLastName())));
+		System.out.println("My logs capitalized: " + StringUtils.capitalize(formUser.getFirstName()));
+		
 		formUser.setPassword("password");
 		System.out.println("MY Logs: Controller: " + formUser.getUserName());
 		userService.save(formUser);
@@ -111,9 +108,11 @@ public class UserController {
 		
 		String userName = firstPart + lastName.toLowerCase();
 		Long userNumber = userService.getUsersAmount(firstName, lastName);
-		System.out.println("MY Log: " + userName + " number: " + userNumber);
+		
+		if (userNumber == 0) {
+			return userName;
+		}
 		
 		return userName + ++userNumber;
 	}
-	
 }

@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.jacekg.reportSystem.dao.RoleDao;
 import com.jacekg.reportSystem.dao.UserDao;
@@ -47,8 +48,8 @@ public class UserServiceImpl implements UserService {
 		
 		user.setUserName(formUser.getUserName());
 		user.setPassword(passwordEncoder.encode(formUser.getPassword()));
-		user.setFirstName(formUser.getFirstName());
-		user.setLastName(formUser.getLastName());
+		user.setFirstName(StringUtils.capitalize(formUser.getFirstName()));
+		user.setLastName(StringUtils.capitalize(formUser.getLastName()));
 		user.setEmail(formUser.getEmail());
 		user.setEnabled(true);
 		user.setNonExpired(true);
