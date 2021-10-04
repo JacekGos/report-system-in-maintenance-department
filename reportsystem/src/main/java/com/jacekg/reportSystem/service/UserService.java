@@ -11,6 +11,8 @@ public interface UserService extends UserDetailsService {
 	User findByUserName(String userName);
 
 	List<User> getUsers();
+
+	User getUser(long userId);
 		
 //	void save(FormUser formUser);
 	

@@ -57,12 +57,20 @@
 								<c:if test="${users != null}">
 									<c:forEach var="user" items="${users}">
 										<tr>
+											<c:url var="detailsLink"
+												value="/user/showUserDetails">
+												<c:param name="id" value="${user.id}" />
+											</c:url>
+
 											<td>${user.id}</td>
 											<td>${user.userName}</td>
 											<td>${user.firstName}</td>
 											<td>${user.lastName}</td>
 											<td>${user.email}</td>
 											<td>${user.getRoleName()}</td>
+											<td>
+												<a href="${detailsLink}"><i class="bi bi-search"></i></a>
+											</td>
 										</tr>
 									</c:forEach>
 								</c:if>

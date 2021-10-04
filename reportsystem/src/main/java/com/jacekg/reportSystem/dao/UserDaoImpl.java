@@ -56,4 +56,17 @@ public class UserDaoImpl implements UserDao {
 		return query.getResultList();
 	}
 
+	@Override
+	public User getUser(long userId) {
+
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		Query<User> query = 
+				currentSession.createQuery("SELECT DISTINCT u FROM User u"
+						+ " JOIN FETCH u.roles WHERE u.id=:userId", User.class);
+		query.setParameter("userId", userId);
+		
+		return query.getSingleResult();
+	}
+
 }
