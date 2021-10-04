@@ -12,6 +12,7 @@ import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -88,6 +89,31 @@ public class UserController {
 		if (bindingResult.hasErrors()) {
 			
 			model.addAttribute("roles", roles);
+			System.out.println("My log: " + formUser.getFirstName());
+			System.out.println("My log: " + formUser.getLastName());
+			System.out.println("My log: " + formUser.getEmail());
+			System.out.println("My log: " + formUser.getRole());
+			
+			
+			for (Object object : bindingResult.getAllErrors()) {
+			    if(object instanceof FieldError) {
+			        FieldError fieldError = (FieldError) object;
+
+			        System.out.println(fieldError.getCode());
+			    }
+
+//			    if(object instanceof ObjectError) {
+//			        ObjectError objectError = (ObjectError) object;
+//
+//			        System.out.println(objectError.getCode());
+//			    }
+			}
+			
+			
+			
+			
+			
+			
 			
 			return "user-form";
 		}

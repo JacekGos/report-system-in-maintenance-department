@@ -50,6 +50,10 @@ public class UserServiceImpl implements UserService {
 		user.setFirstName(formUser.getFirstName());
 		user.setLastName(formUser.getLastName());
 		user.setEmail(formUser.getEmail());
+		user.setEnabled(true);
+		user.setNonExpired(true);
+		user.setCredentialsNonExpired(true);
+		user.setNonLocked(true);
 		
 		if (formUser.getRole().equals("ROLE_EMPLOYEE")) {
 			user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_EMPLOYEE")));
@@ -106,6 +110,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public User getUser(String userName) {
 		return userDao.getUser(userName);
 	}

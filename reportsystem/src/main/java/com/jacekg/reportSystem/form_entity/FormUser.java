@@ -7,17 +7,17 @@ import com.jacekg.reportSystem.validation.ValidEmail;
 
 public class FormUser {
 	
-	@NotNull(message = "is required")
-	@Size(min = 1, message = "is required")
+//	@NotNull(message = "is required")
+//	@Size(min = 1, message = "is required")
 	private String userName;
 	
-	@NotNull(message = "is required")
-	@Size(min = 1, message = "is required")
+//	@NotNull(message = "is required")
+//	@Size(min = 1, message = "is required")
 	private String password;
-	
-	@NotNull(message = "is required")
-	@Size(min = 1, message = "is required")
-	private String matchingPassword;
+//	
+//	@NotNull(message = "is required")
+//	@Size(min = 1, message = "is required")
+//	private String matchingPassword;
 	
 	@NotNull(message = "is required")
 	@Size(min = 1, message = "is required")
@@ -54,13 +54,13 @@ public class FormUser {
 		this.password = password;
 	}
 
-	public String getMatchingPassword() {
-		return matchingPassword;
-	}
-
-	public void setMatchingPassword(String matchingPassword) {
-		this.matchingPassword = matchingPassword;
-	}
+//	public String getMatchingPassword() {
+//		return matchingPassword;
+//	}
+//
+//	public void setMatchingPassword(String matchingPassword) {
+//		this.matchingPassword = matchingPassword;
+//	}
 
 	public String getFirstName() {
 		return firstName;
