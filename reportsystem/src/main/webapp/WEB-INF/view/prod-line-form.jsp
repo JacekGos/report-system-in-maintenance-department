@@ -72,7 +72,6 @@
 					</aside>
 					<aside class="col-sm-4"></aside>
 				</div>
-		</div>
 		</main>
 	</div>
 	</div>

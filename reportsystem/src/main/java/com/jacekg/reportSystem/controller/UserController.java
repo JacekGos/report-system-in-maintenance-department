@@ -1,6 +1,10 @@
 package com.jacekg.reportSystem.controller;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.jacekg.reportSystem.entity.ProductionLine;
 import com.jacekg.reportSystem.entity.ProductionMachine;
 import com.jacekg.reportSystem.entity.User;
+import com.jacekg.reportSystem.form_entity.FormUser;
 import com.jacekg.reportSystem.service.UserService;
 
 @Controller
@@ -20,7 +25,20 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-
+	
+	private Map<String, String> roles;
+	
+	@PostConstruct
+	protected void loadRoles() {
+		
+		roles = new LinkedHashMap<String, String>();
+		
+		roles.put("ROLE_EMPLOYEE", "Employee");
+		roles.put("ROLE_MANAGER", "Manager");
+		roles.put("ROLE_ADMIN", "Admin");
+		
+	}
+	
 	@GetMapping("/showUsersList")
 	public String showUsersList(Model model) {
 
@@ -39,6 +57,15 @@ public class UserController {
 		model.addAttribute("user", user);		
 		
 		return "user-details";
+	}
+	
+	@GetMapping("/showUserForm")
+	public String showUserForm(Model model) {
+		
+		model.addAttribute("formUser", new FormUser());
+		model.addAttribute("roles", roles);
+		
+		return "user-form";
 	}
 
 }

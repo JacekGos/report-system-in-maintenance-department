@@ -3,9 +3,8 @@ package com.jacekg.reportSystem.form_entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@FieldMatch.List({
-	@FieldMatch(first = "password", second = "matchingPassword", message = "The password field must match")
-})
+import com.jacekg.reportSystem.validation.ValidEmail;
+
 public class FormUser {
 	
 	@NotNull(message = "is required")

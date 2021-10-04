@@ -40,7 +40,7 @@
 
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page"
-						href="${pageContext.request.contextPath}/user/showAddUserForm"> <span
+						href="${pageContext.request.contextPath}/user/showUserForm"> <span
 							data-feather="home"></span><i class="bi bi-person-plus-fill"></i> Dodaj użytkownika
 					</a></li>
 					<li class="nav-item"><a class="nav-link active"
