@@ -50,11 +50,20 @@ public class UserServiceImpl implements UserService {
 		user.setFirstName(formUser.getFirstName());
 		user.setLastName(formUser.getLastName());
 		user.setEmail(formUser.getEmail());
-		if (!formUser.getRole().equals("ROLE_EMPLOYEE")) {
-			user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_EMPLOYEE")
-					, roleDao.findRoleByName(formUser.getRole())));
-		} else {
+		
+		if (formUser.getRole().equals("ROLE_EMPLOYEE")) {
 			user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_EMPLOYEE")));
+		} 
+		else if (formUser.getRole().equals("ROLE_MANAGER")) {
+			user.setRoles(Arrays.asList(
+					roleDao.findRoleByName("ROLE_EMPLOYEE"),
+					roleDao.findRoleByName("ROLE_MANAGER")));
+		} 
+		else if (formUser.getRole().equals("ROLE_ADMIN")) {
+			user.setRoles(Arrays.asList(
+					roleDao.findRoleByName("ROLE_EMPLOYEE"),
+					roleDao.findRoleByName("ROLE_MANAGER"),
+					roleDao.findRoleByName("ROLE_ADMIN")));
 		}
 		
 		userDao.save(user);

@@ -94,10 +94,10 @@ public class UserController {
 		
 		formUser.setUserName(generateUserName(formUser.getFirstName(), formUser.getLastName()));
 		formUser.setPassword("password");
-		
+		System.out.println("MY Logs: Controller: " + formUser.getUserName());
 		userService.save(formUser);
 		
-		return "registration-confirmation";
+		return "home";
 	}
 	
 	private String generateUserName(String firstName, String lastName) {

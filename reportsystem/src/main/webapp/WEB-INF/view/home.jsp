@@ -34,6 +34,9 @@
 							class="btn btn-sm btn-outline-secondary dropdown-toggle">
 							<span data-feather="calendar"></span> This week
 						</button> -->
+						
+						<h1>${user.userName}</h1>
+						
 					</div>
 				</div>
 			</main>
