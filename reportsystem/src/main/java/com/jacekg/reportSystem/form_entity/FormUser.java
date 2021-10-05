@@ -1,5 +1,6 @@
 package com.jacekg.reportSystem.form_entity;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -7,12 +8,10 @@ import com.jacekg.reportSystem.validation.ValidEmail;
 
 public class FormUser {
 	
-//	@NotNull(message = "is required")
-//	@Size(min = 1, message = "is required")
+	private Long id;
+	
 	private String userName;
 	
-//	@NotNull(message = "is required")
-//	@Size(min = 1, message = "is required")
 	private String password;
 //	
 //	@NotNull(message = "is required")
@@ -34,8 +33,24 @@ public class FormUser {
 	
 	private String role;
 	
+	private boolean isEnabled;
+	
+	private boolean isNonExpired;
+	 
+	private boolean isCredentialsNonExpired;
+	 
+	private boolean isNonLocked;
+	
 	public FormUser() {
 		
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getUserName() {
@@ -92,6 +107,38 @@ public class FormUser {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public boolean isEnabled() {
+		return isEnabled;
+	}
+
+	public void setEnabled(boolean isEnabled) {
+		this.isEnabled = isEnabled;
+	}
+
+	public boolean isNonExpired() {
+		return isNonExpired;
+	}
+
+	public void setNonExpired(boolean isNonExpired) {
+		this.isNonExpired = isNonExpired;
+	}
+
+	public boolean isCredentialsNonExpired() {
+		return isCredentialsNonExpired;
+	}
+
+	public void setCredentialsNonExpired(boolean isCredentialsNonExpired) {
+		this.isCredentialsNonExpired = isCredentialsNonExpired;
+	}
+
+	public boolean isNonLocked() {
+		return isNonLocked;
+	}
+
+	public void setNonLocked(boolean isNonLocked) {
+		this.isNonLocked = isNonLocked;
 	}
 
 	@Override

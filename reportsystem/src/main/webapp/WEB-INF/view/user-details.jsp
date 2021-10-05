@@ -104,14 +104,14 @@
 								onclick="if (!(confirm('Jesteś pewny, że chcesz ustawić domyślne hasło?'))) return false">Reset
 								hasła</a>
 
-							<c:if test="${user.isEnabled() == true}">
+							<c:if test="${user.enabled == true}">
 
 								<a class="btn btn-outline-primary" href="${deactivateUserLink}"
 									role="button"
 									onclick="if (!(confirm('Jesteś pewny, że chcesz dezaktywować konto użytkownika?'))) return false">Dezaktywuj</a>
 
 							</c:if>
-							<c:if test="${user.isEnabled() != true}">
+							<c:if test="${user.enabled != true}">
 
 								<a class="btn btn-outline-primary" href="${activateUserLink}"
 									role="button"
@@ -139,12 +139,17 @@
 											<form:form class="row g-3"
 												action="${pageContext.request.contextPath}/user/setUserRole"
 												modelAttribute="formUser" accept-charset="UTF-8">
-
+												
+												<form:hidden path="id" />
 												<form:hidden path="firstName" />
 												<form:hidden path="lastName" />
 												<form:hidden path="password" />
 												<form:hidden path="userName" />
 												<form:hidden path="email" />
+												<form:hidden path="enabled" />
+												<form:hidden path="credentialsNonExpired" />
+												<form:hidden path="nonExpired" />
+												<form:hidden path="nonLocked" />
 
 												<div class="col-md-5">
 													<label class="form-label">Uprawnienia</label> 
@@ -154,6 +159,10 @@
 
 													<form:select path="role" items="${roles}"
 														class="form-select" />
+													<br>	
+													<button type="submit" class="btn btn-outline-primary">
+														Zapisz zmiany</button>
+												
 												</div>
 
 											</form:form>
@@ -162,8 +171,7 @@
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary"
 												data-bs-dismiss="modal">Zamknij</button>
-											<button type="button" class="btn btn-outline-primary">
-												Zapisz zmiany</button>
+											
 										</div>
 									</div>
 								</div>
