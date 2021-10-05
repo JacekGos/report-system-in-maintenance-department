@@ -90,16 +90,30 @@ public class UserController {
 			return "user-form";
 		}
 		
-		formUser.setUserName(generateUserName(
-				StringUtils.capitalize(formUser.getFirstName()), 
-				StringUtils.capitalize(formUser.getLastName())));
-		System.out.println("My logs capitalized: " + StringUtils.capitalize(formUser.getFirstName()));
-		
+		formUser.setFirstName(StringUtils.capitalize(formUser.getFirstName()));
+		formUser.setLastName(StringUtils.capitalize(formUser.getLastName()));
+		formUser.setUserName(generateUserName(formUser.getFirstName(), formUser.getLastName()));
 		formUser.setPassword("password");
-		System.out.println("MY Logs: Controller: " + formUser.getUserName());
+		
+		return "user-confirmation";
+	}
+	
+	@PostMapping("/processSaveUser")
+	public String processSaveUser(@ModelAttribute("formUser") FormUser formUser, Model model) {
+		
+		System.out.println("My logs formUser: " + formUser.toString());
+		
+		if (userService.findByUserName(formUser.getUserName()) != null) {
+			
+			model.addAttribute("registrationError", "Wystąpił błąd - nazwa konta zajęta.");
+			
+			return "user-confirmation";
+		}
+		
 		userService.save(formUser);
 		
-		return "home";
+		return "redirect:/user/showUsersList";
+		
 	}
 	
 	private String generateUserName(String firstName, String lastName) {
@@ -107,6 +121,7 @@ public class UserController {
 		char firstPart = firstName.toLowerCase().charAt(0);
 		
 		String userName = firstPart + lastName.toLowerCase();
+		
 		Long userNumber = userService.getUsersAmount(firstName, lastName);
 		
 		if (userNumber == 0) {

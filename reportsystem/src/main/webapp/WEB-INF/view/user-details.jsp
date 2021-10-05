@@ -41,8 +41,8 @@
 
 
 				<div class="row">
-					<aside class="col-sm-4"></aside>
-					<aside class="col-sm-4">
+					<aside class="col-sm-3"></aside>
+					<aside class="col-sm-5">
 						<div class="table-responsive">
 							<table
 								class="table table-striped table-sm table-bordered table-hover">
@@ -54,14 +54,18 @@
 
 										<th scope="col">Imię</th>
 										<th scope="col">Nazwisko</th>
+										<th scope="col">Nazwa użytkownika</th>
 										<th scope="col">Email</th>
+										<th scope="col">Uprawnienia</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<td>${user.firstName}</td>
 										<td>${user.lastName}</td>
+										<td>${user.userName}</td>
 										<td>${user.email}</td>
+										<td>${user.getRoleName()}</td>
 									</tr>
 
 								</tbody>

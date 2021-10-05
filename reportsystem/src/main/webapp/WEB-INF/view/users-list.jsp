@@ -45,7 +45,7 @@
 							<thead class="table-dark">
 								<tr>
 									<th scope="col">#</th>
-									<th scope="col">Login</th>
+									<th scope="col">Nazwa użytkownika</th>
 									<th scope="col">Imię</th>
 									<th scope="col">Nazwisko</th>
 									<th scope="col">Email</th>

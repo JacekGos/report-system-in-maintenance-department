@@ -94,4 +94,12 @@ public class FormUser {
 		this.role = role;
 	}
 
+	@Override
+	public String toString() {
+		return "FormUser [userName=" + userName + ", password=" + password + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", email=" + email + ", role=" + role + "]";
+	}
+	
+	
+
 }
