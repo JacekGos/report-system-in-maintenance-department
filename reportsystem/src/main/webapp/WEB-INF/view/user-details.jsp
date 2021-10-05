@@ -79,7 +79,11 @@
 								<c:param name="id" value="${user.id}" />
 							</c:url>
 							
-							<c:url var="blockUserLink" value="/user/blockUser">
+							<c:url var="deactivateUserLink" value="/user/deactivateUserAccount">
+								<c:param name="id" value="${user.id}" />
+							</c:url>
+							
+							<c:url var="activateUserLink" value="/user/activateUserAccount">
 								<c:param name="id" value="${user.id}" />
 							</c:url>
 
@@ -90,11 +94,25 @@
 								href="${resetPasswordLink}" role="button" 
 								onclick="if (!(confirm('Jesteś pewny, że chcesz ustawić domyślne hasło?'))) return false"
 								>Reset hasła</a>
-								
-							<a class="btn btn-outline-primary" 
-								href="${blockUserLink}" role="button"
+							
+							<c:if test="${user.isEnabled() == true}">
+							
+								<a class="btn btn-outline-primary" 
+								href="${deactivateUserLink}" role="button"
 								onclick="if (!(confirm('Jesteś pewny, że chcesz dezaktywować konto użytkownika?'))) return false"
-								>Blokuj</a>
+								>Dezaktywuj</a>
+								
+							</c:if>
+							<c:if test="${user.isEnabled() != true}">
+							
+								<a class="btn btn-outline-primary" 
+								href="${activateUserLink}" role="button"
+								onclick="if (!(confirm('Jesteś pewny, że chcesz aktywować konto użytkownika?'))) return false"
+								>Aktywuj</a>
+								
+							</c:if>
+							
+							
 
 						</div>
 					</aside>

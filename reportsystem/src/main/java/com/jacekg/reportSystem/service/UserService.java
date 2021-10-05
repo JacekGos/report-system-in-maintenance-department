@@ -20,5 +20,9 @@ public interface UserService extends UserDetailsService {
 	void save(FormUser formUser);
 
 	void setUserPassword(long userId, String password);
+
+	void deactivateUser(long userId);
+
+	void activateUser(long userId);
 	
 }

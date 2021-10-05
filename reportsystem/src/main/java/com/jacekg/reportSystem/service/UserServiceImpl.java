@@ -127,6 +127,26 @@ public class UserServiceImpl implements UserService {
 		userDao.save(user);
 	}
 
+	@Override
+	@Transactional
+	public void deactivateUser(long userId) {
+		
+		User user = userDao.getUser(userId);
+		user.setEnabled(false);
+		
+		userDao.save(user);
+	}
+
+	@Override
+	@Transactional
+	public void activateUser(long userId) {
+		
+		User user = userDao.getUser(userId);
+		user.setEnabled(true);
+		
+		userDao.save(user);
+	}
+
 }
 
 

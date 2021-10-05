@@ -125,10 +125,24 @@ public class UserController {
 		return "redirect:/user/showUserDetails";
 	}
 	
-	@PostMapping("/blockUserAccount")
-	public String blockUserAccount() {
+	@GetMapping("/deactivateUserAccount")
+	public String deactivateUserAccount(@RequestParam("id") long userId, Model model) {
 		
-		return "user-details";
+		userService.deactivateUser(userId);
+		
+		model.addAttribute("id", userId);	
+		
+		return "redirect:/user/showUserDetails";
+	}
+	
+	@GetMapping("/activateUserAccount")
+	public String activateUserAccount(@RequestParam("id") long userId, Model model) {
+		
+		userService.activateUser(userId);
+		
+		model.addAttribute("id", userId);	
+		
+		return "redirect:/user/showUserDetails";
 	}
 	
 	private String generateUserName(String firstName, String lastName) {
