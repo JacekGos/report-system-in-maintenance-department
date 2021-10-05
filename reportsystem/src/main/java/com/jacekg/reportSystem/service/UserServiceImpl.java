@@ -116,6 +116,17 @@ public class UserServiceImpl implements UserService {
 		return userDao.getUsersAmount(firstName, lastName);
 	}
 
+	@Override
+	@Transactional
+	public void setUserPassword(long userId, String password) {
+		
+		User user = userDao.getUser(userId);
+		user.getRoles();
+		user.setPassword(passwordEncoder.encode(password));
+		
+		userDao.save(user);
+	}
+
 }
 
 

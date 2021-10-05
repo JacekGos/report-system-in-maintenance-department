@@ -42,7 +42,7 @@
 
 				<div class="row">
 					<aside class="col-sm-3"></aside>
-					<aside class="col-sm-5">
+					<aside class="col-sm-6">
 						<div class="table-responsive">
 							<table
 								class="table table-striped table-sm table-bordered table-hover">
@@ -74,18 +74,27 @@
 							<c:url var="detailsLink" value="/user/showUpdateUserForm">
 								<c:param name="id" value="${user.id}" />
 							</c:url>
-							<c:url var="resetPasswordLink" value="/user/resetPassword">
+							
+							<c:url var="resetPasswordLink" value="/user/resetUserPassword">
 								<c:param name="id" value="${user.id}" />
 							</c:url>
+							
 							<c:url var="blockUserLink" value="/user/blockUser">
 								<c:param name="id" value="${user.id}" />
 							</c:url>
 
 							<a class="btn btn-outline-primary" href="${detailsLink}"
-								role="button"> Edycja</a> <a class="btn btn-outline-primary"
-								href="${resetPasswordLink}" role="button"> Reset hasła</a> <a
-								class="btn btn-outline-primary" href="${blockUserLink}"
-								role="button"> Blokuj</a>
+								role="button">Edycja</a> 
+								
+							<a class="btn btn-outline-primary"
+								href="${resetPasswordLink}" role="button" 
+								onclick="if (!(confirm('Jesteś pewny, że chcesz ustawić domyślne hasło?'))) return false"
+								>Reset hasła</a>
+								
+							<a class="btn btn-outline-primary" 
+								href="${blockUserLink}" role="button"
+								onclick="if (!(confirm('Jesteś pewny, że chcesz dezaktywować konto użytkownika?'))) return false"
+								>Blokuj</a>
 
 						</div>
 					</aside>

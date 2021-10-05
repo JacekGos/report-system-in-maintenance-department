@@ -113,13 +113,16 @@ public class UserController {
 		userService.save(formUser);
 		
 		return "redirect:/user/showUsersList";
-		
 	}
 	
-	@PostMapping("/resetUserPassword")
-	public String resetPassword() {
+	@GetMapping("/resetUserPassword")
+	public String resetPassword(@RequestParam("id") long userId, Model model) {
 		
-		return "user-details";
+		userService.setUserPassword(userId, "password");
+		
+		model.addAttribute("id", userId);	
+		
+		return "redirect:/user/showUserDetails";
 	}
 	
 	@PostMapping("/blockUserAccount")
