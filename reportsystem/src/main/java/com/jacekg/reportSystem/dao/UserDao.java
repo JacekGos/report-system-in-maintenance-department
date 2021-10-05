@@ -15,4 +15,6 @@ public interface UserDao {
 	User getUser(long userId);
 	
 	Long getUsersAmount(String firstName, String lastName);
+
+	Long getUserId(String userName);
 }

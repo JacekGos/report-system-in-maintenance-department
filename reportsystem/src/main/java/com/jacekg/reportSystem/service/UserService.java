@@ -24,5 +24,7 @@ public interface UserService extends UserDetailsService {
 	void deactivateUser(long userId);
 
 	void activateUser(long userId);
+
+	Long getUserId(String userName);
 	
 }

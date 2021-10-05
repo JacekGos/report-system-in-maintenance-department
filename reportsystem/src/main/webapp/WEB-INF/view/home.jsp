@@ -36,6 +36,7 @@
 						</button> -->
 						
 						<h1>${user.userName}</h1>
+						<h1>${userId}</h1>
 						
 					</div>
 				</div>

@@ -20,10 +20,17 @@
 				<i class="bi bi-person"></i>
 			</button>
 			<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-				<li><button class="dropdown-item" type="button">
+				<li>
+				
+				<form:form action="${pageContext.request.contextPath}/user/showUserOptions"
+					method="POST">
+
+					<button class="dropdown-item" type="submit">
 						<i class="bi bi-gear-fill"></i> Opcje
 					</button></li>
 
+				</form:form>
+				
 				<form:form action="${pageContext.request.contextPath}/logout"
 					method="POST">
 

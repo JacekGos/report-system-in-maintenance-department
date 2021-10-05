@@ -1,5 +1,6 @@
 package com.jacekg.reportSystem.controller;
 
+import java.security.Principal;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -158,7 +159,21 @@ public class UserController {
 
 		return "redirect:/user/showUserDetails";
 	}
-
+	
+	@PostMapping("/showUserOptions")
+	public String showUserOptions(Principal principal, Model model) {
+		
+		String userName = principal.getName();
+		
+		Long userId = userService.getUserId(userName);
+		
+		model.addAttribute("userId", userId);
+		
+		System.out.println(userName);
+		
+		return "home";
+	}
+	
 	private String generateUserName(String firstName, String lastName) {
 
 		char firstPart = firstName.toLowerCase().charAt(0);
