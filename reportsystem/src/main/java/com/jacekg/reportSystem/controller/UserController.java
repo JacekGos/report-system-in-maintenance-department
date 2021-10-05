@@ -116,6 +116,18 @@ public class UserController {
 		
 	}
 	
+	@PostMapping("/resetUserPassword")
+	public String resetPassword() {
+		
+		return "user-details";
+	}
+	
+	@PostMapping("/blockUserAccount")
+	public String blockUserAccount() {
+		
+		return "user-details";
+	}
+	
 	private String generateUserName(String firstName, String lastName) {
 		
 		char firstPart = firstName.toLowerCase().charAt(0);
