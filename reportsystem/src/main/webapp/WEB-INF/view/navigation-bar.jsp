@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>  
  
 <!DOCTYPE html>
@@ -20,7 +19,6 @@
 				data-bs-toggle="dropdown" aria-expanded="false">
 				<i class="bi bi-person"></i>
 			</button>
-
 			<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
 				<li><button class="dropdown-item" type="button">
 						<i class="bi bi-gear-fill"></i> Opcje
