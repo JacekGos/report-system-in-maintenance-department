@@ -12,6 +12,17 @@
 
 <%@ include file="/WEB-INF/view/sources.jsp"%>
 
+<script>
+	$('#exampleModal').on('shown.bs.modal', function() {
+		$('#myInput').trigger('focus')
+	})
+
+	$('#exampleModal').modal({
+		backdrop : 'static',
+		keyboard : false
+	})
+</script>
+
 </head>
 <body>
 
@@ -74,45 +85,89 @@
 							<c:url var="detailsLink" value="/user/showUpdateUserForm">
 								<c:param name="id" value="${user.id}" />
 							</c:url>
-							
+
 							<c:url var="resetPasswordLink" value="/user/resetUserPassword">
 								<c:param name="id" value="${user.id}" />
 							</c:url>
-							
-							<c:url var="deactivateUserLink" value="/user/deactivateUserAccount">
+
+							<c:url var="deactivateUserLink"
+								value="/user/deactivateUserAccount">
 								<c:param name="id" value="${user.id}" />
 							</c:url>
-							
+
 							<c:url var="activateUserLink" value="/user/activateUserAccount">
 								<c:param name="id" value="${user.id}" />
 							</c:url>
 
-							<a class="btn btn-outline-primary" href="${detailsLink}"
-								role="button">Edycja</a> 
-								
-							<a class="btn btn-outline-primary"
-								href="${resetPasswordLink}" role="button" 
-								onclick="if (!(confirm('Jesteś pewny, że chcesz ustawić domyślne hasło?'))) return false"
-								>Reset hasła</a>
-							
+							<a class="btn btn-outline-primary" href="${resetPasswordLink}"
+								role="button"
+								onclick="if (!(confirm('Jesteś pewny, że chcesz ustawić domyślne hasło?'))) return false">Reset
+								hasła</a>
+
 							<c:if test="${user.isEnabled() == true}">
-							
-								<a class="btn btn-outline-primary" 
-								href="${deactivateUserLink}" role="button"
-								onclick="if (!(confirm('Jesteś pewny, że chcesz dezaktywować konto użytkownika?'))) return false"
-								>Dezaktywuj</a>
-								
+
+								<a class="btn btn-outline-primary" href="${deactivateUserLink}"
+									role="button"
+									onclick="if (!(confirm('Jesteś pewny, że chcesz dezaktywować konto użytkownika?'))) return false">Dezaktywuj</a>
+
 							</c:if>
 							<c:if test="${user.isEnabled() != true}">
-							
-								<a class="btn btn-outline-primary" 
-								href="${activateUserLink}" role="button"
-								onclick="if (!(confirm('Jesteś pewny, że chcesz aktywować konto użytkownika?'))) return false"
-								>Aktywuj</a>
-								
+
+								<a class="btn btn-outline-primary" href="${activateUserLink}"
+									role="button"
+									onclick="if (!(confirm('Jesteś pewny, że chcesz aktywować konto użytkownika?'))) return false">Aktywuj</a>
+
 							</c:if>
-							
-							
+
+							<button type="button" class="btn btn-outline-primary"
+								data-bs-toggle="modal" data-bs-target="#exampleModal">
+								Zmiana uprawnień</button>
+
+							<div class="modal fade" id="exampleModal" tabindex="-1"
+								aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Zmiana
+												uprawnień</h5>
+											<button type="button" class="btn-close"
+												data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+
+										<div class="modal-body">
+
+											<form:form class="row g-3"
+												action="${pageContext.request.contextPath}/user/setUserRole"
+												modelAttribute="formUser" accept-charset="UTF-8">
+
+												<form:hidden path="firstName" />
+												<form:hidden path="lastName" />
+												<form:hidden path="password" />
+												<form:hidden path="userName" />
+												<form:hidden path="email" />
+
+												<div class="col-md-5">
+													<label class="form-label">Uprawnienia</label> 
+													
+													<input type="text" placeholder="${formUser.role}"
+													class="form-control" disabled readonly>
+
+													<form:select path="role" items="${roles}"
+														class="form-select" />
+												</div>
+
+											</form:form>
+
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+												data-bs-dismiss="modal">Zamknij</button>
+											<button type="button" class="btn btn-outline-primary">
+												Zapisz zmiany</button>
+										</div>
+									</div>
+								</div>
+							</div>
 
 						</div>
 					</aside>

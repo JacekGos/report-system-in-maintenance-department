@@ -68,7 +68,16 @@ public class UserController {
 		
 		User user = userService.getUser(userId);
 		
-		model.addAttribute("user", user);		
+		FormUser formUser = new FormUser();
+		formUser.setFirstName(user.getFirstName());
+		formUser.setLastName(user.getLastName());
+		formUser.setUserName(user.getUserName());
+		formUser.setPassword(user.getPassword());
+		formUser.setRole(user.getRoleName());
+		
+		model.addAttribute("user", user);
+		model.addAttribute("roles", roles);
+		model.addAttribute("formUser", formUser);
 		
 		return "user-details";
 	}

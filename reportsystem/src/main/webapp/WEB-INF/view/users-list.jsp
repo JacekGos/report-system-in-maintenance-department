@@ -50,6 +50,7 @@
 									<th scope="col">Nazwisko</th>
 									<th scope="col">Email</th>
 									<th scope="col">Uprawnienia</th>
+									<th scope="col">Status konta</th>
 									<th scope="col">Opcje</th>
 								</tr>
 							</thead>
@@ -68,6 +69,7 @@
 											<td>${user.lastName}</td>
 											<td>${user.email}</td>
 											<td>${user.getRoleName()}</td>
+											<td>${user.isEnabledStatus()}</td>
 											<td>
 												<a href="${detailsLink}"><i class="bi bi-search"></i></a>
 											</td>

@@ -151,7 +151,7 @@ public class User {
 	public boolean isEnabled() {
 		return isEnabled;
 	}
-
+	
 	public void setEnabled(boolean isEnabled) {
 		this.isEnabled = isEnabled;
 	}
@@ -186,6 +186,15 @@ public class User {
 
 	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
+	}
+	
+	public String isEnabledStatus() {
+		
+		if (isEnabled()) {
+			return "Aktywowane";
+		} 
+		
+		return "Dazaktywowane";
 	}
 	
 	public String getRoleName() {
