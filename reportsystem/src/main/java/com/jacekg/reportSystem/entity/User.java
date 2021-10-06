@@ -194,7 +194,7 @@ public class User {
 			return "Aktywowane";
 		} 
 		
-		return "Dazaktywowane";
+		return "Dezaktywowane";
 	}
 	
 	public String getRoleName() {

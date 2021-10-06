@@ -43,7 +43,7 @@ public class ProductionController {
 	@GetMapping("/showAddProdLineForm")
 	public String showAddProdLineForm(Model model) {
 		
-		model.addAttribute("formProdLine", new ProductionLineDto());
+		model.addAttribute("productionLineDto", new ProductionLineDto());
 		
 		return "prod-line-form";
 	}
@@ -98,7 +98,7 @@ public class ProductionController {
 	@GetMapping("/showAddProdMachineForm")
 	public String showAddProdMachineForm(Model model) {
 		
-		model.addAttribute("formProdMachine", new ProductionMachineDto());
+		model.addAttribute("productionMachineDto", new ProductionMachineDto());
 		
 		prodLines = new LinkedHashMap<Integer, String>();
 		prodLines = loadProdLines();

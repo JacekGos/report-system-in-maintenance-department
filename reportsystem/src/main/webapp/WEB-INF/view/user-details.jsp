@@ -150,7 +150,7 @@
 												<div class="col-md-5">
 													<label class="form-label">Uprawnienia</label> 
 													
-													<input type="text" placeholder="${formUser.role}"
+													<input type="text" placeholder="${userDto.role}"
 													class="form-control" disabled readonly>
 
 													<form:select path="role" items="${roles}"
