@@ -49,11 +49,6 @@
 						<a class="btn btn-outline-primary" href="${changePasswordLink}"
 							role="button">Zmiana hasła</a>
 
-						<c:if test="${changePasswordError != null}">
-							<div class="alert alert-danger col-xs-offset-1 col-xs-10">
-								${changePasswordError}</div>
-						</c:if>
-
 					</aside>
 					<aside class="col-sm-7"></aside>
 					<aside class="col-sm-4"></aside>

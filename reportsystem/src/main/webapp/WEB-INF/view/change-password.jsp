@@ -48,14 +48,16 @@
 							modelAttribute="formChangePassword" accept-charset="UTF-8">
 
 							<div class="col-md-4">
-
+								
+<%-- 								<h3>Użytkownik: <security:authentication property="principal.username" /></h3><br> --%>
+								
 								<form:hidden path="id" />
 
 								<label class="form-label">Nowe hasło</label>
 								<form:input path="password" placeholder="*****"
 									class="form-control" type="password" />
 
-								<form:errors path="password" cssClass="error" />
+								<form:errors path="password" cssClass="error" /><br>
 
 								<label class="form-label">Powtórz hasło</label>
 								<form:input path="matchingPassword" placeholder="*****"
@@ -71,7 +73,14 @@
 
 						</form:form>
 
-
+						<c:if test="${changePasswordSuccess != null}">
+							<div class="alert alert-success col-xs-offset-1 col-xs-10 col-4">
+								${changePasswordSuccess}</div>
+						</c:if>
+						<c:if test="${changePasswordError != null}">
+							<div class="alert alert-danger col-xs-offset-1 col-xs-10 col-4">
+								${changePasswordError}</div>
+						</c:if>
 
 					</aside>
 

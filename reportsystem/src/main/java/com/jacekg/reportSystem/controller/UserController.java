@@ -192,7 +192,12 @@ public class UserController {
 	
 	@PostMapping("/processChangePassword")
 	public String processChangePassword(
-			@ModelAttribute("formChangePassword") FormChangePassword formChangePassword, Model model) {
+			@Valid @ModelAttribute("formChangePassword") FormChangePassword formChangePassword, 
+			BindingResult bindingResult, Model model) {
+		
+		if (bindingResult.hasErrors()) {
+			return "change-password";
+		}
 
 		System.out.println("My logs: " + formChangePassword.getId());
 		System.out.println("My logs: " + formChangePassword.getPassword());
@@ -204,15 +209,19 @@ public class UserController {
 			
 			FormUser formUser = new FormUser();
 			formUser = fillFormUser(user);
-			System.out.println("My logs: " + formUser.getRole());
 			formUser.setPassword(formChangePassword.getPassword());
 			
 			userService.save(formUser);
+			
+			model.addAttribute("changePasswordSuccess", "Zmiana hasła powiodła się.");
+			
 		} else if (user == null) {
 			model.addAttribute("changePasswordError", "Zmiana hasła nie powiodła się.");
 		}
 		
-		return "redirect:/user/showUserOptions";
+		model.addAttribute("formChangePassword", new FormChangePassword());
+		
+		return "change-password";
 	}
 	
 	private String generateUserName(String firstName, String lastName) {
