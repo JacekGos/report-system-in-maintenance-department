@@ -39,42 +39,47 @@
 					</div>
 				</div>
 
+				<div class="row">
+					<aside class="col-sm-4"></aside>
+					<aside class="col-sm-7">
 
-				<form:form class="row g-3"
-					action="${pageContext.request.contextPath}/user/processChangePassword"
-					modelAttribute="formUser" accept-charset="UTF-8">
+						<form:form class="row g-3"
+							action="${pageContext.request.contextPath}/user/processChangePassword"
+							modelAttribute="formChangePassword" accept-charset="UTF-8" method="POST">
+						
+							<div class="col-md-4">
+								
+								<form:hidden path="id" />
+								
+								<label class="form-label">Aktualne hasło</label>
+								<form:input path="currentPassword" placeholder="*****"
+									class="form-control" type="password" />
 
-					<div class="col-md-4">
+								<form:errors path="currentPassword" cssClass="error" />
 
-						<form:hidden path="id" />
-						<form:hidden path="firstName" />
-						<form:hidden path="lastName" />
-						<form:hidden path="userName" />
-						<form:hidden path="email" />
-						<form:hidden path="enabled" />
-						<form:hidden path="credentialsNonExpired" />
-						<form:hidden path="nonExpired" />
-						<form:hidden path="nonLocked" />
+								<label class="form-label">Nowe hasło</label>
+								<form:input path="password" placeholder="*****"
+									class="form-control" type="password" />
 
-						<label class="form-label">Nowe hasło</label>
-						<form:input path="password" placeholder="*****"
-							class="form-control" type="password" />
+								<form:errors path="password" cssClass="error" />
 
-						<form:errors path="password" cssClass="error" />
+								<label class="form-label">Powtórz hasło</label>
+								<form:input path="matchingPassword" placeholder="*****"
+									class="form-control" type="password" />
+									
+								<form:errors path="matchingPassword" cssClass="error" />
+								
+							</div>
 
-						<label class="form-label">Powtórz hasło</label>
-						<form:input path="matchingPassword" placeholder="*****"
-							class="form-control" type="password" />
+							<div class="col-12">
+								<button type="submit" class="btn btn-outline-primary">Zatwierdź</button>
+							</div>
 
-						<form:errors path="matchingPassword" cssClass="error" />
+						</form:form>
+					</aside>
 
-					</div>
-
-					<div class="col-12">
-						<button type="submit" class="btn btn-outline-primary">Zatwierdź</button>
-					</div>
-
-				</form:form>
+					<aside class="col-sm-4"></aside>
+				</div>
 			</main>
 		</div>
 	</div>

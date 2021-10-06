@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jacekg.reportSystem.entity.User;
+import com.jacekg.reportSystem.form_entity.FormChangePassword;
 import com.jacekg.reportSystem.form_entity.FormUser;
 import com.jacekg.reportSystem.service.UserService;
 
@@ -160,7 +161,7 @@ public class UserController {
 		return "redirect:/user/showUserDetails";
 	}
 	
-	@PostMapping("/showUserOptions")
+	@GetMapping("/showUserOptions")
 	public String showUserOptions(Principal principal, Model model) {
 		
 		String userName = principal.getName();
@@ -177,13 +178,26 @@ public class UserController {
 	@GetMapping("/changeUserPassword")
 	public String changeUserPassword(@RequestParam("userId") Long userId, Model model) {
 		
-		User user = userService.getUser(userId);
+		FormChangePassword formChangePassword = new FormChangePassword();
+		formChangePassword.setId(userId);
 		
-		FormUser formUser = fillFormUser(user);
-		
-		model.addAttribute(formUser);
+		model.addAttribute("formChangePassword", formChangePassword);
 		
 		return "change-password";
+	}
+	
+	@PostMapping("/processChangePassword")
+	public String processChangePassword(
+			@ModelAttribute("formChangePassword") FormChangePassword formChangePassword, Model model) {
+
+		System.out.println("My logs: " + formChangePassword.getId());
+		System.out.println("My logs: " + formChangePassword.getCurrentPassword());
+		System.out.println("My logs: " + formChangePassword.getPassword());
+		System.out.println("My logs: " + formChangePassword.getMatchingPassword());
+		
+//		userService.save(formUser);
+
+		return "redirect:/user/showUserOptions";
 	}
 	
 	private String generateUserName(String firstName, String lastName) {

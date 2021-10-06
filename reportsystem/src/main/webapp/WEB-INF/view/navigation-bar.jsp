@@ -23,7 +23,7 @@
 				<li>
 				
 				<form:form action="${pageContext.request.contextPath}/user/showUserOptions"
-					method="POST">
+					method="GET">
 
 					<button class="dropdown-item" type="submit">
 						<i class="bi bi-gear-fill"></i> Opcje

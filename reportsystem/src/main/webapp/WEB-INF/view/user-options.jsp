@@ -43,11 +43,11 @@
 				<div class="row">
 					<aside class="col-sm-4">
 
-<%-- 						<c:url var="changePasswordLink" value="/user/changeUserPassword"> --%>
-<%-- 							<c:param name="userId" value="${userId}" /> --%>
-<%-- 						</c:url> --%>
-<%-- 						<a class="btn btn-outline-primary" href="${changePasswordLink}" --%>
-<!-- 							role="button">Zmiana hasła</a> -->
+						<c:url var="changePasswordLink" value="/user/changeUserPassword">
+							<c:param name="userId" value="${userId}" />
+						</c:url>
+						<a class="btn btn-outline-primary" href="${changePasswordLink}"
+							role="button">Zmiana hasła</a>
 
 					</aside>
 					<aside class="col-sm-7"></aside>
