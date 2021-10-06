@@ -17,7 +17,7 @@ import org.springframework.util.StringUtils;
 
 import com.jacekg.reportSystem.dao.RoleDao;
 import com.jacekg.reportSystem.dao.UserDao;
-import com.jacekg.reportSystem.dto.FormUser;
+import com.jacekg.reportSystem.dto.UserDto;
 import com.jacekg.reportSystem.entity.Role;
 import com.jacekg.reportSystem.entity.User;
 
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	@Transactional
-	public void save(FormUser formUser) {
+	public void save(UserDto formUser) {
 		
 		User user = new User();
 		

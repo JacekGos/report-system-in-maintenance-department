@@ -59,10 +59,6 @@
 								class="table table-striped table-sm table-bordered table-hover">
 								<thead class="table-dark">
 									<tr>
-										<!-- <th scope="col" class="col-sm-6">Imię</th>
-										<th scope="col" class="col-sm-3">Nazwisko</th>
-										<th scope="col" class="col-sm-3">Email</th> -->
-
 										<th scope="col">Imię</th>
 										<th scope="col">Nazwisko</th>
 										<th scope="col">Nazwa użytkownika</th>
@@ -138,7 +134,7 @@
 
 											<form:form class="row g-3"
 												action="${pageContext.request.contextPath}/user/setUserRole"
-												modelAttribute="formUser" accept-charset="UTF-8">
+												modelAttribute="userDto" accept-charset="UTF-8">
 												
 												<form:hidden path="id" />
 												<form:hidden path="firstName" />

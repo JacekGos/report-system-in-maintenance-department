@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.jacekg.reportSystem.dao.ProductionLineDao;
 import com.jacekg.reportSystem.dao.ProductionMachineDao;
-import com.jacekg.reportSystem.dto.FormProductionLine;
-import com.jacekg.reportSystem.dto.FormProductionMachine;
+import com.jacekg.reportSystem.dto.ProductionLineDto;
+import com.jacekg.reportSystem.dto.ProductionMachineDto;
 import com.jacekg.reportSystem.entity.ProductionLine;
 import com.jacekg.reportSystem.entity.ProductionMachine;
 
@@ -22,7 +22,7 @@ public class ProductionServiceImpl implements ProductionService {
 	
 	@Override
 	@Transactional
-	public void save(FormProductionLine formProductionLine) {
+	public void save(ProductionLineDto formProductionLine) {
 		
 		ProductionLine productionLine = new ProductionLine();
 		
@@ -34,7 +34,7 @@ public class ProductionServiceImpl implements ProductionService {
 	
 	@Override
 	@Transactional
-	public void save(FormProductionMachine formProductionMachine) {
+	public void save(ProductionMachineDto formProductionMachine) {
 		
 		ProductionMachine productionMachine = new ProductionMachine();
 		ProductionLine productionLine = productionLineDao.findProdLineById(formProductionMachine.getProdLineId());

@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.jacekg.reportSystem.dto.FormChangePassword;
-import com.jacekg.reportSystem.dto.FormUser;
+import com.jacekg.reportSystem.dto.ChangePasswordDto;
+import com.jacekg.reportSystem.dto.UserDto;
 import com.jacekg.reportSystem.entity.User;
 import com.jacekg.reportSystem.service.UserService;
 
@@ -73,11 +73,11 @@ public class UserController {
 
 		User user = userService.getUser(userId);
 
-		FormUser formUser = fillFormUser(user);
+		UserDto userDto = fillFormUser(user);
 
 		model.addAttribute("user", user);
 		model.addAttribute("roles", roles);
-		model.addAttribute("formUser", formUser);
+		model.addAttribute("userDto", userDto);
 
 		return "user-details";
 	}
@@ -85,14 +85,14 @@ public class UserController {
 	@GetMapping("/showUserForm")
 	public String showUserForm(Model model) {
 
-		model.addAttribute("formUser", new FormUser());
+		model.addAttribute("userDto", new UserDto());
 		model.addAttribute("roles", roles);
 
 		return "user-form";
 	}
 
 	@PostMapping("/processUserForm")
-	public String processUserForm(@Valid @ModelAttribute("formUser") FormUser formUser,
+	public String processUserForm(@Valid @ModelAttribute("formUser") UserDto formUser,
 			BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
@@ -109,18 +109,18 @@ public class UserController {
 	}
 
 	@PostMapping("/processSaveUser")
-	public String processSaveUser(@ModelAttribute("formUser") FormUser formUser, Model model) {
+	public String processSaveUser(@ModelAttribute("formUser") UserDto userDto, Model model) {
 
-		System.out.println("My logs formUser: " + formUser.toString());
+		System.out.println("My logs formUser: " + userDto.toString());
 
-		if (userService.findByUserName(formUser.getUserName()) != null) {
+		if (userService.findByUserName(userDto.getUserName()) != null) {
 
 			model.addAttribute("registrationError", "Wystąpił błąd - nazwa konta zajęta.");
 
 			return "user-confirmation";
 		}
 
-		userService.save(formUser);
+		userService.save(userDto);
 
 		return "redirect:/user/showUsersList";
 	}
@@ -156,11 +156,11 @@ public class UserController {
 	}
 
 	@PostMapping("/setUserRole")
-	public String setUserRole(@ModelAttribute("formUser") FormUser formUser, Model model) {
+	public String setUserRole(@ModelAttribute("formUser") UserDto userDto, Model model) {
 
-		userService.save(formUser);
+		userService.save(userDto);
 
-		model.addAttribute("id", formUser.getId());	
+		model.addAttribute("id", userDto.getId());	
 
 		return "redirect:/user/showUserDetails";
 	}
@@ -182,36 +182,32 @@ public class UserController {
 	@GetMapping("/changeUserPassword")
 	public String changeUserPassword(@RequestParam("userId") Long userId, Model model) {
 		
-		FormChangePassword formChangePassword = new FormChangePassword();
-		formChangePassword.setId(userId);
+		ChangePasswordDto changePasswordDto = new ChangePasswordDto();
+		changePasswordDto.setId(userId);
 		
-		model.addAttribute("formChangePassword", formChangePassword);
+		model.addAttribute("changePasswordDto", changePasswordDto);
 		
 		return "change-password";
 	}
 	
 	@PostMapping("/processChangePassword")
 	public String processChangePassword(
-			@Valid @ModelAttribute("formChangePassword") FormChangePassword formChangePassword, 
+			@Valid @ModelAttribute("formChangePassword") ChangePasswordDto changePasswordDto, 
 			BindingResult bindingResult, Model model) {
 		
 		if (bindingResult.hasErrors()) {
 			return "change-password";
 		}
-
-		System.out.println("My logs: " + formChangePassword.getId());
-		System.out.println("My logs: " + formChangePassword.getPassword());
-		System.out.println("My logs: " + formChangePassword.getMatchingPassword());
 		
-		User user = userService.getUser(formChangePassword.getId());
+		User user = userService.getUser(changePasswordDto.getId());
 		
 		if (user != null) {
 			
-			FormUser formUser = new FormUser();
-			formUser = fillFormUser(user);
-			formUser.setPassword(formChangePassword.getPassword());
+			UserDto userDto = new UserDto();
+			userDto = fillFormUser(user);
+			userDto.setPassword(changePasswordDto.getPassword());
 			
-			userService.save(formUser);
+			userService.save(userDto);
 			
 			model.addAttribute("changePasswordSuccess", "Zmiana hasła powiodła się.");
 			
@@ -219,7 +215,7 @@ public class UserController {
 			model.addAttribute("changePasswordError", "Zmiana hasła nie powiodła się.");
 		}
 		
-		model.addAttribute("formChangePassword", new FormChangePassword());
+		model.addAttribute("changePasswordDto", new ChangePasswordDto());
 		
 		return "change-password";
 	}
@@ -239,21 +235,21 @@ public class UserController {
 		return userName + ++userNumber;
 	}
 
-	private FormUser fillFormUser(User user) {
+	private UserDto fillFormUser(User user) {
 
-		FormUser formUser = new FormUser();
-		formUser.setId(user.getId());
-		formUser.setFirstName(user.getFirstName());
-		formUser.setLastName(user.getLastName());
-		formUser.setUserName(user.getUserName());
-		formUser.setPassword(user.getPassword());
-		formUser.setEmail(user.getEmail());
-		formUser.setRole(user.getRoleName());
-		formUser.setEnabled(user.isEnabled());
-		formUser.setCredentialsNonExpired(user.isCredentialsNonExpired());
-		formUser.setNonExpired(user.isNonExpired());
-		formUser.setNonLocked(user.isNonLocked());
+		UserDto userDto = new UserDto();
+		userDto.setId(user.getId());
+		userDto.setFirstName(user.getFirstName());
+		userDto.setLastName(user.getLastName());
+		userDto.setUserName(user.getUserName());
+		userDto.setPassword(user.getPassword());
+		userDto.setEmail(user.getEmail());
+		userDto.setRole(user.getRoleName());
+		userDto.setEnabled(user.isEnabled());
+		userDto.setCredentialsNonExpired(user.isCredentialsNonExpired());
+		userDto.setNonExpired(user.isNonExpired());
+		userDto.setNonLocked(user.isNonLocked());
 
-		return formUser;
+		return userDto;
 	}
 }

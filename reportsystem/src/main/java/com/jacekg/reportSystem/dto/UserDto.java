@@ -7,7 +7,7 @@ import com.jacekg.reportSystem.validation.FieldMatch;
 import com.jacekg.reportSystem.validation.ValidEmail;
 
 
-public class FormUser {
+public class UserDto {
 	
 	private Long id;
 	
@@ -38,7 +38,7 @@ public class FormUser {
 	 
 	private boolean isNonLocked;
 	
-	public FormUser() {
+	public UserDto() {
 		
 	}
 	

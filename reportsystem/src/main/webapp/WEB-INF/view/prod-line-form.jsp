@@ -45,7 +45,7 @@
 					<aside class="col-sm-6">
 						<form:form class="row g-3"
 							action="${pageContext.request.contextPath}/production/processProdLineForm"
-							modelAttribute="formProdLine" accept-charset="UTF-8">
+							modelAttribute="productionLineDto" accept-charset="UTF-8">
 							<div class="col-md-4">
 
 								<form:hidden path="id" />

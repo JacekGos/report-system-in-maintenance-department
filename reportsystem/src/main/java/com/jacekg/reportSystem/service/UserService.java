@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import com.jacekg.reportSystem.dto.FormUser;
+import com.jacekg.reportSystem.dto.UserDto;
 import com.jacekg.reportSystem.entity.User;
 
 public interface UserService extends UserDetailsService {
@@ -17,7 +17,7 @@ public interface UserService extends UserDetailsService {
 	
 	Long getUsersAmount(String firstName, String lastName);
 		
-	void save(FormUser formUser);
+	void save(UserDto formUser);
 
 	void setUserPassword(long userId, String password);
 

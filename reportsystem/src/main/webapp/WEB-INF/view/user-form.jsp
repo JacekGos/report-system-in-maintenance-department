@@ -42,7 +42,7 @@
 							<%-- 					<form class="needs-validation" novalidate> --%>
 							<form:form class="row g-3"
 								action="${pageContext.request.contextPath}/user/processUserForm"
-								modelAttribute="formUser" accept-charset="UTF-8">
+								modelAttribute="userDto" accept-charset="UTF-8">
 
 								<div class="row g-3">
 									<div class="col-sm-6">

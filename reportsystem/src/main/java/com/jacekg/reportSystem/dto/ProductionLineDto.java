@@ -3,7 +3,7 @@ package com.jacekg.reportSystem.dto;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class FormProductionLine {
+public class ProductionLineDto {
 	
 	private int id;
 	
@@ -11,7 +11,7 @@ public class FormProductionLine {
 	@Size(min = 1, max = 20, message = "za długa/krótka nazwa")
 	private String name;
 	
-	public FormProductionLine() {
+	public ProductionLineDto() {
 		
 	}
 

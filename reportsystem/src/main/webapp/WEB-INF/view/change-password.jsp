@@ -45,7 +45,7 @@
 
 						<form:form class="row g-3"
 							action="${pageContext.request.contextPath}/user/processChangePassword"
-							modelAttribute="formChangePassword" accept-charset="UTF-8">
+							modelAttribute="changePasswordDto" accept-charset="UTF-8">
 
 							<div class="col-md-4">
 								

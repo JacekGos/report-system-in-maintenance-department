@@ -4,16 +4,16 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import com.jacekg.reportSystem.dto.FormProductionLine;
-import com.jacekg.reportSystem.dto.FormProductionMachine;
+import com.jacekg.reportSystem.dto.ProductionLineDto;
+import com.jacekg.reportSystem.dto.ProductionMachineDto;
 import com.jacekg.reportSystem.entity.ProductionLine;
 import com.jacekg.reportSystem.entity.ProductionMachine;
 
 public interface ProductionService {
 
-	void save(FormProductionLine formProductionLine);
+	void save(ProductionLineDto formProductionLine);
 	
-	void save(FormProductionMachine formProductionMachine);
+	void save(ProductionMachineDto formProductionMachine);
 
 	ProductionLine findProdLineByName(String name);
 

@@ -45,7 +45,7 @@
 					<aside class="col-sm-7">
 						<form:form class="row g-3"
 							action="${pageContext.request.contextPath}/production/processProdMachineForm"
-							modelAttribute="formProdMachine" accept-charset="UTF-8">
+							modelAttribute="productionMachineDto" accept-charset="UTF-8">
 
 							<div class="col-md-4">
 

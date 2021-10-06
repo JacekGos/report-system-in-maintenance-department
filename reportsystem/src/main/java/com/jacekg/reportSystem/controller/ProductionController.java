@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.jacekg.reportSystem.dto.FormProductionLine;
-import com.jacekg.reportSystem.dto.FormProductionMachine;
+import com.jacekg.reportSystem.dto.ProductionLineDto;
+import com.jacekg.reportSystem.dto.ProductionMachineDto;
 import com.jacekg.reportSystem.entity.ProductionLine;
 import com.jacekg.reportSystem.entity.ProductionMachine;
 import com.jacekg.reportSystem.service.ProductionService;
@@ -43,7 +43,7 @@ public class ProductionController {
 	@GetMapping("/showAddProdLineForm")
 	public String showAddProdLineForm(Model model) {
 		
-		model.addAttribute("formProdLine", new FormProductionLine());
+		model.addAttribute("formProdLine", new ProductionLineDto());
 		
 		return "prod-line-form";
 	}
@@ -53,37 +53,37 @@ public class ProductionController {
 		
 		ProductionLine productionLine = productionService.getProdLineOnly(lineId);
 		
-		FormProductionLine formProductionLine = new FormProductionLine();
-		formProductionLine.setId(lineId);
-		formProductionLine.setName(productionLine.getName());
+		ProductionLineDto productionLineDto = new ProductionLineDto();
+		productionLineDto.setId(lineId);
+		productionLineDto.setName(productionLine.getName());
 		
-		model.addAttribute("formProdLine", formProductionLine);
+		model.addAttribute("productionLineDto", productionLineDto);
 		
 		return "prod-line-form";
 	}
 	
 	@PostMapping("/processProdLineForm")
-	public String processProdLineForm(@Valid @ModelAttribute("formProdLine") FormProductionLine formProductionLine,
+	public String processProdLineForm(@Valid @ModelAttribute("formProdLine") ProductionLineDto productionLineDto,
 			BindingResult bindingResult, Model model) {
 		
 		if (bindingResult.hasErrors()) {
 			return "prod-line-form";
 		}
 		
-		ProductionLine productionLine = productionService.findProdLineByName(formProductionLine.getName());
+		ProductionLine productionLine = productionService.findProdLineByName(productionLineDto.getName());
 		
-		int formProdLineId = formProductionLine.getId();
+		int formProdLineId = productionLineDto.getId();
 		
 		if (productionLine != null && productionLine.getId() != formProdLineId) {
 			
-			model.addAttribute("formProdLine", formProductionLine);
+			model.addAttribute("productionLineDto", productionLineDto);
 			model.addAttribute("errorMessage", "Podana linia już istnieje");
 			
 			return "prod-line-form";
 		}
 		
 		try {
-			productionService.save(formProductionLine);
+			productionService.save(productionLineDto);
 		} catch (Exception e) {
 			System.out.println("MY log ---> Unique value violated");
 			
@@ -98,7 +98,7 @@ public class ProductionController {
 	@GetMapping("/showAddProdMachineForm")
 	public String showAddProdMachineForm(Model model) {
 		
-		model.addAttribute("formProdMachine", new FormProductionMachine());
+		model.addAttribute("formProdMachine", new ProductionMachineDto());
 		
 		prodLines = new LinkedHashMap<Integer, String>();
 		prodLines = loadProdLines();
@@ -113,25 +113,25 @@ public class ProductionController {
 		
 		ProductionMachine productionMachine = productionService.getProdMachine(machineId);
 		
-		FormProductionMachine formProductionMachine = new FormProductionMachine();
-		formProductionMachine.setId(machineId);
-		formProductionMachine.setName(productionMachine.getName());
-		formProductionMachine.setProdLineName(productionMachine.getProductionLine().getName());
+		ProductionMachineDto productionMachineDto = new ProductionMachineDto();
+		productionMachineDto.setId(machineId);
+		productionMachineDto.setName(productionMachine.getName());
+		productionMachineDto.setProdLineName(productionMachine.getProductionLine().getName());
 		
-		System.out.println("prodLineName: " + formProductionMachine.getProdLineName());
+		System.out.println("prodLineName: " + productionMachineDto.getProdLineName());
 		
 		prodLines = new LinkedHashMap<Integer, String>();
 		prodLines = loadProdLines();
 		
 		model.addAttribute("prodLines", prodLines);
-		model.addAttribute("prodLineName", formProductionMachine.getProdLineName());
-		model.addAttribute("formProdMachine", formProductionMachine);
+		model.addAttribute("prodLineName", productionMachineDto.getProdLineName());
+		model.addAttribute("productionMachineDto", productionMachineDto);
 		
 		return "prod-machine-form";
 	}
 	
 	@PostMapping("/processProdMachineForm")
-	public String processProdMachineForm(@Valid @ModelAttribute("formProdMachine") FormProductionMachine formProductionMachine,
+	public String processProdMachineForm(@Valid @ModelAttribute("formProdMachine") ProductionMachineDto productionMachineDto,
 			BindingResult bindingResult, Model model) {
 		
 		if (bindingResult.hasErrors()) {
@@ -146,10 +146,10 @@ public class ProductionController {
 		
 		ProductionMachine productionMachine = 
 				productionService.findProdMachineByNameAndLine(
-						formProductionMachine.getName(), 
-						formProductionMachine.getProdLineId());
+						productionMachineDto.getName(), 
+						productionMachineDto.getProdLineId());
 		
-		int formProdMachineId = formProductionMachine.getId();
+		int formProdMachineId = productionMachineDto.getId();
 		
 		if (productionMachine != null && productionMachine.getId() != formProdMachineId) {
 			
@@ -157,15 +157,15 @@ public class ProductionController {
 			prodLines = loadProdLines();
 			
 			model.addAttribute("prodLines", prodLines);
-			model.addAttribute("formProdMachine", formProductionMachine);
-			model.addAttribute("prodLineName", formProductionMachine.getProdLineName());
+			model.addAttribute("productionMachineDto", productionMachineDto);
+			model.addAttribute("prodLineName", productionMachineDto.getProdLineName());
 			model.addAttribute("errorMessage", "Podana maszyna już istnieje");
 			
 			return "prod-machine-form";
 		}
 		
 		try {
-			productionService.save(formProductionMachine);
+			productionService.save(productionMachineDto);
 		} catch (Exception e) {
 			
 			System.out.println("MY log ---> Unique value violated");

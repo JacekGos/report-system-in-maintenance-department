@@ -8,7 +8,7 @@ import com.jacekg.reportSystem.validation.FieldMatch;
 @FieldMatch.List({
 	@FieldMatch(first = "password", second = "matchingPassword", message = "The password field must match")
 })
-public class FormChangePassword {
+public class ChangePasswordDto {
 	
 	private Long id;
 	
@@ -20,7 +20,7 @@ public class FormChangePassword {
 	@Size(min = 1, message = "is required")
 	private String matchingPassword;
 	
-	public FormChangePassword() {
+	public ChangePasswordDto() {
 		
 	}
 	
