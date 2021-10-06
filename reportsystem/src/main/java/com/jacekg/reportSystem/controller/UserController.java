@@ -171,7 +171,19 @@ public class UserController {
 		
 		System.out.println(userName);
 		
-		return "home";
+		return "user-options";
+	}
+	
+	@GetMapping("/changeUserPassword")
+	public String changeUserPassword(@RequestParam("userId") Long userId, Model model) {
+		
+		User user = userService.getUser(userId);
+		
+		FormUser formUser = fillFormUser(user);
+		
+		model.addAttribute(formUser);
+		
+		return "change-password";
 	}
 	
 	private String generateUserName(String firstName, String lastName) {
