@@ -12,7 +12,7 @@
 
 <%@ include file="/WEB-INF/view/sources.jsp"%>
 
-<script>
+<!-- <script>
 	$('#exampleModal').on('shown.bs.modal', function() {
 		$('#myInput').trigger('focus')
 	})
@@ -21,7 +21,7 @@
 		backdrop : 'static',
 		keyboard : false
 	})
-</script>
+</script> -->
 
 </head>
 <body>
@@ -100,78 +100,79 @@
 								onclick="if (!(confirm('Jesteś pewny, że chcesz ustawić domyślne hasło?'))) return false">Reset
 								hasła</a>
 
-							<c:if test="${user.enabled == true}">
+							<c:if test="${currentUserName != user.userName}">
+								<c:if test="${user.enabled == true}">
 
-								<a class="btn btn-outline-primary" href="${deactivateUserLink}"
-									role="button"
-									onclick="if (!(confirm('Jesteś pewny, że chcesz dezaktywować konto użytkownika?'))) return false">Dezaktywuj</a>
+									<a class="btn btn-outline-primary" href="${deactivateUserLink}"
+										role="button"
+										onclick="if (!(confirm('Jesteś pewny, że chcesz dezaktywować konto użytkownika?'))) return false">Dezaktywuj</a>
 
-							</c:if>
-							<c:if test="${user.enabled != true}">
+								</c:if>
+								<c:if test="${user.enabled != true}">
 
-								<a class="btn btn-outline-primary" href="${activateUserLink}"
-									role="button"
-									onclick="if (!(confirm('Jesteś pewny, że chcesz aktywować konto użytkownika?'))) return false">Aktywuj</a>
+									<a class="btn btn-outline-primary" href="${activateUserLink}"
+										role="button"
+										onclick="if (!(confirm('Jesteś pewny, że chcesz aktywować konto użytkownika?'))) return false">Aktywuj</a>
 
-							</c:if>
+								</c:if>
 
-							<button type="button" class="btn btn-outline-primary"
-								data-bs-toggle="modal" data-bs-target="#exampleModal">
-								Zmiana uprawnień</button>
+								<button type="button" class="btn btn-outline-primary"
+									data-bs-toggle="modal" data-bs-target="#exampleModal">
+									Zmiana uprawnień</button>
 
-							<div class="modal fade" id="exampleModal" tabindex="-1"
-								aria-labelledby="exampleModalLabel" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLabel">Zmiana
-												uprawnień</h5>
-											<button type="button" class="btn-close"
-												data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
+								<div class="modal fade" id="exampleModal" tabindex="-1"
+									aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Zmiana
+													uprawnień</h5>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
 
-										<div class="modal-body">
+											<div class="modal-body">
 
-											<form:form class="row g-3"
-												action="${pageContext.request.contextPath}/user/setUserRole"
-												modelAttribute="userDto" accept-charset="UTF-8">
-												
-												<form:hidden path="id" />
-												<form:hidden path="firstName" />
-												<form:hidden path="lastName" />
-												<form:hidden path="password" />
-												<form:hidden path="userName" />
-												<form:hidden path="email" />
-												<form:hidden path="enabled" />
-												<form:hidden path="credentialsNonExpired" />
-												<form:hidden path="nonExpired" />
-												<form:hidden path="nonLocked" />
+												<form:form class="row g-3"
+													action="${pageContext.request.contextPath}/user/setUserRole"
+													modelAttribute="userDto" accept-charset="UTF-8">
 
-												<div class="col-md-5">
-													<label class="form-label">Uprawnienia</label> 
-													
-													<input type="text" placeholder="${userDto.role}"
-													class="form-control" disabled readonly>
+													<form:hidden path="id" />
+													<form:hidden path="firstName" />
+													<form:hidden path="lastName" />
+													<form:hidden path="password" />
+													<form:hidden path="userName" />
+													<form:hidden path="email" />
+													<form:hidden path="enabled" />
+													<form:hidden path="credentialsNonExpired" />
+													<form:hidden path="nonExpired" />
+													<form:hidden path="nonLocked" />
 
-													<form:select path="role" items="${roles}"
-														class="form-select" />
-													<br>	
-													<button type="submit" class="btn btn-outline-primary">
-														Zapisz zmiany</button>
-												
-												</div>
+													<div class="col-md-5">
+														<label class="form-label">Uprawnienia</label> <input
+															type="text" placeholder="${userDto.role}"
+															class="form-control" disabled readonly>
 
-											</form:form>
+														<form:select path="role" items="${roles}"
+															class="form-select" />
+														<br>
+														<button type="submit" class="btn btn-outline-primary">
+															Zapisz zmiany</button>
 
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary"
-												data-bs-dismiss="modal">Zamknij</button>
-											
+													</div>
+
+												</form:form>
+
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">Zamknij</button>
+
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
+							</c:if>
 
 						</div>
 					</aside>

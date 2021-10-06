@@ -69,13 +69,16 @@ public class UserController {
 	}
 
 	@GetMapping("/showUserDetails")
-	public String showUserDetails(@RequestParam("id") long userId, Model model) {
-
+	public String showUserDetails(@RequestParam("id") long userId, Model model, Principal principal) {
+		
 		User user = userService.getUser(userId);
 
 		UserDto userDto = fillFormUser(user);
+		
+		String currentUserName = principal.getName();
 
 		model.addAttribute("user", user);
+		model.addAttribute("currentUserName", currentUserName);
 		model.addAttribute("roles", roles);
 		model.addAttribute("userDto", userDto);
 
@@ -192,7 +195,7 @@ public class UserController {
 	
 	@PostMapping("/processChangePassword")
 	public String processChangePassword(
-			@Valid @ModelAttribute("formChangePassword") ChangePasswordDto changePasswordDto, 
+			@Valid @ModelAttribute("changePasswordDto") ChangePasswordDto changePasswordDto, 
 			BindingResult bindingResult, Model model) {
 		
 		if (bindingResult.hasErrors()) {
