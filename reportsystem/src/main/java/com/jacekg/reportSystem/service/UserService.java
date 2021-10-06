@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import com.jacekg.reportSystem.dto.FormUser;
 import com.jacekg.reportSystem.entity.User;
-import com.jacekg.reportSystem.form_entity.FormUser;
 
 public interface UserService extends UserDetailsService {
 	

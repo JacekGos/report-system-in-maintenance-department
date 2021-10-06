@@ -1,4 +1,4 @@
-package com.jacekg.reportSystem.form_entity;
+package com.jacekg.reportSystem.dto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -11,10 +11,6 @@ import com.jacekg.reportSystem.validation.FieldMatch;
 public class FormChangePassword {
 	
 	private Long id;
-	
-	@NotNull(message = "is required")
-	@Size(min = 1, message = "is required")
-	private String currentPassword;
 	
 	@NotNull(message = "is required")
 	@Size(min = 1, message = "is required")
@@ -34,16 +30,6 @@ public class FormChangePassword {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-
-
-	public String getCurrentPassword() {
-		return currentPassword;
-	}
-
-	public void setCurrentPassword(String currentPassword) {
-		this.currentPassword = currentPassword;
 	}
 
 	public String getPassword() {

@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.jacekg.reportSystem.dto.FormProductionLine;
+import com.jacekg.reportSystem.dto.FormProductionMachine;
 import com.jacekg.reportSystem.entity.ProductionLine;
 import com.jacekg.reportSystem.entity.ProductionMachine;
-import com.jacekg.reportSystem.form_entity.FormProductionLine;
-import com.jacekg.reportSystem.form_entity.FormProductionMachine;
 
 public interface ProductionService {
 

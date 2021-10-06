@@ -208,6 +208,8 @@ public class User {
 		return convertedName;
 	}
 	
+
+	
 	private void addReport(Report report) {
 		
 		if (reports == null) {

@@ -17,9 +17,9 @@ import org.springframework.util.StringUtils;
 
 import com.jacekg.reportSystem.dao.RoleDao;
 import com.jacekg.reportSystem.dao.UserDao;
+import com.jacekg.reportSystem.dto.FormUser;
 import com.jacekg.reportSystem.entity.Role;
 import com.jacekg.reportSystem.entity.User;
-import com.jacekg.reportSystem.form_entity.FormUser;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -57,15 +57,15 @@ public class UserServiceImpl implements UserService {
 		user.setCredentialsNonExpired(true);
 		user.setNonLocked(true);
 		
-		if (formUser.getRole().equals("ROLE_EMPLOYEE")) {
+		if (formUser.getRole().equals("EMPLOYEE")) {
 			user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_EMPLOYEE")));
 		} 
-		else if (formUser.getRole().equals("ROLE_MANAGER")) {
+		else if (formUser.getRole().equals("MANAGER")) {
 			user.setRoles(Arrays.asList(
 					roleDao.findRoleByName("ROLE_EMPLOYEE"),
 					roleDao.findRoleByName("ROLE_MANAGER")));
 		} 
-		else if (formUser.getRole().equals("ROLE_ADMIN")) {
+		else if (formUser.getRole().equals("ADMIN")) {
 			user.setRoles(Arrays.asList(
 					roleDao.findRoleByName("ROLE_EMPLOYEE"),
 					roleDao.findRoleByName("ROLE_MANAGER"),

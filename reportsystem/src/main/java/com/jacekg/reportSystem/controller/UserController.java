@@ -10,6 +10,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -22,9 +23,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.jacekg.reportSystem.dto.FormChangePassword;
+import com.jacekg.reportSystem.dto.FormUser;
 import com.jacekg.reportSystem.entity.User;
-import com.jacekg.reportSystem.form_entity.FormChangePassword;
-import com.jacekg.reportSystem.form_entity.FormUser;
 import com.jacekg.reportSystem.service.UserService;
 
 @Controller
@@ -35,15 +36,18 @@ public class UserController {
 	private UserService userService;
 
 	private Map<String, String> roles;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 
 	@PostConstruct
 	protected void loadRoles() {
 
 		roles = new LinkedHashMap<String, String>();
 
-		roles.put("ROLE_EMPLOYEE", "Employee");
-		roles.put("ROLE_MANAGER", "Manager");
-		roles.put("ROLE_ADMIN", "Admin");
+		roles.put("EMPLOYEE", "Employee");
+		roles.put("MANAGER", "Manager");
+		roles.put("ADMIN", "Admin");
 	}
 
 	@InitBinder
@@ -191,12 +195,23 @@ public class UserController {
 			@ModelAttribute("formChangePassword") FormChangePassword formChangePassword, Model model) {
 
 		System.out.println("My logs: " + formChangePassword.getId());
-		System.out.println("My logs: " + formChangePassword.getCurrentPassword());
 		System.out.println("My logs: " + formChangePassword.getPassword());
 		System.out.println("My logs: " + formChangePassword.getMatchingPassword());
 		
-//		userService.save(formUser);
-
+		User user = userService.getUser(formChangePassword.getId());
+		
+		if (user != null) {
+			
+			FormUser formUser = new FormUser();
+			formUser = fillFormUser(user);
+			System.out.println("My logs: " + formUser.getRole());
+			formUser.setPassword(formChangePassword.getPassword());
+			
+			userService.save(formUser);
+		} else if (user == null) {
+			model.addAttribute("changePasswordError", "Zmiana hasła nie powiodła się.");
+		}
+		
 		return "redirect:/user/showUserOptions";
 	}
 	

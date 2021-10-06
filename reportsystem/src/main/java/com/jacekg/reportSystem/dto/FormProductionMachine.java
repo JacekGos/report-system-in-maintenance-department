@@ -1,4 +1,4 @@
-package com.jacekg.reportSystem.form_entity;
+package com.jacekg.reportSystem.dto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

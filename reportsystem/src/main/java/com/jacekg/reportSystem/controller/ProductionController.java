@@ -16,10 +16,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.jacekg.reportSystem.dto.FormProductionLine;
+import com.jacekg.reportSystem.dto.FormProductionMachine;
 import com.jacekg.reportSystem.entity.ProductionLine;
 import com.jacekg.reportSystem.entity.ProductionMachine;
-import com.jacekg.reportSystem.form_entity.FormProductionLine;
-import com.jacekg.reportSystem.form_entity.FormProductionMachine;
 import com.jacekg.reportSystem.service.ProductionService;
 
 @Controller

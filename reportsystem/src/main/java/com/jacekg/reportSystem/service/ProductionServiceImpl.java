@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.jacekg.reportSystem.dao.ProductionLineDao;
 import com.jacekg.reportSystem.dao.ProductionMachineDao;
+import com.jacekg.reportSystem.dto.FormProductionLine;
+import com.jacekg.reportSystem.dto.FormProductionMachine;
 import com.jacekg.reportSystem.entity.ProductionLine;
 import com.jacekg.reportSystem.entity.ProductionMachine;
-import com.jacekg.reportSystem.form_entity.FormProductionLine;
-import com.jacekg.reportSystem.form_entity.FormProductionMachine;
 
 @Service
 public class ProductionServiceImpl implements ProductionService {

@@ -45,17 +45,11 @@
 
 						<form:form class="row g-3"
 							action="${pageContext.request.contextPath}/user/processChangePassword"
-							modelAttribute="formChangePassword" accept-charset="UTF-8" method="POST">
-						
-							<div class="col-md-4">
-								
-								<form:hidden path="id" />
-								
-								<label class="form-label">Aktualne hasło</label>
-								<form:input path="currentPassword" placeholder="*****"
-									class="form-control" type="password" />
+							modelAttribute="formChangePassword" accept-charset="UTF-8">
 
-								<form:errors path="currentPassword" cssClass="error" />
+							<div class="col-md-4">
+
+								<form:hidden path="id" />
 
 								<label class="form-label">Nowe hasło</label>
 								<form:input path="password" placeholder="*****"
@@ -66,9 +60,9 @@
 								<label class="form-label">Powtórz hasło</label>
 								<form:input path="matchingPassword" placeholder="*****"
 									class="form-control" type="password" />
-									
+
 								<form:errors path="matchingPassword" cssClass="error" />
-								
+
 							</div>
 
 							<div class="col-12">
@@ -76,6 +70,9 @@
 							</div>
 
 						</form:form>
+
+
+
 					</aside>
 
 					<aside class="col-sm-4"></aside>
