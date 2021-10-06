@@ -20,7 +20,7 @@
 				</h5>
 
 				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" href="${pageContext.request.contextPath}/report/showAddReportForm"> 
+					aria-current="page" href="${pageContext.request.contextPath}/report/showReportForm"> 
 					<span data-feather="home"></span>
 						<i class="bi bi-receipt"></i> Dodaj raport
 				</a></li>

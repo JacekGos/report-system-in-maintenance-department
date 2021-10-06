@@ -37,9 +37,6 @@ public class UserController {
 
 	private Map<String, String> roles;
 	
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
-
 	@PostConstruct
 	protected void loadRoles() {
 
