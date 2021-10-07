@@ -35,8 +35,7 @@
 							<span data-feather="calendar"></span> This week
 						</button> -->
 						
-						<h1>${user.userName}</h1>
-						<h1>${formChangedPassword.password}</h1>
+<%-- 						<h1>${productionLine.}</h1> --%>
 						
 					</div>
 				</div>

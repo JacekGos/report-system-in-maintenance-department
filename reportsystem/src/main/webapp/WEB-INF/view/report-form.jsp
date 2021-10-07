@@ -15,21 +15,6 @@
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/form-validation.css" />
 
-<script src="jquery-1.11.3.js"></script>
-
-<script>
-
-	var pathname = ${pageContext.request.contextPath} + "/report/loadProdMachines?"; // Returns path only (/path/example.html)
-	var url      = window.location.href;     // Returns full URL (https://example.com/path/example.html)
-	var origin   = window.location.origin;   // Returns base URL (https://example.com)
-
-	$("#first-choice").change(function() {
-		   $("#second-choice").load("/report/loadProdMachines?") + $("#first-choice").val());
-// 			$.get("home.jsp");
-		});
-	
-</script>
-
 </head>
 
 <body>
@@ -73,13 +58,6 @@
 											items="${prodMachines}" class="form-select" />
 									</div> --%>
 
-									<select id="first-choice">
-										<option selected value="base">Please Select</option>
-										<option value="beverages">Beverages</option>
-										<option value="snacks">Snacks</option>
-									</select> <br> <select id="second-choice">
-										<option>Please choose from above</option>
-									</select>
 
 									<div class="col-sm-6">
 										<label for="exampleFormControlTextarea1" class="form-label">Data</label>

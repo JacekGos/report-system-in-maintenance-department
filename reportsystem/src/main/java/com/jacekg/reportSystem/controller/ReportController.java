@@ -1,12 +1,9 @@
 package com.jacekg.reportSystem.controller;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -16,10 +13,13 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.google.gson.Gson;
 import com.jacekg.reportSystem.dto.ReportDto;
 import com.jacekg.reportSystem.entity.FailType;
 import com.jacekg.reportSystem.entity.ProductionLine;
+import com.jacekg.reportSystem.entity.ProductionMachine;
 import com.jacekg.reportSystem.service.ProductionService;
 import com.jacekg.reportSystem.service.ReportService;
 
@@ -34,6 +34,7 @@ public class ReportController {
 	private ReportService reportService;
 
 	private Map<Integer, String> prodLines;
+	private Map<Integer, String> prodMachines;
 	private Map<Integer, String> failTypes;
 
 	@InitBinder
@@ -60,18 +61,30 @@ public class ReportController {
 		model.addAttribute("failTypes", failTypes);
 		model.addAttribute("reportDto", reportDto);
 
-		return "report-form";
+		return "report-form2";
 	}
 	
-	@GetMapping("/loadProdMachines")
-	public List<String> loadProdMachines() {
-		
-		List<String> list = new ArrayList<>();
-		list.add("OP10");
-		
-		return list;
-	}
-
+//	@GetMapping("/loadProdMachines")
+//	public String loadProdMachines(@RequestParam("prodLineId") int prodLineId, Model model) {
+//		
+//		int prodLineId = 1;
+//		
+//		ProductionLine productionLine = productionService.getProdLineWithMachines(prodLineId);
+//		List<ProductionMachine> productionMachines = productionLine.getProductionMachines();
+//		
+//		prodMachines = new LinkedHashMap<Integer, String>();
+//		
+//		for (ProductionMachine productionMachine : productionMachines) {
+//
+//			prodMachines.put(productionMachine.getId(), productionMachine.getName());
+//		}
+//		
+//		String productionMachinesList = new Gson().toJson(prodMachines);
+//		
+//		return "home.jsp";
+//	}
+	
+	//this won't be useful after adding drop-down lists
 	private Map<Integer, String> loadProdLines() {
 
 		List<ProductionLine> prodLineList = productionService.getProdLinesWithMachines();

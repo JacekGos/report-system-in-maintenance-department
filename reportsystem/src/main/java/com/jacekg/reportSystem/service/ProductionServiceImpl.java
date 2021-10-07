@@ -110,4 +110,21 @@ public class ProductionServiceImpl implements ProductionService {
 		
 		return productionLines;
 	}
+
+	@Override
+	@Transactional
+	public ProductionLine getProdLineWithMachines(int prodLineId) {
+		
+		ProductionLine productionLine = productionLineDao.findProdLineById(prodLineId);
+		System.out.println(productionLine.getProductionMachines());
+		
+		return productionLine;
+	}
 }
+
+
+
+
+
+
+
