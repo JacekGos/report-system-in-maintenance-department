@@ -3,9 +3,6 @@ package com.jacekg.reportSystem.dto;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.jacekg.reportSystem.entity.User;
-
-
 public class ReportDto {
 	
 	private Long id;
@@ -22,9 +19,9 @@ public class ReportDto {
 	
 	private int productionMachineId;
 	
-	List<Integer> failTypes;
-	
 	List<Integer> images;
+	
+	List<Integer> failTypes;
 	
 	public ReportDto() {
 		
