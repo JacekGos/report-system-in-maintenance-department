@@ -32,6 +32,7 @@ public class ReportController {
 	private ReportService reportService;
 
 	private Map<Integer, String> prodLines;
+	private Map<Integer, String> failTypes;
 
 	@InitBinder
 	public void initBinder(WebDataBinder dataBinder) {
@@ -44,11 +45,15 @@ public class ReportController {
 	@GetMapping("/showReportForm")
 	public String showReportForm(Model model) {
 
-
 		prodLines = new LinkedHashMap<Integer, String>();
 		prodLines = loadProdLines();
+		System.out.println(prodLines.get(0));
+		
+		failTypes = new LinkedHashMap<Integer, String>();
+		failTypes = loadFailTypes();
 
 		model.addAttribute("prodLines", prodLines);
+		model.addAttribute("failTypes", failTypes);
 		model.addAttribute("reportDto", new ReportDto());
 
 
@@ -68,7 +73,7 @@ public class ReportController {
 
 	private Map<Integer, String> getProdLineNames(List<ProductionLine> prodLineList) {
 
-		LinkedHashMap<Integer, String> prodLineNames = new LinkedHashMap();
+		Map<Integer, String> prodLineNames = new LinkedHashMap<Integer, String>();
 
 		for (ProductionLine productionLine : prodLineList) {
 
@@ -76,7 +81,6 @@ public class ReportController {
 		}
 
 		return prodLineNames;
-
 	}
 
 	private Map<Integer, String> loadFailTypes() {
@@ -85,14 +89,14 @@ public class ReportController {
 
 		Map<Integer, String> failTypes = new LinkedHashMap<Integer, String>();
 
-		prodLines = getFailTypeNames(failTypeList);
+		failTypes = getFailTypeNames(failTypeList);
 
-		return prodLines;
+		return failTypes;
 	}
 
 	private Map<Integer, String> getFailTypeNames(List<FailType> failTypeList) {
 
-		LinkedHashMap<Integer, String> failTypeNames = new LinkedHashMap();
+		LinkedHashMap<Integer, String> failTypeNames = new LinkedHashMap<Integer, String>();
 
 		for (FailType failType : failTypeList) {
 

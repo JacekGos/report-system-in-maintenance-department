@@ -82,8 +82,8 @@
 										<form:errors path="duration" cssClass="error" />
 									</div>
 									
-									<%-- <form:checkboxes path="failTypes" element="span class='checkbox'" 
-										items="${failTypes}" /> --%>
+									<form:checkboxes path="failTypes" element="span class='checkbox'" 
+										items="${failTypes}" />
 
 									<%-- <div class="form-check form-check-inline">
 										<form:input path="failType" class="form-check-input" type="checkbox"

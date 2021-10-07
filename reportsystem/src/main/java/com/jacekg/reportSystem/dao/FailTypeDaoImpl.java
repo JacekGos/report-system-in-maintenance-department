@@ -21,7 +21,7 @@ public class FailTypeDaoImpl implements FailTypeDao {
 
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		Query<FailType> query = currentSession.createQuery("SELECT FROM FailType", FailType.class);
+		Query<FailType> query = currentSession.createQuery("FROM FailType", FailType.class);
 		
 		return query.getResultList();
 	}
