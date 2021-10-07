@@ -19,6 +19,7 @@ import com.jacekg.reportSystem.dto.ReportDto;
 import com.jacekg.reportSystem.entity.FailType;
 import com.jacekg.reportSystem.entity.ProductionLine;
 import com.jacekg.reportSystem.service.ProductionService;
+import com.jacekg.reportSystem.service.ReportService;
 
 @Controller
 @RequestMapping("/report")
@@ -26,6 +27,9 @@ public class ReportController {
 
 	@Autowired
 	private ProductionService productionService;
+	
+	@Autowired
+	private ReportService reportService;
 
 	private Map<Integer, String> prodLines;
 
@@ -81,7 +85,7 @@ public class ReportController {
 
 		Map<Integer, String> failTypes = new LinkedHashMap<Integer, String>();
 
-		prodLines = getProdLineNames(prodLineList);
+		prodLines = getFailTypeNames(failTypeList);
 
 		return prodLines;
 	}

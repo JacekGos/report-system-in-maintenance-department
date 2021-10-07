@@ -1,10 +1,10 @@
-package com.jacekg.reportSystem.dao;
+package com.jacekg.reportSystem.service;
 
 import java.util.List;
 
 import com.jacekg.reportSystem.entity.FailType;
 
-public interface FailTypeDao {
+public interface ReportService {
 
 	List<FailType> getFailTypes();
 

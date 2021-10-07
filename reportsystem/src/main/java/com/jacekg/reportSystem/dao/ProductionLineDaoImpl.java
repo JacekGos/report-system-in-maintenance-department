@@ -28,7 +28,8 @@ public class ProductionLineDaoImpl implements ProductionLineDao {
 		
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		Query<ProductionLine> query = currentSession.createQuery("FROM ProductionLine WHERE name=:name", ProductionLine.class);
+		Query<ProductionLine> query = 
+				currentSession.createQuery("FROM ProductionLine WHERE name=:name", ProductionLine.class);
 		query.setParameter("name", name);
 		
 		ProductionLine productionLine = null;
