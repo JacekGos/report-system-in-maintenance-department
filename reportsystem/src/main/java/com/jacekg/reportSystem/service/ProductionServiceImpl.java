@@ -103,6 +103,7 @@ public class ProductionServiceImpl implements ProductionService {
 	}
 
 	@Override
+	@Transactional
 	public List<ProductionLine> getProdLinesWithMachines() {
 
 		List<ProductionLine> productionLines = productionLineDao.getProdLinesWithMachines();

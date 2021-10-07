@@ -1,6 +1,7 @@
 package com.jacekg.reportSystem.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +61,15 @@ public class ReportController {
 		model.addAttribute("reportDto", reportDto);
 
 		return "report-form";
+	}
+	
+	@GetMapping("/loadProdMachines")
+	public List<String> loadProdMachines() {
+		
+		List<String> list = new ArrayList<>();
+		list.add("OP10");
+		
+		return list;
 	}
 
 	private Map<Integer, String> loadProdLines() {

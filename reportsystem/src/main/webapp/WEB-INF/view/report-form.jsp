@@ -15,6 +15,21 @@
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/form-validation.css" />
 
+<script src="jquery-1.11.3.js"></script>
+
+<script>
+
+	var pathname = ${pageContext.request.contextPath} + "/report/loadProdMachines?"; // Returns path only (/path/example.html)
+	var url      = window.location.href;     // Returns full URL (https://example.com/path/example.html)
+	var origin   = window.location.origin;   // Returns base URL (https://example.com)
+
+	$("#first-choice").change(function() {
+		   $("#second-choice").load("/report/loadProdMachines?") + $("#first-choice").val());
+// 			$.get("home.jsp");
+		});
+	
+</script>
+
 </head>
 
 <body>
@@ -46,31 +61,33 @@
 
 								<div class="row g-3">
 
-									<div class="col-md-6">
+									<%-- <div class="col-md-6">
 										<label class="form-label">Linia</label>
-										<form:select path="productionLineId" items="${prodLines}"
-											class="form-select" />
-									</div>
-									
-									<div class="col-md-6">
-										<label class="form-label">Stacja</label>
-										<form:select path="productionLineId" items="${prodLines}"
-											class="form-select" />
+										<form:select id="first-choice" path="productionLineId"
+											items="${prodLines}" class="form-select" />
 									</div>
 
-								<%-- 	<div class="col-md-5">
+									<div class="col-md-6">
 										<label class="form-label">Stacja</label>
-										<form:select path="role" items="${prodMachines}"
-											class="form-select" />
+										<form:select id="second-choice" path="productionMachineId"
+											items="${prodMachines}" class="form-select" />
 									</div> --%>
 
+									<select id="first-choice">
+										<option selected value="base">Please Select</option>
+										<option value="beverages">Beverages</option>
+										<option value="snacks">Snacks</option>
+									</select> <br> <select id="second-choice">
+										<option>Please choose from above</option>
+									</select>
 
 									<div class="col-sm-6">
 										<label for="exampleFormControlTextarea1" class="form-label">Data</label>
 										<div class="input-append date" id="dp3" data-date="12-02-2012"
 											data-date-format="dd-mm-yyyy">
 											<form:input path="date" class="form-control" size="16"
-												type="text" value="${reportDto.date}" placeholder="RRRR-MM-DD"/>
+												type="text" value="${reportDto.date}"
+												placeholder="RRRR-MM-DD" />
 											<span class="add-on"><i class="icon-th"></i></span>
 										</div>
 									</div>
@@ -81,9 +98,9 @@
 											class="form-control" />
 										<form:errors path="duration" cssClass="error" />
 									</div>
-									
-									<form:checkboxes path="failTypes" element="span class='checkbox'" 
-										items="${failTypes}" />
+
+									<form:checkboxes path="failTypes"
+										element="span class='checkbox'" items="${failTypes}" />
 									<%-- <div class="form-check form-check-inline">
 										<form:input path="failType" class="form-check-input" type="checkbox"
 											id="inlineCheckbox1" value="option1"/> <label
