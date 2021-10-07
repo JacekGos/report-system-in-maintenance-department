@@ -46,13 +46,19 @@
 
 								<div class="row g-3">
 
-									<%-- <div class="col-md-5">
+									<div class="col-md-6">
 										<label class="form-label">Linia</label>
-										<form:select path="role" items="${prodLines}"
+										<form:select path="productionLineId" items="${prodLines}"
+											class="form-select" />
+									</div>
+									
+									<div class="col-md-6">
+										<label class="form-label">Stacja</label>
+										<form:select path="productionLineId" items="${prodLines}"
 											class="form-select" />
 									</div>
 
-									<div class="col-md-5">
+								<%-- 	<div class="col-md-5">
 										<label class="form-label">Stacja</label>
 										<form:select path="role" items="${prodMachines}"
 											class="form-select" />
