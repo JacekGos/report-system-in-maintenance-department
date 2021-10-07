@@ -70,7 +70,7 @@
 										<div class="input-append date" id="dp3" data-date="12-02-2012"
 											data-date-format="dd-mm-yyyy">
 											<form:input path="date" class="form-control" size="16"
-												type="text" value="12-02-2012" />
+												type="text" value="${reportDto.date}" placeholder="RRRR-MM-DD"/>
 											<span class="add-on"><i class="icon-th"></i></span>
 										</div>
 									</div>
@@ -84,7 +84,6 @@
 									
 									<form:checkboxes path="failTypes" element="span class='checkbox'" 
 										items="${failTypes}" />
-
 									<%-- <div class="form-check form-check-inline">
 										<form:input path="failType" class="form-check-input" type="checkbox"
 											id="inlineCheckbox1" value="option1"/> <label
@@ -94,7 +93,7 @@
 									<div class="mb-3">
 										<label for="exampleFormControlTextarea1" class="form-label">Opis</label>
 										<form:textarea class="form-control" path="description"
-											id="exampleFormControlTextarea1" rows="3"></form:textarea>
+											id="exampleFormControlTextarea1" rows="5"></form:textarea>
 									</div>
 
 

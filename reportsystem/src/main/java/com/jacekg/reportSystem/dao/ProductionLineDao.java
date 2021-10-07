@@ -16,5 +16,7 @@ public interface ProductionLineDao {
 
 	ProductionLine getProdLine(int lineId);
 
+	List<ProductionLine> getProdLinesWithMachines();
+
 
 }

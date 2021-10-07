@@ -1,5 +1,6 @@
 package com.jacekg.reportSystem.controller;
 
+import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,22 +48,23 @@ public class ReportController {
 
 		prodLines = new LinkedHashMap<Integer, String>();
 		prodLines = loadProdLines();
-		System.out.println(prodLines.get(0));
 		
 		failTypes = new LinkedHashMap<Integer, String>();
 		failTypes = loadFailTypes();
-
+		
+		ReportDto reportDto = new ReportDto();
+		reportDto.setDate(LocalDate.now());
+		
 		model.addAttribute("prodLines", prodLines);
 		model.addAttribute("failTypes", failTypes);
-		model.addAttribute("reportDto", new ReportDto());
-
+		model.addAttribute("reportDto", reportDto);
 
 		return "report-form";
 	}
 
 	private Map<Integer, String> loadProdLines() {
 
-		List<ProductionLine> prodLineList = productionService.getProdLines();
+		List<ProductionLine> prodLineList = productionService.getProdLinesWithMachines();
 
 		Map<Integer, String> prodLines = new LinkedHashMap<Integer, String>();
 

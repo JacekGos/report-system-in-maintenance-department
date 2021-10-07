@@ -101,4 +101,12 @@ public class ProductionServiceImpl implements ProductionService {
 		
 		return productionMachine;
 	}
+
+	@Override
+	public List<ProductionLine> getProdLinesWithMachines() {
+
+		List<ProductionLine> productionLines = productionLineDao.getProdLinesWithMachines();
+		
+		return productionLines;
+	}
 }
