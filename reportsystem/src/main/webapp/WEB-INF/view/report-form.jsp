@@ -57,28 +57,33 @@
 										<form:select id="second-choice" path="productionMachineId"
 											items="${prodMachines}" class="form-select" />
 									</div><br>
-		
+									
 
 									<div class="col-sm-6">
 										<label for="exampleFormControlTextarea1" class="form-label">Data</label>
 										<div class="input-append date" id="dp3" data-date="12-02-2012"
 											data-date-format="dd-mm-yyyy">
 											<form:input path="date" class="form-control" size="16"
-												type="text" value="${reportDto.date}"
-												placeholder="RRRR-MM-DD" />
+												type="date" value="${reportDto.date}"
+												placeholder="DD-MM-RRRR" />
 											<span class="add-on"><i class="icon-th"></i></span>
 										</div>
 									</div>
-
+									<form:errors path="date" cssClass="error" />
+									
+									
 									<div class="col-sm-6">
 										<label class="form-label">Czas trwania</label>
 										<form:input path="duration" placeholder="minuty"
 											class="form-control" />
 										<form:errors path="duration" cssClass="error" />
 									</div>
+									<form:errors path="duration" cssClass="error" />
 
 									<form:checkboxes path="failTypes"
 										element="span class='checkbox'" items="${failTypes}" />
+									<form:errors path="failTypes" cssClass="error" />
+									
 									<%-- <div class="form-check form-check-inline">
 										<form:input path="failType" class="form-check-input" type="checkbox"
 											id="inlineCheckbox1" value="option1"/> <label
@@ -90,6 +95,7 @@
 										<form:textarea class="form-control" path="description"
 											id="exampleFormControlTextarea1" rows="5"></form:textarea>
 									</div>
+									<form:errors path="description" cssClass="error" />
 
 
 

@@ -1,17 +1,25 @@
 package com.jacekg.reportSystem.controller;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
@@ -40,7 +48,10 @@ public class ReportController {
 
 		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
 
-		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);			
+		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);	
+		
+//		dataBinder.registerCustomEditor(LocalDate.class,     
+//                 new CustomDateEditor(new SimpleDateFormat("dd/MM/yyyy"), true, 10)); 
 	}
 
 	@GetMapping("/showReportForm")
@@ -64,6 +75,25 @@ public class ReportController {
 		model.addAttribute("reportDto", reportDto);
 
 		return "report-form";
+	}
+	
+	@PostMapping("/processReportForm")
+	public String processReportForm(@Valid @ModelAttribute("reportDto") ReportDto reportDto,
+			BindingResult bindingResult, Model model) {
+		
+		if (bindingResult.hasErrors()) {
+			
+			failTypes = new LinkedHashMap<Integer, String>();
+			failTypes = loadFailTypes();
+			
+			model.addAttribute("failTypes", failTypes);
+			
+			return "report-form";
+		}
+		
+		
+		
+		return "redirect:/report/showReportForm";
 	}
 	
 	private Map<Integer, String> loadProdMachines() {

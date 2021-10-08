@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.validation.constraints.NotNull;
 
 public class ReportDto {
@@ -12,7 +15,7 @@ public class ReportDto {
 	
 	private Long userId;
 	
-	@NotNull(message = "is required")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate date;
 	
 	@NotNull(message = "is required")
