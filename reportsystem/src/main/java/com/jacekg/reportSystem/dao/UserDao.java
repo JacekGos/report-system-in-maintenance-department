@@ -12,9 +12,11 @@ public interface UserDao {
 
 	List<User> getUsers();
 
-	User getUser(long userId);
+	User getUserWithRoles(long userId);
 	
 	Long getUsersAmount(String firstName, String lastName);
 
 	Long getUserId(String userName);
+
+	User getUser(Long userId);
 }

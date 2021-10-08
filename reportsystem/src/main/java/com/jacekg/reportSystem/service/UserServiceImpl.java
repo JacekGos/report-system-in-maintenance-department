@@ -107,8 +107,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public User getUser(long userId) {
-		return userDao.getUser(userId);
+	public User getUserWithRoles(long userId) {
+		return userDao.getUserWithRoles(userId);
 	}
 
 	@Override
@@ -121,7 +121,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public void setUserPassword(long userId, String password) {
 		
-		User user = userDao.getUser(userId);
+		User user = userDao.getUserWithRoles(userId);
 		user.getRoles();
 		user.setPassword(passwordEncoder.encode(password));
 		
@@ -132,7 +132,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public void deactivateUser(long userId) {
 		
-		User user = userDao.getUser(userId);
+		User user = userDao.getUserWithRoles(userId);
 		user.setEnabled(false);
 		
 		userDao.save(user);
@@ -142,7 +142,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public void activateUser(long userId) {
 		
-		User user = userDao.getUser(userId);
+		User user = userDao.getUserWithRoles(userId);
 		user.setEnabled(true);
 		
 		userDao.save(user);

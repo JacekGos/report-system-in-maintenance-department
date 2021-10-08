@@ -68,7 +68,7 @@ public class UserController {
 	@GetMapping("/showUserDetails")
 	public String showUserDetails(@RequestParam("id") long userId, Model model, Principal principal) {
 		
-		User user = userService.getUser(userId);
+		User user = userService.getUserWithRoles(userId);
 
 		UserDto userDto = fillFormUser(user);
 		
@@ -202,7 +202,7 @@ public class UserController {
 			return "change-password";
 		}
 		
-		User user = userService.getUser(changePasswordDto.getId());
+		User user = userService.getUserWithRoles(changePasswordDto.getId());
 		
 		if (user != null) {
 			

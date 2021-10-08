@@ -57,7 +57,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User getUser(long userId) {
+	public User getUserWithRoles(long userId) {
 
 		Session currentSession = sessionFactory.getCurrentSession();
 
@@ -111,6 +111,26 @@ public class UserDaoImpl implements UserDao {
 		}
 		
 		return userId;
+	}
+
+	@Override
+	public User getUser(Long userId) {
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Query<User> query = 
+				currentSession.createQuery("FROM User WHERE id=:userId", User.class);
+		query.setParameter("userId", userId);
+
+		User user = null;
+
+		try {
+			user = query.getSingleResult();
+		} catch (Exception e) {
+			user = null;
+		}
+
+		return user;
 	}
 
 }

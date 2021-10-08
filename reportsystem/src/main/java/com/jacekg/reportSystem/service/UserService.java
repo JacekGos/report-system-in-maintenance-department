@@ -13,7 +13,7 @@ public interface UserService extends UserDetailsService {
 
 	List<User> getUsers();
 
-	User getUser(long userId);
+	User getUserWithRoles(long userId);
 	
 	Long getUsersAmount(String firstName, String lastName);
 		
