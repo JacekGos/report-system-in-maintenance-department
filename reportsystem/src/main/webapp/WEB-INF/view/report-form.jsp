@@ -78,8 +78,7 @@
 											class="form-control" />
 										<form:errors path="duration" cssClass="error" />
 									</div>
-									<form:errors path="duration" cssClass="error" />
-
+			
 									<form:checkboxes path="failTypes"
 										element="span class='checkbox'" items="${failTypes}" />
 									<form:errors path="failTypes" cssClass="error" />

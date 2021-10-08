@@ -7,6 +7,8 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 public class ReportDto {
@@ -19,6 +21,8 @@ public class ReportDto {
 	private LocalDate date;
 	
 	@NotNull(message = "is required")
+	@Min(value = 0)
+	@Max(value = 10000)
 	private Integer duration;
 	
 	@NotNull(message = "is required")

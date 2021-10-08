@@ -83,9 +83,13 @@ public class ReportController {
 		
 		if (bindingResult.hasErrors()) {
 			
+			prodMachines = new LinkedHashMap<Integer, String>();
+			prodMachines = loadProdMachines();
+			
 			failTypes = new LinkedHashMap<Integer, String>();
 			failTypes = loadFailTypes();
 			
+			model.addAttribute("prodMachines", prodMachines);
 			model.addAttribute("failTypes", failTypes);
 			
 			return "report-form";
