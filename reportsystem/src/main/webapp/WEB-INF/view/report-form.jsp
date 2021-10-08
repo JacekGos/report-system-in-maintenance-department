@@ -98,6 +98,12 @@
 								<div class="col-12">
 									<button type="submit" class="btn btn-outline-primary">Zatwierdź</button>
 								</div>
+								
+								<c:if test="${reportError != null}">
+									<div class="alert alert-danger col-xs-offset-1 col-xs-10">
+											${reportError} </div>
+								</c:if>
+								${reportError}
 
 							</form:form>
 						</div>

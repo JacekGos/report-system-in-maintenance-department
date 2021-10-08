@@ -8,4 +8,6 @@ public interface FailTypeDao {
 
 	List<FailType> getFailTypes();
 
+	FailType getFailTypeById(Integer failTypeId);
+
 }

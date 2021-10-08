@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jacekg.reportSystem.dto.ReportDto;
 import com.jacekg.reportSystem.entity.FailType;
+import com.jacekg.reportSystem.entity.Report;
 
 @Repository
 public class ReportDaoImpl implements ReportDao {
@@ -17,9 +18,11 @@ public class ReportDaoImpl implements ReportDao {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public void saveReport(ReportDto reportDto) {
-		// TODO Auto-generated method stub
+	public void saveReport(Report report) {
 		
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		currentSession.saveOrUpdate(report);
 	}
 
 }

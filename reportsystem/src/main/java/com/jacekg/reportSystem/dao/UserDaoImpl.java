@@ -30,7 +30,7 @@ public class UserDaoImpl implements UserDao {
 		try {
 			user = query.getSingleResult();
 		} catch (Exception e) {
-			user = null;
+
 		}
 		
 		return user;

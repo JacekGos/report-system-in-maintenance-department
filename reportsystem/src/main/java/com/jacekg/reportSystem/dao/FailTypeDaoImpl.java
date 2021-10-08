@@ -26,4 +26,20 @@ public class FailTypeDaoImpl implements FailTypeDao {
 		return query.getResultList();
 	}
 
+	@Override
+	public FailType getFailTypeById(Integer failTypeId) {
+			
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		FailType failType = null;
+		
+		try {
+			failType = currentSession.get(FailType.class, failTypeId);
+		} catch (Exception e) {
+			
+		}
+		
+		return failType;
+	}
+
 }

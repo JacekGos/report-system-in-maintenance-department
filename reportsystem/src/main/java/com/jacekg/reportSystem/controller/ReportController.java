@@ -8,7 +8,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -22,6 +26,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.jacekg.reportSystem.dto.ReportDto;
@@ -76,7 +82,7 @@ public class ReportController {
 		ReportDto reportDto = new ReportDto();
 		reportDto.setDate(LocalDate.now());
 		reportDto.setUserId(userId);
-
+			
 		model.addAttribute("prodMachines", prodMachines);
 		model.addAttribute("failTypes", failTypes);
 		model.addAttribute("reportDto", reportDto);
@@ -86,7 +92,7 @@ public class ReportController {
 	
 	@PostMapping("/processReportForm")
 	public String processReportForm(@Valid @ModelAttribute("reportDto") ReportDto reportDto,
-			BindingResult bindingResult, Model model) {
+			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
 		
 		if (bindingResult.hasErrors()) {
 			
@@ -106,9 +112,9 @@ public class ReportController {
 		System.out.println(reportDto.toString());
 		
 		try {
-//			reportService.saveReport(reportDto);
+			reportService.saveReport(reportDto);
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 		
 		return "redirect:/report/showReportForm";

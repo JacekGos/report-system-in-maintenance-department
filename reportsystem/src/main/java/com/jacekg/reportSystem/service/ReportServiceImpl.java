@@ -1,5 +1,6 @@
 package com.jacekg.reportSystem.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,22 +48,47 @@ public class ReportServiceImpl implements ReportService {
 	@Transactional
 	public void saveReport(ReportDto reportDto) {
 		
-		Report report = new Report();
+		
 		User user = userDao.getUser(reportDto.getUserId());
 		ProductionMachine productionMachine = productionMachineDao.getProdMachine(reportDto.getProductionMachineId());
 		ProductionLine productionLine = productionMachine.getProductionLine();
+		List<FailType> failTypes = findFailTypes(reportDto.getFailTypes());
 		
 		//TODO saving images and add to report
-		report.setUser(user);
-		report.setDate(reportDto.getDate());
-		report.setDuration(reportDto.getDuration());
-		report.setDescription(reportDto.getDescription());
-		report.setProductionLine(productionLine);
-		report.setProductionMachine(productionMachine);
 		
+		Report report = new Report(
+				user,
+				reportDto.getDate(),
+				reportDto.getDuration(),
+				reportDto.getDescription(),
+				productionLine,
+				productionMachine,
+				failTypes);
 		
+//		report.setUser(user);
+//		report.setDate(reportDto.getDate());
+//		report.setDuration(reportDto.getDuration());
+//		report.setDescription(reportDto.getDescription());
+//		report.setProductionLine(productionLine);
+//		report.setProductionMachine(productionMachine);
+//		report.setFailTypes(failTypes);
+//		
+		reportDao.saveReport(report);
+	}
+
+	private List<FailType> findFailTypes(List<Integer> failTypes) {
 		
-		reportDao.saveReport(reportDto);
+		List<FailType> failTypeList = new ArrayList<FailType>();
+		FailType failType = null;
+		
+		for (Integer failTypeId : failTypes) {
+			
+			failType = failTypeDao.getFailTypeById(failTypeId);
+			
+			failTypeList.add(failType);
+		}
+		
+		return failTypeList;
 	}
 	
 	
