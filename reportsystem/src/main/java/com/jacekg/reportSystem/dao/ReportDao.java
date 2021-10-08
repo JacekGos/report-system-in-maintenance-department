@@ -1,9 +1,8 @@
 package com.jacekg.reportSystem.dao;
 
-import java.util.List;
-
-import com.jacekg.reportSystem.entity.FailType;
+import com.jacekg.reportSystem.dto.ReportDto;
 
 public interface ReportDao {
 
+	void saveReport(ReportDto reportDto);
 }

@@ -1,5 +1,6 @@
 package com.jacekg.reportSystem.controller;
 
+import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
@@ -26,8 +27,10 @@ import com.google.gson.Gson;
 import com.jacekg.reportSystem.dto.ReportDto;
 import com.jacekg.reportSystem.entity.FailType;
 import com.jacekg.reportSystem.entity.ProductionMachine;
+import com.jacekg.reportSystem.entity.User;
 import com.jacekg.reportSystem.service.ProductionService;
 import com.jacekg.reportSystem.service.ReportService;
+import com.jacekg.reportSystem.service.UserService;
 
 @Controller
 @RequestMapping("/report")
@@ -38,6 +41,9 @@ public class ReportController {
 	
 	@Autowired
 	private ReportService reportService;
+	
+	@Autowired
+	private UserService userService;
 
 	private Map<Integer, String> prodLines;
 	private Map<Integer, String> prodMachines;
@@ -55,10 +61,11 @@ public class ReportController {
 	}
 
 	@GetMapping("/showReportForm")
-	public String showReportForm(Model model) {
+	public String showReportForm(Model model, Principal principal) {
 		
-//		prodLines = new LinkedHashMap<Integer, String>();
-//		prodLines = loadProdLines();
+		String userName = principal.getName();
+		Long userId = userService.getUserId(userName);
+		System.out.println(userId);
 		
 		prodMachines = new LinkedHashMap<Integer, String>();
 		prodMachines = loadProdMachines();
@@ -68,8 +75,8 @@ public class ReportController {
 		
 		ReportDto reportDto = new ReportDto();
 		reportDto.setDate(LocalDate.now());
-		
-//		model.addAttribute("prodLines", prodLines);
+		reportDto.setUserId(userId);
+
 		model.addAttribute("prodMachines", prodMachines);
 		model.addAttribute("failTypes", failTypes);
 		model.addAttribute("reportDto", reportDto);
@@ -95,7 +102,14 @@ public class ReportController {
 			return "report-form";
 		}
 		
+		System.out.println("My log process report form");
+		System.out.println(reportDto.toString());
 		
+		try {
+//			reportService.saveReport(reportDto);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 		return "redirect:/report/showReportForm";
 	}

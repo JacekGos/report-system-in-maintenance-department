@@ -43,7 +43,9 @@
 							<form:form class="row g-3"
 								action="${pageContext.request.contextPath}/report/processReportForm"
 								modelAttribute="reportDto" accept-charset="UTF-8">
-
+								
+								<form:hidden path="userId"/>
+								
 								<div class="row g-3">
 
 									<%-- <div class="col-md-6">
@@ -53,74 +55,44 @@
 									</div> --%>
 
 									<div class="col-md-6">
-										<label class="form-label">Stacja</label>
+										<label class="form-label"><h6>Stacja</h6></label>
 										<form:select id="second-choice" path="productionMachineId"
 											items="${prodMachines}" class="form-select" />
-									</div><br>
-									
+									</div>
+									<br>
+
 
 									<div class="col-sm-6">
-										<label for="exampleFormControlTextarea1" class="form-label">Data</label>
-										<div class="input-append date" id="dp3" data-date="12-02-2012"
+										<label for="exampleFormControlTextarea1" class="form-label"><h6>Data</h6></label>
+										<div class="input-append date" id="dp3" 
 											data-date-format="dd-mm-yyyy">
 											<form:input path="date" class="form-control" size="16"
 												type="date" value="${reportDto.date}"
 												placeholder="DD-MM-RRRR" />
 											<span class="add-on"><i class="icon-th"></i></span>
 										</div>
-									</div>
 									<form:errors path="date" cssClass="error" />
-									
-									
+									</div>
+																	
+
 									<div class="col-sm-6">
-										<label class="form-label">Czas trwania</label>
+										<label class="form-label"><h6>Czas trwania</h6></label>
 										<form:input path="duration" placeholder="minuty"
 											class="form-control" />
 										<form:errors path="duration" cssClass="error" />
 									</div>
-			
+									
+									<label class="form-label"><h6>Przyczyna</h6></label>
 									<form:checkboxes path="failTypes"
 										element="span class='checkbox'" items="${failTypes}" />
 									<form:errors path="failTypes" cssClass="error" />
 									
-									<%-- <div class="form-check form-check-inline">
-										<form:input path="failType" class="form-check-input" type="checkbox"
-											id="inlineCheckbox1" value="option1"/> <label
-											class="form-check-label" for="inlineCheckbox1">1</label>
-									</div> --%>
-
 									<div class="mb-3">
-										<label for="exampleFormControlTextarea1" class="form-label">Opis</label>
+										<label for="exampleFormControlTextarea1" class="form-label"><h6>Opis</h6></label>
 										<form:textarea class="form-control" path="description"
 											id="exampleFormControlTextarea1" rows="5"></form:textarea>
 									</div>
 									<form:errors path="description" cssClass="error" />
-
-
-
-									<%-- <div class="col-sm-6">
-										<label class="form-label">Imię</label>
-										<form:input path="firstName" placeholder="Imię"
-											class="form-control" />
-										<form:errors path="firstName" cssClass="error" />
-									</div>
-
-									<div class="col-sm-6">
-										<label class="form-label">Nazwisko</label>
-										<form:input path="lastName" placeholder="Nazwisko"
-											class="form-control" />
-										<form:errors path="lastName" cssClass="error" />
-									</div>
-
-									<div class="col-12">
-										<label class="form-label">Email</label>
-										<form:input path="email" placeholder="name@example.com"
-											class="form-control" />
-										<form:errors path="email" cssClass="error" />
-									</div>
- --%>
-
-
 								</div>
 
 								<div class="col-12">

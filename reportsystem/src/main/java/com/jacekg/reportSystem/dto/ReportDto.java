@@ -18,6 +18,7 @@ public class ReportDto {
 	private Long userId;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull(message = "is required")
 	private LocalDate date;
 	
 	@NotNull(message = "is required")
@@ -36,6 +37,7 @@ public class ReportDto {
 	List<Integer> images;
 	
 	@NotNull(message = "is required")
+	@Size(min = 1, message = "Co najmniej jedno pole")
 	List<Integer> failTypes;
 	
 	public ReportDto() {
@@ -113,5 +115,14 @@ public class ReportDto {
 	public void setImages(List<Integer> images) {
 		this.images = images;
 	}
+
+	@Override
+	public String toString() {
+		return "ReportDto [id=" + id + ", userId=" + userId + ", date=" + date + ", duration=" + duration
+				+ ", description=" + description + ", productionLineId=" + productionLineId + ", productionMachineId="
+				+ productionMachineId + ", images=" + images + ", failTypes=" + failTypes + "]";
+	}
+	
+	
 	
 }
