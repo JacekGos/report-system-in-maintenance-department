@@ -25,32 +25,32 @@
 	$(document)
 			.ready(
 					function() {
-						/* $
-								.ajax({
-									url : "/test/loadProdMachines",
+						
+								$.ajax({
+									url : "${pageContext.request.contextPath}/test/loadProdMachines",
 									method : "GET",
 									data : {
 										operation : 'country'
 									},
-									success : function(data, textStatus, jqXHR) {
-										console.log(data);
-										let obj = $.parseJSON(data);
-										$.each(obj, function(key, value) {
-											$('#country').append(
-													'<option value="' + value.id + '">'
-															+ value.name
-															+ '</option>')
-										});
-										$('select').formSelect();
-									},
-									error : function(jqXHR, textStatus,
-											errorThrown) {
-										$('#country')
-												.append(
-														'<option>Country Unavailable</option>');
-									},
+// 									success : function(data, textStatus, jqXHR) {
+// 										console.log(data);
+// 										let obj = $.parseJSON(data);
+// 										$.each(obj, function(key, value) {
+// 											$('#country').append(
+// 													'<option value="' + value.id + '">'
+// 															+ value.name
+// 															+ '</option>')
+// 										});
+// 										$('select').formSelect();
+// 									},
+// 									error : function(jqXHR, textStatus,
+// 											errorThrown) {
+// 										$('#country')
+// 												.append(
+// 														'<option>Country Unavailable</option>');
+// 									},
 									cache : false
-								}); */
+								}); 
 
 						$('#country')
 								.change(
@@ -58,7 +58,7 @@
 											$('#state').find('option').remove();
 											$('#state')
 													.append(
-															'<option>Select State</option>');
+															'<option>Wybierz stacje</option>');
 
 											let cid = $('#country').val();
 											let data = {
@@ -66,8 +66,7 @@
 												id : cid
 											};
 
-											$
-													.ajax({
+											$.ajax({
 														url : "${pageContext.request.contextPath}/test/loadProdMachines",
 														method : "GET",
 														data : data,
@@ -78,85 +77,84 @@
 															console.log(data);
 															let obj = $
 																	.parseJSON(data);
-															$
-																	.each(
-																			obj,
-																			function(
-																					key,
-																					value) {
-																				$(
-																						'#state')
-																						.append(
-																								'<option value="' + value.id + '">'
-																										+ value.name
-																										+ '</option>')
-																			});
-															$('select')
-																	.formSelect();
-														},
-														error : function(jqXHR,
-																textStatus,
-																errorThrown) {
-															$('#state')
+															$.each(
+																obj,
+																function(
+																		key,
+																		value) {
+																	$(
+																	'#state')
 																	.append(
-																			'<option>State Unavailable</option>');
-														},
+																			'<option value="' + value.id  + '">'
+																					+ value.name
+																					+ '</option>')
+																	});
+														$('select')
+																.formSelect();
+													},
+													error : function(jqXHR,
+															textStatus,
+															errorThrown) {
+														$('#state')
+																.append(
+																		'<option>State Unavailable</option>');
+													},
 														cache : false
 													});
 										});
 
-						$('#state')
-								.change(
-										function() {
-											$('#city').find('option').remove();
-											$('#city')
-													.append(
-															'<option>Select City</option>');
+// 						$('#state')
+// 								.change(
+// 										function() {
+// 											$('#city').find('option').remove();
+// 											$('#city')
+// 													.append(
+// 															'<option>Select City</option>');
 
-											let sid = $('#state').val();
-											let data = {
-												operation : "city",
-												id : sid
-											};
+// 											let sid = $('#state').val();
+// 											let data = {
+// 												operation : "city",
+// 												id : sid
+// 											};
 
-											$
-													.ajax({
-														url : "${pageContext.request.contextPath}/test/loadProdMachines",
-														method : "GET",
-														data : data,
-														success : function(
-																data,
-																textStatus,
-																jqXHR) {
-															console.log(data);
-															let obj = $
-																	.parseJSON(data);
-															$
-																	.each(
-																			obj,
-																			function(
-																					key,
-																					value) {
-																				$(
-																						'#city')
-																						.append(
-																								'<option value="' + value.id + '">'
-																										+ value.name
-																										+ '</option>')
-																			});
-															$('select')
-																	.formSelect();
-														},
-														error : function(jqXHR,
-																textStatus,
-																errorThrown) {
-															$('#city')
-																	.append(
-																			'<option>City Unavailable</option>');
-														},
-														cache : false
-													});
-										});
+// 											$
+// 													.ajax({
+// 														url : "${pageContext.request.contextPath}/test/loadProdMachines",
+// 														method : "GET",
+// 														data : data,
+// 														success : function(
+// 																data,
+// 																textStatus,
+// 																jqXHR) {
+// 															console.log(data);
+// 															let obj = $
+// 																	.parseJSON(data);
+// 															$
+// 																	.each(
+// 																			obj,
+// 																			function(
+// 																					key,
+// 																					value) {
+// 																				$(
+// 																						'#city')
+// 																						.append(
+// 																								'<option value="' + value.id + '">'
+// 																										+ value.name
+// 																										+ '</option>')
+// 																			});
+// 															$('select')
+// 																	.formSelect();
+// 														},
+// 														error : function(jqXHR,
+// 																textStatus,
+// 																errorThrown) {
+// 															$('#city')
+// 																	.append(
+// 																			'<option>City Unavailable</option>');
+// 														},
+// 														cache : false
+// 													});
+// 										});
 
 					});
 </script>
@@ -185,7 +183,7 @@
 					<aside class="col-sm-8">
 
 						<div class="col-md-7 col-lg-8">
-
+ 
 							<form:form class="row g-3"
 								action="${pageContext.request.contextPath}/report/processReportForm"
 								modelAttribute="reportDto" accept-charset="UTF-8">
@@ -194,16 +192,15 @@
 
 									<div class="col-md-6">
 										<label class="form-label">Linia</label>
-										<form:select id="country" path="productionLineId"
-											items="${prodLines}" class="form-select" />
+										<form:select id="school" path="productionLineId"
+										 	items="${prodLines}" class="form-select" />
 									</div>
 
 									<div class="col-md-6">
-										<label class="form-label">Linia</label>
-										<form:select id="state" path="productionMachineId"
-											class="form-select">
-											<option>Wybierz stację</option>
-										</form:select>
+										<label class="form-label">Stacja</label>
+										<form:select id="course" path="productionMachineId"
+										class="form-select"> 
+										</form:select> 
 									</div>
 
 								</div>
@@ -213,6 +210,123 @@
 								</div>
 
 							</form:form>
+
+<!--  					<div>
+    <div style="float: left;">
+        Select Department
+        <br />
+        <select id="departments"></select>
+    </div>
+    <div style="float: left; margin-left: 10px;">
+        Select Manager
+        <br />
+        <select id="managers"></select>
+    </div>
+</div>
+-->					
+
+<script>
+
+cars=new Array("Mercedes","Volvo","BMW","porche");
+phones=new Array('Samsung','Nokia','Iphone');
+
+
+$('.school').on('change',function()
+		{
+		      var selectedSchool=$(this).find('option:selected').val(); //Select the school code which is stored as value for option
+		      $.ajax({
+		             url:"${pageContext.request.contextPath}/test/loadProdMachines", //Write a function in the server side which accepts school code as argument
+		             type:"POST",
+		             dataType:'json',//return type from server side function [return it as JSON object]
+		             contentType: "application/json",
+		             data: JSON.stringify(productionMachinesList), //Pass the data to the function on server side
+		             success: function (data) { //Array of data returned from server side function
+		                    $.each(data,function(value){
+		                          $('.course').append('<option>'+value+'</option>');
+		                    });
+		             },
+		             error:
+		                function (data) {
+		                    //display any unhandled error
+		             }
+		       });
+		});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  
+var $departments = $("#departments");
+var $managers = $("#managers");
+
+// This data would be loaded from the DB
+var departments = [
+	
+    {id: "1", value: "Department 1"},
+    {id: "2", value: "Department 2"}
+];
+
+// This data would be loaded from the DB
+var managers = [
+    { departmentId: "1", value: "Dep 1 Manager 1"},
+    { departmentId: "1", value: "Dep 1 Manager 2"},
+    { departmentId: "1", value: "Dep 1 Manager 3"},
+    { departmentId: "1", value: "Dep 1 Manager 4"},
+    { departmentId: "1", value: "Dep 1 Manager 5"},
+    { departmentId: "1", value: "Dep 1 Manager 6"},
+    { departmentId: "1", value: "Dep 1 Manager 7"},
+    { departmentId: "1", value: "Dep 1 Manager 8"},
+    { departmentId: "1", value: "Dep 1 Manager 9"},
+    { departmentId: "1", value: "Dep 1 Manager 10"},
+    { departmentId: "2", value: "Dep 2 Manager 1"},
+    { departmentId: "2", value: "Dep 2 Manager 2"},
+    { departmentId: "2", value: "Dep 2 Manager 3"},
+    { departmentId: "2", value: "Dep 2 Manager 4"},
+    { departmentId: "2", value: "Dep 2 Manager 5"},
+    { departmentId: "2", value: "Dep 2 Manager 6"},
+    { departmentId: "2", value: "Dep 2 Manager 7"},
+    { departmentId: "2", value: "Dep 2 Manager 8"},
+    { departmentId: "2", value: "Dep 2 Manager 9"},
+    { departmentId: "2", value: "Dep 2 Manager 10"}
+];
+
+function getManagers() {
+    $managers.empty();
+
+    var departmentId = $departments.val();
+
+    for (i = 0; i < managers.length; i++) {
+        if (managers[i].departmentId === departmentId) {
+            $managers.append("<option value='" + managers[i].departmentId + "'>" + managers[i].value + "</option>");
+        }
+    }
+}
+
+for (i = 0; i < departments.length; i++) {
+    $departments.append("<option value='" + departments[i].id + "'>" + departments[i].value + "</option>");
+}
+
+getManagers();
+
+$departments.on("change", function(){
+    getManagers();
+});
+
+*/
+
+</script>
+
 
 
 						</div>

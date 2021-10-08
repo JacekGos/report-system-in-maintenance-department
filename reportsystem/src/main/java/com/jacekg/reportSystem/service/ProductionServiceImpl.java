@@ -120,6 +120,15 @@ public class ProductionServiceImpl implements ProductionService {
 		
 		return productionLine;
 	}
+
+	@Override
+	@Transactional
+	public List<ProductionMachine> getProdMachinesWithLines() {
+		
+		List<ProductionMachine> productionMachines = productionMachineDao.getProdMachinesWithLines();
+		
+		return productionMachines;
+	}
 }
 
 

@@ -4,12 +4,15 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
@@ -27,7 +30,7 @@ public class TestController {
 	private Map<Integer, String> prodMachines;
 	
 	@GetMapping("/loadProdMachines")
-	public String loadProdMachines() {
+	public String loadProdMachines(HttpServletResponse response) {
 		
 		int prodLineId = 1;
 		
@@ -42,6 +45,7 @@ public class TestController {
 		}
 		
 		String productionMachinesList = new Gson().toJson(prodMachines);
+		response.setContentType("json");
 		
 		return productionMachinesList;
 	}

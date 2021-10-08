@@ -30,4 +30,6 @@ public interface ProductionService {
 	List<ProductionLine> getProdLinesWithMachines();
 
 	ProductionLine getProdLineWithMachines(int prodLineId);
+
+	List<ProductionMachine> getProdMachinesWithLines();
 }

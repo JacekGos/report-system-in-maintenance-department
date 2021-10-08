@@ -50,13 +50,13 @@
 										<label class="form-label">Linia</label>
 										<form:select id="first-choice" path="productionLineId"
 											items="${prodLines}" class="form-select" />
-									</div>
+									</div> --%>
 
 									<div class="col-md-6">
 										<label class="form-label">Stacja</label>
 										<form:select id="second-choice" path="productionMachineId"
 											items="${prodMachines}" class="form-select" />
-									</div> --%>
+									</div>
 
 
 									<div class="col-sm-6">

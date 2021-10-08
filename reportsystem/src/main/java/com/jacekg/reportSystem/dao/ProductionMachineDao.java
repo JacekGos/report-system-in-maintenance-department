@@ -11,4 +11,6 @@ public interface ProductionMachineDao {
 	void save(ProductionMachine productionMachine);
 
 	ProductionMachine getProdMachine(int machineId);
+
+	List<ProductionMachine> getProdMachinesWithLines();
 }

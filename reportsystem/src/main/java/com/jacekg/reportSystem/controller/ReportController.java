@@ -47,9 +47,12 @@ public class ReportController {
 
 	@GetMapping("/showReportForm")
 	public String showReportForm(Model model) {
-
-		prodLines = new LinkedHashMap<Integer, String>();
-		prodLines = loadProdLines();
+		
+//		prodLines = new LinkedHashMap<Integer, String>();
+//		prodLines = loadProdLines();
+		
+		prodMachines = new LinkedHashMap<Integer, String>();
+		prodMachines = loadProdMachines();
 		
 		failTypes = new LinkedHashMap<Integer, String>();
 		failTypes = loadFailTypes();
@@ -57,56 +60,62 @@ public class ReportController {
 		ReportDto reportDto = new ReportDto();
 		reportDto.setDate(LocalDate.now());
 		
-		model.addAttribute("prodLines", prodLines);
+//		model.addAttribute("prodLines", prodLines);
+		model.addAttribute("prodMachines", prodMachines);
 		model.addAttribute("failTypes", failTypes);
 		model.addAttribute("reportDto", reportDto);
 
-		return "report-form2";
+		return "report-form";
 	}
 	
-//	@GetMapping("/loadProdMachines")
-//	public String loadProdMachines(@RequestParam("prodLineId") int prodLineId, Model model) {
-//		
-//		int prodLineId = 1;
-//		
-//		ProductionLine productionLine = productionService.getProdLineWithMachines(prodLineId);
-//		List<ProductionMachine> productionMachines = productionLine.getProductionMachines();
-//		
-//		prodMachines = new LinkedHashMap<Integer, String>();
-//		
-//		for (ProductionMachine productionMachine : productionMachines) {
-//
-//			prodMachines.put(productionMachine.getId(), productionMachine.getName());
-//		}
-//		
-//		String productionMachinesList = new Gson().toJson(prodMachines);
-//		
-//		return "home.jsp";
-//	}
-	
-	//this won't be useful after adding drop-down lists
-	private Map<Integer, String> loadProdLines() {
+	private Map<Integer, String> loadProdMachines() {
+		
+		List<ProductionMachine> prodMachineList = productionService.getProdMachinesWithLines();
 
-		List<ProductionLine> prodLineList = productionService.getProdLinesWithMachines();
+		Map<Integer, String> prodMachines = new LinkedHashMap<Integer, String>();
 
-		Map<Integer, String> prodLines = new LinkedHashMap<Integer, String>();
+		prodMachines = getProdMachineNames(prodMachineList);
 
-		prodLines = getProdLineNames(prodLineList);
-
-		return prodLines;
+		return prodMachines;
 	}
 
-	private Map<Integer, String> getProdLineNames(List<ProductionLine> prodLineList) {
+	private Map<Integer, String> getProdMachineNames(List<ProductionMachine> prodMachineList) {
+		
+		Map<Integer, String> prodMachineNames = new LinkedHashMap<Integer, String>();
 
-		Map<Integer, String> prodLineNames = new LinkedHashMap<Integer, String>();
+		for (ProductionMachine productionMachine : prodMachineList) {
 
-		for (ProductionLine productionLine : prodLineList) {
-
-			prodLineNames.put(productionLine.getId(), productionLine.getName());
+			prodMachineNames.put(
+					productionMachine.getId(), 
+					productionMachine.getProductionLine().getName() + "-" + productionMachine.getName());
 		}
 
-		return prodLineNames;
+		return prodMachineNames;
 	}
+	
+
+//	private Map<Integer, String> loadProdLines() {
+//
+//		List<ProductionLine> prodLineList = productionService.getProdLines();
+//
+//		Map<Integer, String> prodLines = new LinkedHashMap<Integer, String>();
+//
+//		prodLines = getProdLineNames(prodLineList);
+//
+//		return prodLines;
+//	}
+
+//	private Map<Integer, String> getProdLineNames(List<ProductionLine> prodLineList) {
+//
+//		Map<Integer, String> prodLineNames = new LinkedHashMap<Integer, String>();
+//
+//		for (ProductionLine productionLine : prodLineList) {
+//
+//			prodLineNames.put(productionLine.getId(), productionLine.getName());
+//		}
+//
+//		return prodLineNames;
+//	}
 
 	private Map<Integer, String> loadFailTypes() {
 

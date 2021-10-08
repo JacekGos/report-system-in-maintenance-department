@@ -1,5 +1,7 @@
 package com.jacekg.reportSystem.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -63,6 +65,18 @@ public class ProductionMachineDaoImpl implements ProductionMachineDao {
 		}
 
 		return productionMachine;
+	}
+
+	@Override
+	public List<ProductionMachine> getProdMachinesWithLines() {
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Query<ProductionMachine> query = 
+				currentSession.createQuery("SELECT p FROM ProductionMachine p"
+						+ " LEFT JOIN FETCH p.productionLine ORDER BY p.productionLine", ProductionMachine.class);
+
+		return query.getResultList();
 	}
 
 }
