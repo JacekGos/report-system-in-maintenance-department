@@ -13,12 +13,10 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.gson.Gson;
 import com.jacekg.reportSystem.dto.ReportDto;
 import com.jacekg.reportSystem.entity.FailType;
-import com.jacekg.reportSystem.entity.ProductionLine;
 import com.jacekg.reportSystem.entity.ProductionMachine;
 import com.jacekg.reportSystem.service.ProductionService;
 import com.jacekg.reportSystem.service.ReportService;

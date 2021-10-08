@@ -56,8 +56,8 @@
 										<label class="form-label">Stacja</label>
 										<form:select id="second-choice" path="productionMachineId"
 											items="${prodMachines}" class="form-select" />
-									</div>
-
+									</div><br>
+		
 
 									<div class="col-sm-6">
 										<label for="exampleFormControlTextarea1" class="form-label">Data</label>

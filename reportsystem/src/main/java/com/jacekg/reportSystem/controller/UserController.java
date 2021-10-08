@@ -92,24 +92,27 @@ public class UserController {
 	}
 
 	@PostMapping("/processUserForm")
-	public String processUserForm(@Valid @ModelAttribute("formUser") UserDto formUser,
+	public String processUserForm(@Valid @ModelAttribute("userDto") UserDto userDto ,
 			BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
+			
+			model.addAttribute("roles", roles);
+			
 			return "user-form";
 		}
 
-		formUser.setFirstName(StringUtils.capitalize(formUser.getFirstName()));
-		formUser.setLastName(StringUtils.capitalize(formUser.getLastName()));
-		formUser.setUserName(generateUserName(formUser.getFirstName(), formUser.getLastName()));
-		formUser.setPassword("password");
-		formUser.setId(0L);
+		userDto.setFirstName(StringUtils.capitalize(userDto.getFirstName()));
+		userDto.setLastName(StringUtils.capitalize(userDto.getLastName()));
+		userDto.setUserName(generateUserName(userDto.getFirstName(), userDto.getLastName()));
+		userDto.setPassword("password");
+		userDto.setId(0L);
 
 		return "user-confirmation";
 	}
 
 	@PostMapping("/processSaveUser")
-	public String processSaveUser(@ModelAttribute("formUser") UserDto userDto, Model model) {
+	public String processSaveUser(@ModelAttribute("userDto") UserDto userDto, Model model) {
 
 		System.out.println("My logs formUser: " + userDto.toString());
 
@@ -156,7 +159,7 @@ public class UserController {
 	}
 
 	@PostMapping("/setUserRole")
-	public String setUserRole(@ModelAttribute("formUser") UserDto userDto, Model model) {
+	public String setUserRole(@ModelAttribute("userDto") UserDto userDto, Model model) {
 
 		userService.save(userDto);
 

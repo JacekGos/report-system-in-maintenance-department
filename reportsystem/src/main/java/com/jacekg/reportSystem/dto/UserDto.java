@@ -3,7 +3,6 @@ package com.jacekg.reportSystem.dto;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.jacekg.reportSystem.validation.FieldMatch;
 import com.jacekg.reportSystem.validation.ValidEmail;
 
 

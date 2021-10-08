@@ -3,16 +3,23 @@ package com.jacekg.reportSystem.dto;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
+
 public class ReportDto {
 	
 	private Long id;
 	
 	private Long userId;
-
+	
+	@NotNull(message = "is required")
 	private LocalDate date;
 	
-	private int duration;
+	@NotNull(message = "is required")
+	private Integer duration;
 	
+	@NotNull(message = "is required")
+	@Size(min = 1, message = "is required")
 	private String description;
 	
 	private int productionLineId;
@@ -21,6 +28,7 @@ public class ReportDto {
 	
 	List<Integer> images;
 	
+	@NotNull(message = "is required")
 	List<Integer> failTypes;
 	
 	public ReportDto() {
@@ -51,7 +59,7 @@ public class ReportDto {
 		this.date = date;
 	}
 
-	public int getDuration() {
+	public Integer getDuration() {
 		return duration;
 	}
 
