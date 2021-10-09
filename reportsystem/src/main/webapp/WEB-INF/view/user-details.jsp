@@ -95,25 +95,79 @@
 								<c:param name="id" value="${user.id}" />
 							</c:url>
 
-							<a class="btn btn-outline-primary" href="${resetPasswordLink}"
-								role="button"
-								onclick="if (!(confirm('Jesteś pewny, że chcesz ustawić domyślne hasło?'))) return false">Reset
-								hasła</a>
+
+							<button type="button" class="btn btn-outline-primary"
+								data-bs-toggle="modal" data-bs-target="#submitModal">
+								Reset hasła</button>
+
+							<div class="modal fade" id="submitModal" tabindex="-1"
+								aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="btn-close"
+												data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">Jesteś pewny?</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+												data-bs-dismiss="modal">Close</button>
+											<a class="btn btn-outline-primary"
+												href="${resetPasswordLink}" role="button">Zatwierdź</a>
+										</div>
+									</div>
+								</div>
+							</div>
 
 							<c:if test="${currentUserName != user.userName}">
 								<c:if test="${user.enabled == true}">
+									<button type="button" class="btn btn-outline-primary"
+										data-bs-toggle="modal" data-bs-target="#submitModal2">
+										Dezaktywuj</button>
 
-									<a class="btn btn-outline-primary" href="${deactivateUserLink}"
-										role="button"
-										onclick="if (!(confirm('Jesteś pewny, że chcesz dezaktywować konto użytkownika?'))) return false">Dezaktywuj</a>
-
+									<div class="modal fade" id="submitModal2" tabindex="-1"
+										aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="btn-close"
+														data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">Jesteś pewny?</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-bs-dismiss="modal">Close</button>
+													<a class="btn btn-outline-primary"
+														href="${deactivateUserLink}" role="button">Zatwierdź</a>
+												</div>
+											</div>
+										</div>
+									</div>
 								</c:if>
+
 								<c:if test="${user.enabled != true}">
+									<button type="button" class="btn btn-outline-primary"
+										data-bs-toggle="modal" data-bs-target="#submitModal2">
+										Aktywuj</button>
 
-									<a class="btn btn-outline-primary" href="${activateUserLink}"
-										role="button"
-										onclick="if (!(confirm('Jesteś pewny, że chcesz aktywować konto użytkownika?'))) return false">Aktywuj</a>
-
+									<div class="modal fade" id="submitModal2" tabindex="-1"
+										aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="btn-close"
+														data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">Jesteś pewny?</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-bs-dismiss="modal">Close</button>
+													<a class="btn btn-outline-primary"
+														href="${activateUserLink}" role="button">Zatwierdź</a>
+												</div>
+											</div>
+										</div>
+									</div>
 								</c:if>
 
 								<button type="button" class="btn btn-outline-primary"

@@ -27,7 +27,7 @@ public class ReportDto {
 	private Integer duration;
 	
 	@NotNull(message = "is required")
-	@Size(min = 1, max = 10, message = "is required")
+	@Size(min = 1, max = 2100, message = "is required")
 	private String description;
 	
 	private int productionLineId;

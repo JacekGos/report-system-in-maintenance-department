@@ -43,9 +43,9 @@
 							<form:form class="row g-3"
 								action="${pageContext.request.contextPath}/report/processReportForm"
 								modelAttribute="reportDto" accept-charset="UTF-8">
-								
-								<form:hidden path="userId"/>
-								
+
+								<form:hidden path="userId" />
+
 								<div class="row g-3">
 
 									<%-- <div class="col-md-6">
@@ -61,19 +61,18 @@
 									</div>
 									<br>
 
-
 									<div class="col-sm-6">
 										<label for="exampleFormControlTextarea1" class="form-label"><h6>Data</h6></label>
-										<div class="input-append date" id="dp3" 
+										<div class="input-append date" id="dp3"
 											data-date-format="dd-mm-yyyy">
 											<form:input path="date" class="form-control" size="16"
 												type="date" value="${reportDto.date}"
 												placeholder="DD-MM-RRRR" />
 											<span class="add-on"><i class="icon-th"></i></span>
 										</div>
-									<form:errors path="date" cssClass="error" />
+										<form:errors path="date" cssClass="error" />
 									</div>
-																	
+
 
 									<div class="col-sm-6">
 										<label class="form-label"><h6>Czas trwania</h6></label>
@@ -81,12 +80,12 @@
 											class="form-control" />
 										<form:errors path="duration" cssClass="error" />
 									</div>
-									
+
 									<label class="form-label"><h6>Przyczyna</h6></label>
 									<form:checkboxes path="failTypes"
 										element="span class='checkbox'" items="${failTypes}" />
 									<form:errors path="failTypes" cssClass="error" />
-									
+
 									<div class="mb-3">
 										<label for="exampleFormControlTextarea1" class="form-label"><h6>Opis</h6></label>
 										<form:textarea class="form-control" path="description"
@@ -94,17 +93,29 @@
 									</div>
 									<form:errors path="description" cssClass="error" />
 								</div>
-
 								<div class="col-12">
-									<button type="submit" class="btn btn-outline-primary">Zatwierdź</button>
+									<button type="button" class="btn btn-outline-primary"
+										data-bs-toggle="modal" data-bs-target="#submitModal">
+										Zatwierdź</button>
 								</div>
-								
-								<c:if test="${reportError != null}">
-									<div class="alert alert-danger col-xs-offset-1 col-xs-10">
-											${reportError} </div>
-								</c:if>
-								${reportError}
 
+								<div class="modal fade" id="submitModal" tabindex="-1"
+									aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">Jesteś pewny?</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">Close</button>
+												<button type="submit" class="btn btn-outline-primary">Zatwierdź</button>
+											</div>
+										</div>
+									</div>
+								</div>
 							</form:form>
 						</div>
 					</aside>

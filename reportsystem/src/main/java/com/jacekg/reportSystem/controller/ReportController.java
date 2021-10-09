@@ -114,7 +114,7 @@ public class ReportController {
 		try {
 			reportService.saveReport(reportDto);
 		} catch (Exception e) {
-			
+			return "redirect:/report/showReportForm";
 		}
 		
 		return "redirect:/report/showReportForm";
