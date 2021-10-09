@@ -63,7 +63,7 @@ public class ProductionController {
 	}
 	
 	@PostMapping("/processProdLineForm")
-	public String processProdLineForm(@Valid @ModelAttribute("formProdLine") ProductionLineDto productionLineDto,
+	public String processProdLineForm(@Valid @ModelAttribute("productionLineDto") ProductionLineDto productionLineDto,
 			BindingResult bindingResult, Model model) {
 		
 		if (bindingResult.hasErrors()) {
@@ -131,7 +131,7 @@ public class ProductionController {
 	}
 	
 	@PostMapping("/processProdMachineForm")
-	public String processProdMachineForm(@Valid @ModelAttribute("formProdMachine") ProductionMachineDto productionMachineDto,
+	public String processProdMachineForm(@Valid @ModelAttribute("productionMachineDto") ProductionMachineDto productionMachineDto,
 			BindingResult bindingResult, Model model) {
 		
 		if (bindingResult.hasErrors()) {

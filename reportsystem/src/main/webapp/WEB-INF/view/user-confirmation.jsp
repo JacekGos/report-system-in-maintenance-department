@@ -42,7 +42,7 @@
 							<%-- 					<form class="needs-validation" novalidate> --%>
 							<form:form class="row g-3"
 								action="${pageContext.request.contextPath}/user/processSaveUser"
-								modelAttribute="formUser" accept-charset="UTF-8">
+								modelAttribute="userDto" accept-charset="UTF-8">
 								
 								<form:hidden path="firstName" />
 								<form:hidden path="lastName" />
@@ -54,31 +54,31 @@
 								<div class="row g-3">
 									<div class="col-sm-6">
 										<label class="form-label">Imię</label> <input type="text"
-											placeholder="${formUser.firstName}" class="form-control"
+											placeholder="${userDto.firstName}" class="form-control"
 											disabled readonly>
 									</div>
 
 									<div class="col-sm-6">
 										<label class="form-label">Nazwisko</label> <input type="text"
-											placeholder="${formUser.lastName}" class="form-control"
+											placeholder="${userDto.lastName}" class="form-control"
 											disabled readonly>
 									</div>
 
 									<div class="col-sm-6">
 										<label class="form-label">Nazwa użytkownika</label> <input
-											type="text" placeholder="${formUser.userName}"
+											type="text" placeholder="${userDto.userName}"
 											class="form-control" disabled readonly>
 									</div>
 
 									<div class="col-sm-6">
 										<label class="form-label">Uprawnienia</label> <input
-											type="text" placeholder="${formUser.role}"
+											type="text" placeholder="${userDto.role}"
 											class="form-control" disabled readonly>
 									</div>
 
 									<div class="col-6">
 										<label class="form-label">Email</label> <input type="text"
-											placeholder="${formUser.email}" class="form-control" disabled
+											placeholder="${userDto.email}" class="form-control" disabled
 											readonly>
 									</div>
 
