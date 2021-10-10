@@ -65,15 +65,13 @@ public class ReportServiceImpl implements ReportService {
 				productionMachine,
 				failTypes);
 		
-//		report.setUser(user);
-//		report.setDate(reportDto.getDate());
-//		report.setDuration(reportDto.getDuration());
-//		report.setDescription(reportDto.getDescription());
-//		report.setProductionLine(productionLine);
-//		report.setProductionMachine(productionMachine);
-//		report.setFailTypes(failTypes);
-//		
 		reportDao.saveReport(report);
+	}
+	
+	@Override
+	@Transactional
+	public List<Report> getReports() {
+		return reportDao.getReports();
 	}
 
 	private List<FailType> findFailTypes(List<Integer> failTypes) {
@@ -90,6 +88,8 @@ public class ReportServiceImpl implements ReportService {
 		
 		return failTypeList;
 	}
+
+	
 	
 	
 

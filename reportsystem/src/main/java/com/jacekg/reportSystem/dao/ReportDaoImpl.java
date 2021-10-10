@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +24,16 @@ public class ReportDaoImpl implements ReportDao {
 		Session currentSession = sessionFactory.getCurrentSession();
 		
 		currentSession.saveOrUpdate(report);
+	}
+
+	@Override
+	public List<Report> getReports() {
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		Query<Report> query = currentSession.createQuery("FROM Report", Report.class);
+		
+		return query.getResultList();
 	}
 
 }

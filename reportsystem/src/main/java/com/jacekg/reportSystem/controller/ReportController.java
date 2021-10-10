@@ -1,21 +1,14 @@
 package com.jacekg.reportSystem.controller;
 
 import java.security.Principal;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,14 +19,12 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.google.gson.Gson;
 import com.jacekg.reportSystem.dto.ReportDto;
 import com.jacekg.reportSystem.entity.FailType;
 import com.jacekg.reportSystem.entity.ProductionMachine;
-import com.jacekg.reportSystem.entity.User;
+import com.jacekg.reportSystem.entity.Report;
 import com.jacekg.reportSystem.service.ProductionService;
 import com.jacekg.reportSystem.service.ReportService;
 import com.jacekg.reportSystem.service.UserService;
@@ -51,7 +42,6 @@ public class ReportController {
 	@Autowired
 	private UserService userService;
 
-	private Map<Integer, String> prodLines;
 	private Map<Integer, String> prodMachines;
 	private Map<Integer, String> failTypes;
 
@@ -119,6 +109,17 @@ public class ReportController {
 		
 		return "redirect:/report/showReportForm";
 	}
+	
+	@GetMapping("/showReportList")
+	public String showReportList(Model model) {
+		
+		List<Report> reports = reportService.getReports();
+		System.out.println(reports.get(0).toString());
+		model.addAttribute("reports", reports);
+		
+		return "report-list";
+	}
+	
 	
 	private Map<Integer, String> loadProdMachines() {
 		

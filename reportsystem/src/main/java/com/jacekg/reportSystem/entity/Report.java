@@ -40,12 +40,14 @@ public class Report {
 	@Column(name = "description")
 	private String description;
 	
-	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+	@ManyToOne(fetch = FetchType.LAZY,
+			cascade = {CascadeType.DETACH, CascadeType.MERGE,
 			CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name = "prod_line_id")
 	private ProductionLine productionLine;
 	
-	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+	@ManyToOne(fetch = FetchType.LAZY,
+			cascade = {CascadeType.DETACH, CascadeType.MERGE,
 			CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name = "prod_machine_id")
 	private ProductionMachine productionMachine;
@@ -162,7 +164,13 @@ public class Report {
 	public void setFailTypes(List<FailType> failTypes) {
 		this.failTypes = failTypes;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Report [id=" + id + ", user=" + user + ", date=" + date + ", duration=" + duration + ", description="
+				+ description + ", productionLine=" + productionLine + ", productionMachine=" + productionMachine
+				+ ", images=" + images + ", failTypes=" + failTypes + "]";
+	}
 	
 	
 }
