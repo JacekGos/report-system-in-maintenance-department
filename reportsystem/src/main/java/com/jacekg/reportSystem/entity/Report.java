@@ -26,7 +26,8 @@ public class Report {
 	@Column(name = "id")
 	private long id;
 	
-	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+	@ManyToOne(fetch = FetchType.LAZY,
+			cascade = {CascadeType.DETACH, CascadeType.MERGE,
 			CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -167,10 +168,10 @@ public class Report {
 
 	@Override
 	public String toString() {
-		return "Report [id=" + id + ", user=" + user + ", date=" + date + ", duration=" + duration + ", description="
-				+ description + ", productionLine=" + productionLine + ", productionMachine=" + productionMachine
-				+ ", images=" + images + ", failTypes=" + failTypes + "]";
+		return "Report [id=" + id + ", user=" + user.getUserName() + ", date=" + date + ", duration=" + duration + ", description="
+				+ description + ", productionLine=" + productionLine.getName() + ", productionMachine=" + productionMachine.getName() + "]";
 	}
+
 	
 	
 }
