@@ -113,8 +113,8 @@ public class ReportController {
 	@GetMapping("/showReportList")
 	public String showReportList(Model model) {
 		
-		List<Report> reports = reportService.getReports();
-		System.out.println(reports.get(0).toString());
+		List<Report> reports = reportService.getReportsToShowList();
+		
 		model.addAttribute("reports", reports);
 		
 		return "report-list";

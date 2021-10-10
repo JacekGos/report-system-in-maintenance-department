@@ -25,7 +25,7 @@
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 				<div
 					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-					<h1 class="h2">Lista użytkowników</h1>
+					<h1 class="h2">Historia raportów</h1>
 					<div class="btn-toolbar mb-2 mb-md-0">
 						<div class="btn-group me-2">
 							<button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -37,7 +37,7 @@
 						</button>
 					</div>
 				</div>
-			
+
 				<div class="row">
 					<div class="table-responsive">
 						<table
@@ -46,16 +46,29 @@
 								<tr>
 									<th scope="col">#</th>
 									<th scope="col">Nazwa użytkownika</th>
+									<th scope="col">Linia</th>
+									<th scope="col">Stacja</th>
+									<th scope="col">Data</th>
+									<th scope="col">Opcje</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:if test="${users != null}">
-									<c:forEach var="user" items="${reports}">
+								<c:if test="${reports != null}">
+									<c:forEach var="report" items="${reports}">
 										<tr>
-											<c:url var="detailsLink"
-												value="/user/showUserDetails">
+											<c:url var="detailsLink" value="/report/showReportDetails">
 												<c:param name="id" value="${report.id}" />
 											</c:url>
+
+											<td>${report.id}</td>
+											<td>${report.user.userName}</td>
+											<td>${report.productionLine.name}</td>
+											<td>${report.productionMachine.name}</td>
+											<td>${report.date}</td>
+											<td>
+												<a href="${detailsLink}"><i class="bi bi-search"></i></a>
+											</td>
+											
 										</tr>
 									</c:forEach>
 								</c:if>

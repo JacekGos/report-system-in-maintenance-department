@@ -9,5 +9,5 @@ public interface ReportDao {
 
 	void saveReport(Report report);
 
-	List<Report> getReports();
+	List<Report> getReportsToShowList();
 }

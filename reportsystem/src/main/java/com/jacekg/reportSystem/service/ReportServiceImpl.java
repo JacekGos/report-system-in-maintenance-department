@@ -70,8 +70,8 @@ public class ReportServiceImpl implements ReportService {
 	
 	@Override
 	@Transactional
-	public List<Report> getReports() {
-		return reportDao.getReports();
+	public List<Report> getReportsToShowList() {
+		return reportDao.getReportsToShowList();
 	}
 
 	private List<FailType> findFailTypes(List<Integer> failTypes) {

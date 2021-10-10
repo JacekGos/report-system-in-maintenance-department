@@ -12,6 +12,6 @@ public interface ReportService {
 
 	void saveReport(ReportDto reportDto);
 
-	List<Report> getReports();
+	List<Report> getReportsToShowList();
 
 }
