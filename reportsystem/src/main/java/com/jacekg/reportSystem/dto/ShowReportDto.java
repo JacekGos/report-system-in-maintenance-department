@@ -75,6 +75,14 @@ public class ShowReportDto {
 	public List<String> getFailTypesNames() {
 		return failTypesNames;
 	}
+
+	@Override
+	public String toString() {
+		return "ShowReportDto [id=" + id + ", userName=" + userName + ", productionLineName=" + productionLineName
+				+ ", productionMachineName=" + productionMachineName + ", date=" + date + ", duration=" + duration
+				+ ", description=" + description + ", imagesNames=" + imagesNames + ", failTypesNames=" + failTypesNames
+				+ "]";
+	}
 	
 	
 

@@ -15,6 +15,23 @@
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/form-validation.css" />
 
+<!-- <script>
+	function auto_grow(element) {
+	    element.style.height = "5px";
+	    element.style.height = (element.scrollHeight)+"px";
+	}
+	
+	</script>
+
+<style>
+textarea {
+	resize: none;
+	overflow: hidden;
+	min-height: 50px;
+	max-height: 100px;
+}
+</style> -->
+
 </head>
 
 <body>
@@ -30,73 +47,87 @@
 
 				<div
 					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-					<h1 class="h2">Dodaj użytkownika</h1>
+					<h1 class="h2">Szczegóły raportu</h1>
 
 				</div>
 
+				<div class="table-responsive">
+					<table
+						class="table table-striped table-sm table-bordered table-hover">
+						<thead class="table-dark">
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Nazwa użytkownika</th>
+								<th scope="col">Linia</th>
+								<th scope="col">Stacja</th>
+								<th scope="col">Data</th>
+								<th scope="col">Czas trwania</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:if test="${showReportDto != null}">
+								<tr>
+									<td>${showReportDto.id}</td>
+									<td>${showReportDto.userName}</td>
+									<td>${showReportDto.productionLineName}</td>
+									<td>${showReportDto.productionMachineName}</td>
+									<td>${showReportDto.date}</td>
+									<td>${showReportDto.duration}</td>
+								</tr>
+							</c:if>
+						</tbody>
+					</table>
+				</div>
+
 				<div class="row">
-					<aside class="col-sm-3"></aside>
-					<aside class="col-sm-8">
+
+					<aside class="col-sm-3">
+
+						<div class="table-responsive">
+							<table
+								class="table table-striped table-sm table-bordered table-hover">
+								<thead class="table-dark">
+									<tr>
+										<th scope="col">Przyczyny awarii</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="failTypeName"
+										items="${showReportDto.failTypesNames}">
+										<tr>
+											<td>${failTypeName}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+
+					</aside>
+					<aside class="col-sm-12">
+
 
 						<div class="col-md-7 col-lg-8">
-							<%-- 					<form class="needs-validation" novalidate> --%>
 							<form:form class="row g-3"
 								action="${pageContext.request.contextPath}/user/processSaveUser"
-								modelAttribute="userDto" accept-charset="UTF-8">
-								
-								<form:hidden path="firstName" />
-								<form:hidden path="lastName" />
-								<form:hidden path="password" />
-								<form:hidden path="userName" />
-								<form:hidden path="email" />
-								<form:hidden path="role" />
-								
+								modelAttribute="showReportDto" accept-charset="UTF-8">
+
 								<div class="row g-3">
-									<div class="col-sm-6">
-										<label class="form-label">Imię</label> <input type="text"
-											placeholder="${userDto.firstName}" class="form-control"
-											disabled readonly>
+									<div class="mb-3">
+										<label for="exampleFormControlTextarea1" class="form-label"><h6>Opis</h6></label>
+										<textarea class="form-control"
+											placeholder="${showReportDto.description}"
+											id="exampleFormControlTextarea1" rows = "20"
+											disabled readonly></textarea>
 									</div>
 
-									<div class="col-sm-6">
-										<label class="form-label">Nazwisko</label> <input type="text"
-											placeholder="${userDto.lastName}" class="form-control"
-											disabled readonly>
-									</div>
-
-									<div class="col-sm-6">
-										<label class="form-label">Nazwa użytkownika</label> <input
-											type="text" placeholder="${userDto.userName}"
-											class="form-control" disabled readonly>
-									</div>
-
-									<div class="col-sm-6">
-										<label class="form-label">Uprawnienia</label> <input
-											type="text" placeholder="${userDto.role}"
-											class="form-control" disabled readonly>
-									</div>
-
-									<div class="col-6">
-										<label class="form-label">Email</label> <input type="text"
-											placeholder="${userDto.email}" class="form-control" disabled
-											readonly>
-									</div>
 
 								</div>
 
-								<div class="col-12">
-									<button type="submit" class="btn btn-outline-primary">Zatwierdź</button>
-								</div>
-								
-								<c:if test="${registrationError != null}">
-									<div class="alert alert-danger col-xs-offset-1 col-xs-10">
-											${registrationError}</div>
-								</c:if>
-								
 							</form:form>
 						</div>
+
 					</aside>
-					<aside class="col-sm-4"></aside>
+					<aside class="col-sm-1"></aside>
 				</div>
 			</main>
 

@@ -125,6 +125,8 @@ public class ReportController {
 		Report report = reportService.getReportWithAllData(reportId);
 		
 		ShowReportDto showReportDto = mapShowReportDto(report);
+		System.out.println("My logs: " + showReportDto.toString());
+		model.addAttribute("showReportDto", showReportDto);
 		
 		return "report-details";
 	}
