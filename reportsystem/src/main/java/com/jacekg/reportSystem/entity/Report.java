@@ -1,6 +1,7 @@
 package com.jacekg.reportSystem.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,47 +18,49 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import net.bytebuddy.asm.Advice.This;
+
 @Entity
 @Table(name = "report")
 public class Report {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private long id;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY,
 			cascade = {CascadeType.DETACH, CascadeType.MERGE,
-			CascadeType.PERSIST, CascadeType.REFRESH})
+					CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 	@Column(name = "date")
 	private LocalDate date;
-	
+
 	@Column(name = "duration")
 	private int duration;
-	
+
 	@Column(name = "description")
 	private String description;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY,
 			cascade = {CascadeType.DETACH, CascadeType.MERGE,
-			CascadeType.PERSIST, CascadeType.REFRESH})
+					CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name = "prod_line_id")
 	private ProductionLine productionLine;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY,
 			cascade = {CascadeType.DETACH, CascadeType.MERGE,
-			CascadeType.PERSIST, CascadeType.REFRESH})
+					CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name = "prod_machine_id")
 	private ProductionMachine productionMachine;
-	
+
 	@OneToMany(fetch = FetchType.LAZY,
 			cascade = CascadeType.ALL)
 	@JoinColumn(name = "report_id")
 	private List<Image> images;
-	
+
 	@ManyToMany(fetch = FetchType.LAZY,
 			cascade = {CascadeType.DETACH, CascadeType.MERGE,
 					CascadeType.PERSIST, CascadeType.REFRESH})
@@ -66,9 +69,9 @@ public class Report {
 			joinColumns = @JoinColumn(name = "report_id"),
 			inverseJoinColumns = @JoinColumn(name = "fail_type_id"))
 	private List<FailType> failTypes;
-	
+
 	public Report() {
-		
+
 	}
 
 	public Report(User user, LocalDate date, int duration, String description, ProductionLine productionLine,
@@ -166,14 +169,36 @@ public class Report {
 		this.failTypes = failTypes;
 	}
 
+	public List<String> getFailTypesNames(){
+
+		List<String> failTypesNames = new ArrayList<String>();
+
+		for (FailType failType : this.failTypes) {
+			failTypesNames.add(failType.getName());
+		}
+
+		return failTypesNames;
+	}
+
+	public List<String> getImagesNames(){
+
+		List<String> imagesNames = new ArrayList<String>();
+
+		for (Image image : this.images) {
+			imagesNames.add(image.getName());
+		}
+
+		return imagesNames;
+	}
+
 	@Override
 	public String toString() {
 		return "Report [id=" + id + ", user=" + user.getUserName() + ", date=" + date + ", duration=" + duration + ", description="
 				+ description + ", productionLine=" + productionLine.getName() + ", productionMachine=" + productionMachine.getName() + "]";
 	}
 
-	
-	
+
+
 }
 
 

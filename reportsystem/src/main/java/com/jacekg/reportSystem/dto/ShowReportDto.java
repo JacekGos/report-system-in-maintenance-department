@@ -3,7 +3,7 @@ package com.jacekg.reportSystem.dto;
 import java.time.LocalDate;
 import java.util.List;
 
-public class showReportDto {
+public class ShowReportDto {
 	
 	private Long id;
 	
@@ -19,16 +19,16 @@ public class showReportDto {
 
 	private String description;
 	
-	List<Integer> images;
+	List<String> imagesNames;
 
-	List<Integer> failTypes;
+	List<String> failTypesNames;
 	
-	public showReportDto() {
+	public ShowReportDto() {
 		
 	}
 	
-	public showReportDto(Long id, String userName, String productionLineName, String productionMachineName,
-			LocalDate date, Integer duration, String description, List<Integer> images, List<Integer> failTypes) {
+	public ShowReportDto(Long id, String userName, String productionLineName, String productionMachineName,
+			LocalDate date, Integer duration, String description, List<String> images, List<String> failTypesNames) {
 		this.id = id;
 		this.userName = userName;
 		this.productionLineName = productionLineName;
@@ -36,8 +36,8 @@ public class showReportDto {
 		this.date = date;
 		this.duration = duration;
 		this.description = description;
-		this.images = images;
-		this.failTypes = failTypes;
+		this.imagesNames = images;
+		this.failTypesNames = failTypesNames;
 	}
 
 	public Long getId() {
@@ -68,12 +68,12 @@ public class showReportDto {
 		return description;
 	}
 
-	public List<Integer> getImages() {
-		return images;
+	public List<String> getImagesNames() {
+		return imagesNames;
 	}
 
-	public List<Integer> getFailTypes() {
-		return failTypes;
+	public List<String> getFailTypesNames() {
+		return failTypesNames;
 	}
 	
 	

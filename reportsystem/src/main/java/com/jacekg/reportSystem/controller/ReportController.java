@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jacekg.reportSystem.dto.ReportDto;
+import com.jacekg.reportSystem.dto.ShowReportDto;
 import com.jacekg.reportSystem.entity.FailType;
 import com.jacekg.reportSystem.entity.ProductionMachine;
 import com.jacekg.reportSystem.entity.Report;
@@ -123,6 +124,7 @@ public class ReportController {
 		
 		Report report = reportService.getReportWithAllData(reportId);
 		
+		ShowReportDto showReportDto = mapShowReportDto(report);
 		
 		return "report-details";
 	}
@@ -152,30 +154,6 @@ public class ReportController {
 		return prodMachineNames;
 	}
 	
-
-//	private Map<Integer, String> loadProdLines() {
-//
-//		List<ProductionLine> prodLineList = productionService.getProdLines();
-//
-//		Map<Integer, String> prodLines = new LinkedHashMap<Integer, String>();
-//
-//		prodLines = getProdLineNames(prodLineList);
-//
-//		return prodLines;
-//	}
-
-//	private Map<Integer, String> getProdLineNames(List<ProductionLine> prodLineList) {
-//
-//		Map<Integer, String> prodLineNames = new LinkedHashMap<Integer, String>();
-//
-//		for (ProductionLine productionLine : prodLineList) {
-//
-//			prodLineNames.put(productionLine.getId(), productionLine.getName());
-//		}
-//
-//		return prodLineNames;
-//	}
-
 	private Map<Integer, String> loadFailTypes() {
 
 		List<FailType> failTypeList = reportService.getFailTypes();
@@ -200,7 +178,21 @@ public class ReportController {
 
 	}
 
+	private ShowReportDto mapShowReportDto(Report report) {
 
+		ShowReportDto showReportDto = new ShowReportDto(
+				report.getId(),
+				report.getUser().getUserName(),
+				report.getProductionLine().getName(),
+				report.getProductionMachine().getName(),
+				report.getDate(),
+				report.getDuration(),
+				report.getDescription(),
+				report.getImagesNames(),
+				report.getFailTypesNames());
+		
+		return showReportDto;
+	}
 
 }
 
