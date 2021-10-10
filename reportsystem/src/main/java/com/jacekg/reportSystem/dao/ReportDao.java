@@ -10,4 +10,6 @@ public interface ReportDao {
 	void saveReport(Report report);
 
 	List<Report> getReportsToShowList();
+
+	Report getReport(Long reportId);
 }

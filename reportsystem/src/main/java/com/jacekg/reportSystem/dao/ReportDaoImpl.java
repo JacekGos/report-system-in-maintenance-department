@@ -35,9 +35,19 @@ public class ReportDaoImpl implements ReportDao {
 				currentSession.createQuery("FROM Report r"
 						+ " JOIN FETCH r.user"
 						+ " JOIN FETCH r.productionLine"
-						+ " JOIN FETCH r.productionMachine", Report.class);
+						+ " JOIN FETCH r.productionMachine ORDER BY r.date DESC", Report.class);
 		
 		return query.getResultList();
+	}
+
+	@Override
+	public Report getReport(Long reportId) {
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		Report report = currentSession.get(Report.class, reportId);
+		
+		return report;
 	}
 
 }

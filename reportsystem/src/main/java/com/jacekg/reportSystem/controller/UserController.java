@@ -70,7 +70,7 @@ public class UserController {
 		
 		User user = userService.getUserWithRoles(userId);
 
-		UserDto userDto = fillFormUser(user);
+		UserDto userDto = fillUserDto(user);
 		
 		String currentUserName = principal.getName();
 
@@ -207,7 +207,7 @@ public class UserController {
 		if (user != null) {
 			
 			UserDto userDto = new UserDto();
-			userDto = fillFormUser(user);
+			userDto = fillUserDto(user);
 			userDto.setPassword(changePasswordDto.getPassword());
 			
 			userService.save(userDto);
@@ -238,7 +238,7 @@ public class UserController {
 		return userName + ++userNumber;
 	}
 
-	private UserDto fillFormUser(User user) {
+	private UserDto fillUserDto(User user) {
 
 		UserDto userDto = new UserDto();
 		userDto.setId(user.getId());

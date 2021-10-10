@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jacekg.reportSystem.dto.ReportDto;
@@ -51,9 +52,6 @@ public class ReportController {
 		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
 
 		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);	
-		
-//		dataBinder.registerCustomEditor(LocalDate.class,     
-//                 new CustomDateEditor(new SimpleDateFormat("dd/MM/yyyy"), true, 10)); 
 	}
 
 	@GetMapping("/showReportForm")
@@ -120,6 +118,14 @@ public class ReportController {
 		return "report-list";
 	}
 	
+	@GetMapping("/showReportDetails")
+	public String showReportDetails(@RequestParam("id") Long reportId, Model model) {
+		
+		Report report = reportService.getReportWithAllData(reportId);
+		
+		
+		return "report-details";
+	}
 	
 	private Map<Integer, String> loadProdMachines() {
 		

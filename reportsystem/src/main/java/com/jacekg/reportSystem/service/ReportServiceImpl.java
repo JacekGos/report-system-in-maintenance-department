@@ -73,6 +73,24 @@ public class ReportServiceImpl implements ReportService {
 	public List<Report> getReportsToShowList() {
 		return reportDao.getReportsToShowList();
 	}
+	
+	@Override
+	@Transactional
+	public Report getReportWithAllData(Long reportId) {
+		
+		Report report = reportDao.getReport(reportId);
+		
+		if (report != null) {
+			
+			System.out.println(report.getUser());
+			System.out.println(report.getProductionLine());
+			System.out.println(report.getProductionMachine());
+			System.out.println(report.getFailTypes());
+			System.out.println(report.getImages());
+		}
+		
+		return report;
+	}
 
 	private List<FailType> findFailTypes(List<Integer> failTypes) {
 		
@@ -88,9 +106,5 @@ public class ReportServiceImpl implements ReportService {
 		
 		return failTypeList;
 	}
-
-	
-	
-	
 
 }
