@@ -2,6 +2,7 @@ package com.jacekg.reportSystem.controller;
 
 import java.security.Principal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -114,7 +115,13 @@ public class ReportController {
 		
 		List<Report> reports = reportService.getReportsToShowList();
 		
-		model.addAttribute("reports", reports);
+		List<ShowReportDto> reportsList = new ArrayList<ShowReportDto>();
+		
+		for (Report report : reports) {
+			reportsList.add(mapShowReportDtoToList(report));
+		}
+		
+		model.addAttribute("reportsList", reportsList);
 		
 		return "report-list";
 	}
@@ -192,6 +199,18 @@ public class ReportController {
 				report.getDescription(),
 				report.getImagesNames(),
 				report.getFailTypesNames());
+		
+		return showReportDto;
+	}
+	
+	private ShowReportDto mapShowReportDtoToList(Report report) {
+
+		ShowReportDto showReportDto = new ShowReportDto(
+				report.getId(),
+				report.getUser().getUserName(),
+				report.getProductionLine().getName(),
+				report.getProductionMachine().getName(),
+				report.getDate());
 		
 		return showReportDto;
 	}

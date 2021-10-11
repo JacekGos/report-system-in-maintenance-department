@@ -92,6 +92,20 @@
 											id="exampleFormControlTextarea1" rows="5"></form:textarea>
 									</div>
 									<form:errors path="description" cssClass="error" />
+
+									<div class="col-sm-5">
+										<input class="form-control" type="file"
+											id="file-upload" multiple />
+									</div>
+									
+								<!-- 	
+										<div class="col-sm-6">
+										<label for="file-upload" class="custom-file-upload">
+											Custom Upload </label>
+										<input path="image" class="form-control" type="file"
+											id="file-upload" multiple />
+									</div>
+ -->
 								</div>
 								<div class="col-12">
 									<button type="button" class="btn btn-outline-primary"

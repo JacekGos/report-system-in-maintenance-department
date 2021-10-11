@@ -16,8 +16,9 @@
 	href="${pageContext.request.contextPath}/resources/css/form-validation.css" />
 
 <!-- <script>
+
 	function auto_grow(element) {
-	    element.style.height = "5px";
+	    element.style.height = "100px";
 	    element.style.height = (element.scrollHeight)+"px";
 	}
 	
@@ -80,8 +81,7 @@ textarea {
 				</div>
 
 				<div class="row">
-
-					<aside class="col-sm-3">
+					<aside class="col-sm-2">
 
 						<div class="table-responsive">
 							<table
@@ -103,31 +103,24 @@ textarea {
 						</div>
 
 					</aside>
-					<aside class="col-sm-12">
+					<br>
+					<aside class="col-sm-9">
+						<form:form class="row g-3"
+							action="${pageContext.request.contextPath}/user/processSaveUser"
+							modelAttribute="showReportDto" accept-charset="UTF-8">
 
-
-						<div class="col-md-7 col-lg-8">
-							<form:form class="row g-3"
-								action="${pageContext.request.contextPath}/user/processSaveUser"
-								modelAttribute="showReportDto" accept-charset="UTF-8">
-
-								<div class="row g-3">
-									<div class="mb-3">
-										<label for="exampleFormControlTextarea1" class="form-label"><h6>Opis</h6></label>
-										<textarea class="form-control"
-											placeholder="${showReportDto.description}"
-											id="exampleFormControlTextarea1" rows = "20"
-											disabled readonly></textarea>
-									</div>
-
+							<div class="row g-3">
+								<div class="mb-3">
+									<!-- <label for="exampleFormControlTextarea1" class="form-label"><h6>Opis</h6></label> -->
+									<textarea class="form-control"
+										placeholder="${showReportDto.description}"
+										id="exampleFormControlTextarea1" rows="20" disabled readonly></textarea>
 
 								</div>
-
-							</form:form>
-						</div>
+							</div>
+						</form:form>
 
 					</aside>
-					<aside class="col-sm-1"></aside>
 				</div>
 			</main>
 

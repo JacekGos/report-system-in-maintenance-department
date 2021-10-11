@@ -53,17 +53,17 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:if test="${reports != null}">
-									<c:forEach var="report" items="${reports}">
+								<c:if test="${reportsList != null}">
+									<c:forEach var="report" items="${reportsList}">
 										<tr>
 											<c:url var="detailsLink" value="/report/showReportDetails">
 												<c:param name="id" value="${report.id}" />
 											</c:url>
 
 											<td>${report.id}</td>
-											<td>${report.user.userName}</td>
-											<td>${report.productionLine.name}</td>
-											<td>${report.productionMachine.name}</td>
+											<td>${report.userName}</td>
+											<td>${report.productionLineName}</td>
+											<td>${report.productionMachineName}</td>
 											<td>${report.date}</td>
 											<td>
 												<a href="${detailsLink}"><i class="bi bi-search"></i></a>
