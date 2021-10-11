@@ -11,8 +11,10 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +23,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jacekg.reportSystem.dto.ReportDto;
 import com.jacekg.reportSystem.dto.ShowReportDto;
+import com.jacekg.reportSystem.dto.ShowReportDto2;
 import com.jacekg.reportSystem.entity.FailType;
 import com.jacekg.reportSystem.entity.ProductionMachine;
 import com.jacekg.reportSystem.entity.Report;
@@ -76,13 +80,14 @@ public class ReportController {
 		model.addAttribute("prodMachines", prodMachines);
 		model.addAttribute("failTypes", failTypes);
 		model.addAttribute("reportDto", reportDto);
+		model.addAttribute("imageDto", new ShowReportDto2());
 
-		return "report-form";
+		return "report-form3";
 	}
 	
 	@PostMapping("/processReportForm")
 	public String processReportForm(@Valid @ModelAttribute("reportDto") ReportDto reportDto,
-			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+			BindingResult bindingResult, Model model) {
 		
 		if (bindingResult.hasErrors()) {
 			
@@ -98,14 +103,31 @@ public class ReportController {
 			return "report-form";
 		}
 		
-		System.out.println("My log process report form");
-		System.out.println(reportDto.toString());
-		
 		try {
 			reportService.saveReport(reportDto);
 		} catch (Exception e) {
 			return "redirect:/report/showReportForm";
 		}
+		
+		return "redirect:/report/showReportForm";
+	}
+	
+	//TODO delete after test
+//	@PostMapping("/processReportForm2")
+//	public String processReportForm2(@ModelAttribute("imageDto") ShowReportDto2 showReportDto2,
+//			Model model) {
+	@PostMapping("/processReportForm2")
+	public String processReportForm2(@RequestParam("image") MultipartFile multipartFile,
+			Model model) {
+		
+		
+		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+		System.out.println("My logs: " + fileName);
+//		System.out.println("My logs: " + showReportDto2.getImage().getName());
+		
+//		MultipaCrtFile file = (MultipartFile) showReportDto2.getImage();
+		
+		
 		
 		return "redirect:/report/showReportForm";
 	}
