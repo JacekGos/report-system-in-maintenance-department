@@ -1,5 +1,6 @@
 package com.jacekg.reportSystem.controller;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDate;
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.Deflater;
 
 import javax.validation.Valid;
 
@@ -94,14 +96,11 @@ public class ReportController {
 	public String processReportForm(@Valid @ModelAttribute("reportDto") ReportDto reportDto,
 			BindingResult bindingResult, Model model) {
 		
-		MultipartFile[] image = reportDto.getImages();
+		MultipartFile[] images = reportDto.getImages();
 		
-		System.out.println("My logs: getContentType " +  image[0].getContentType());
-		System.out.println("My logs: getOriginalFilename " +  image[0].getOriginalFilename());
-		System.out.println("My logs: getSize " +  image[0].getSize());
-//		System.out.println("======\nMy logs: getContentType " +  image[1].getContentType());
-//		System.out.println("My logs: getOriginalFilename " +  image[1].getOriginalFilename());
-//		System.out.println("My logs: getSize " +  image[1].getSize());
+		System.out.println("My logs: getContentType " +  images[0].getContentType());
+		System.out.println("My logs: getOriginalFilename " +  images[0].getOriginalFilename());
+		System.out.println("My logs: getSize " +  images[0].getSize());
 		
 		if (bindingResult.hasErrors()) {
 			
@@ -230,7 +229,7 @@ public class ReportController {
 		
 		return showReportDto;
 	}
-
+	
 }
 
 

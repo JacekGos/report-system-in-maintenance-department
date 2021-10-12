@@ -1,8 +1,11 @@
 package com.jacekg.reportSystem.service;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.zip.Deflater;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,7 +75,7 @@ public class ReportServiceImpl implements ReportService {
 					images.add(new Image(
 							imagesFromForm[i].getName(),
 							imagesFromForm[i].getContentType(),
-							imagesFromForm[i].getBytes()
+							compressBytes(imagesFromForm[i].getBytes())
 							));
 				}catch (Exception e) {
 				}
@@ -144,6 +147,30 @@ public class ReportServiceImpl implements ReportService {
 		}
 		
 		return failTypeList;
+	}
+	
+	public static byte[] compressBytes(byte[] image) {
+		
+		Deflater deflater = new Deflater();
+		deflater.setInput(image);
+		deflater.finish();		
+		
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream(image.length);
+		
+		byte[] buffer = new byte[1024];
+		
+		while (!deflater.finished()) {
+			int count = deflater.deflate(buffer);
+			outputStream.write(buffer, 0, count);
+		}
+		try {
+			outputStream.close();
+		} catch (IOException e) {
+		}
+		
+		System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);	
+		
+		return outputStream.toByteArray();
 	}
 
 }

@@ -94,18 +94,9 @@
 									</div>
 									<form:errors path="description" cssClass="error" />
 
-									<%-- 	<div class="col-sm-5">
-										<form:input class="form-control" type="file" path="images" id="file-upload"
-											multiple />
-									</div> --%>
-
-									<%-- <div class="col-sm-5">
-										<form:input path="images" class="form-control" type="file"
-											id="file-upload" accept="image/png, image/jpeg" multiple/>
-									</div> --%>
-
 									<td><form:label path="images"></form:label></td>
-									<td><input type="file" name="images" class="form-control" multiple/></td>
+									<td><input type="file" name="images" class="form-control" 
+										accept="image/png, image/jpeg" multiple/></td>
 
 								</div>
 								<div class="col-12">
