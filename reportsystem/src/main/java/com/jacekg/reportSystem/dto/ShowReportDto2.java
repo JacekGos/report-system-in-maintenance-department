@@ -7,7 +7,7 @@ public class ShowReportDto2 {
 	
 	MultipartFile image;
 	
-	String image2;
+	String name;
 	
 	public ShowReportDto2() {
 		
@@ -21,15 +21,12 @@ public class ShowReportDto2 {
 		this.image = image;
 	}
 
-	public String getImage2() {
-		return image2;
+	public String getName() {
+		return name;
 	}
 
-	public void setImage2(String image2) {
-		this.image2 = image2;
+	public void setName(String name) {
+		this.name = name;
 	}
-
-	
-	
 
 }

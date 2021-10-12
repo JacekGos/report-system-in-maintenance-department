@@ -39,29 +39,26 @@
 					<aside class="col-sm-8">
 
 						<div class="col-md-7 col-lg-8">
-							<%-- 					<form class="needs-validation" novalidate> --%>
-							<form:form class="row g-3"
-								action="${pageContext.request.contextPath}/report/processReportForm2"
+							<form:form class="row g-3" 
+								action="${pageContext.request.contextPath}/report/processReportForm2?${_csrf.parameterName}=${_csrf.token}"
 								enctype="multipart/form-data" accept-charset="UTF-8"
-								method="post" modelAttribute="imageDto" >
+								method="post" modelAttribute="imageDto">
 
-								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
-								
+								<div class="col-sm-6">
+									<label class="form-label"><h6>nazwa</h6></label>
+									<form:input path="name" placeholder="nazwa"
+										class="form-control" />
+									<form:errors path="name" cssClass="error" />
+								</div>
+
+
 								<div class="row g-3">
 
 									<div class="col-sm-5">
-										<form:input path="image2" class="form-control" type="file" 
+										<form:input path="image" class="form-control" type="file"
 											id="file-upload" accept="image/png, image/jpeg" />
 									</div>
 
-									<!-- 	
-										<div class="col-sm-6">
-										<label for="file-upload" class="custom-file-upload">
-											Custom Upload </label>
-										<input path="image" class="form-control" type="file"
-											id="file-upload" multiple />
-									</div>
- -->
 								</div>
 								<div class="col-12">
 									<button type="button" class="btn btn-outline-primary"
@@ -87,12 +84,32 @@
 									</div>
 								</div>
 							</form:form>
+
+
+							<%-- 
+							<form method="post" enctype="multipart/form-data" accept="image/png, image/jpeg"
+								action="${pageContext.request.contextPath}/report/processReportForm2?${_csrf.parameterName}=${_csrf.token}">
+								<table>
+									<tr>
+										<td>File to upload:</td>
+										<td><input type="file" name="file" /></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td><input type="submit" value="Upload" /></td>
+									</tr>
+								</table>
+								
+								<input type="hidden" name="${_csrf.parameterName}"
+                                               value="${_csrf.token}" />
+							</form> --%>
+
 						</div>
 					</aside>
 					<aside class="col-sm-4"></aside>
 				</div>
 			</main>
-<!-- 			https://www.baeldung.com/spring-file-upload -->
+			<!-- 			https://www.baeldung.com/spring-file-upload -->
 		</div>
 	</div>
 </body>

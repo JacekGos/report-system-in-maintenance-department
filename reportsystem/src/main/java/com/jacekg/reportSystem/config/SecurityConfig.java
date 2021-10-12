@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+
 import com.jacekg.reportSystem.service.UserService;
 
 @Configuration
@@ -37,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		filter.setForceEncoding(true);
 		
 		http.addFilterBefore(filter, CsrfFilter.class);
+		
 		
 		http.authorizeRequests()
 			.antMatchers("/").hasRole("EMPLOYEE")
@@ -67,6 +70,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.setPasswordEncoder(passwordEncoder());
 		return auth;
 	}
+	
+
 	
 }
 

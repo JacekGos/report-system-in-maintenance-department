@@ -3,6 +3,8 @@ package com.jacekg.reportSystem.dto;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.jacekg.reportSystem.entity.Image;
 
 public class ShowReportDto {
@@ -21,11 +23,12 @@ public class ShowReportDto {
 
 	private String description;
 	
+	List<MultipartFile> images;
+	
 	List<String> imagesNames;
 
 	List<String> failTypesNames;
 	
-	Image image;
 	
 	public ShowReportDto() {
 		
@@ -81,6 +84,14 @@ public class ShowReportDto {
 	public String getDescription() {
 		return description;
 	}
+	
+	public List<MultipartFile> getImages() {
+		return images;
+	}
+
+	public void setImages(List<MultipartFile> images) {
+		this.images = images;
+	}
 
 	public List<String> getImagesNames() {
 		return imagesNames;
@@ -98,14 +109,5 @@ public class ShowReportDto {
 				+ "]";
 	}
 
-	public Image getImage() {
-		return image;
-	}
-
-	public void setImage(Image image) {
-		this.image = image;
-	}
-	
-	
 
 }

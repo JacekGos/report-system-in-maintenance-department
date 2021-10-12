@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -34,7 +35,9 @@ public class ReportDto {
 	
 	private int productionMachineId;
 	
-	List<Integer> images;
+//	List<MultipartFile> images;
+	
+	MultipartFile[] images;
 	
 	@NotNull(message = "is required")
 	@Size(min = 1, message = "Co najmniej jedno pole")
@@ -108,11 +111,11 @@ public class ReportDto {
 		this.failTypes = failTypes;
 	}
 
-	public List<Integer> getImages() {
+	public MultipartFile[] getImages() {
 		return images;
 	}
 
-	public void setImages(List<Integer> images) {
+	public void setImages(MultipartFile[] images) {
 		this.images = images;
 	}
 

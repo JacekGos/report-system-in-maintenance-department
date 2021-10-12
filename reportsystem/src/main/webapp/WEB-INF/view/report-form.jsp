@@ -40,8 +40,8 @@
 
 						<div class="col-md-7 col-lg-8">
 							<%-- 					<form class="needs-validation" novalidate> --%>
-							<form:form class="row g-3"
-								action="${pageContext.request.contextPath}/report/processReportForm"
+							<form:form class="row g-3" enctype="multipart/form-data"
+								action="${pageContext.request.contextPath}/report/processReportForm?${_csrf.parameterName}=${_csrf.token}"
 								modelAttribute="reportDto" accept-charset="UTF-8">
 
 								<form:hidden path="userId" />
@@ -93,19 +93,19 @@
 									</div>
 									<form:errors path="description" cssClass="error" />
 
-									<div class="col-sm-5">
-										<input class="form-control" type="file"
-											id="file-upload" multiple />
-									</div>
-									
-								<!-- 	
-										<div class="col-sm-6">
-										<label for="file-upload" class="custom-file-upload">
-											Custom Upload </label>
-										<input path="image" class="form-control" type="file"
-											id="file-upload" multiple />
-									</div>
- -->
+									<%-- 	<div class="col-sm-5">
+										<form:input class="form-control" type="file" path="images" id="file-upload"
+											multiple />
+									</div> --%>
+
+									<%-- <div class="col-sm-5">
+										<form:input path="images" class="form-control" type="file"
+											id="file-upload" accept="image/png, image/jpeg" multiple/>
+									</div> --%>
+
+									<td><form:label path="images">Select a file to upload</form:label></td>
+									<td><input type="file" name="images" multiple/></td>
+
 								</div>
 								<div class="col-12">
 									<button type="button" class="btn btn-outline-primary"

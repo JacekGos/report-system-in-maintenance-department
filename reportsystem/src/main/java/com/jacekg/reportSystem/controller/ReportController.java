@@ -1,5 +1,6 @@
 package com.jacekg.reportSystem.controller;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,7 +15,6 @@ import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +22,10 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.jacekg.reportSystem.dto.ReportDto;
 import com.jacekg.reportSystem.dto.ShowReportDto;
@@ -63,9 +64,12 @@ public class ReportController {
 	@GetMapping("/showReportForm")
 	public String showReportForm(Model model, Principal principal) {
 		
+//		if (principal != null) {
+//			String userName = principal.getName();
+//		}
+		
 		String userName = principal.getName();
 		Long userId = userService.getUserId(userName);
-		System.out.println(userId);
 		
 		prodMachines = new LinkedHashMap<Integer, String>();
 		prodMachines = loadProdMachines();
@@ -80,14 +84,22 @@ public class ReportController {
 		model.addAttribute("prodMachines", prodMachines);
 		model.addAttribute("failTypes", failTypes);
 		model.addAttribute("reportDto", reportDto);
-		model.addAttribute("imageDto", new ShowReportDto2());
 
-		return "report-form3";
+		return "report-form";
 	}
 	
 	@PostMapping("/processReportForm")
 	public String processReportForm(@Valid @ModelAttribute("reportDto") ReportDto reportDto,
 			BindingResult bindingResult, Model model) {
+		
+		MultipartFile[] image = reportDto.getImages();
+		
+		System.out.println("My logs: getContentType " +  image[0].getContentType());
+		System.out.println("My logs: getOriginalFilename " +  image[0].getOriginalFilename());
+		System.out.println("My logs: getSize " +  image[0].getSize());
+		System.out.println("======\nMy logs: getContentType " +  image[1].getContentType());
+		System.out.println("My logs: getOriginalFilename " +  image[1].getOriginalFilename());
+		System.out.println("My logs: getSize " +  image[1].getSize());
 		
 		if (bindingResult.hasErrors()) {
 			
@@ -104,7 +116,7 @@ public class ReportController {
 		}
 		
 		try {
-			reportService.saveReport(reportDto);
+//			reportService.saveReport(reportDto);
 		} catch (Exception e) {
 			return "redirect:/report/showReportForm";
 		}
@@ -113,21 +125,33 @@ public class ReportController {
 	}
 	
 	//TODO delete after test
-//	@PostMapping("/processReportForm2")
-//	public String processReportForm2(@ModelAttribute("imageDto") ShowReportDto2 showReportDto2,
-//			Model model) {
 	@PostMapping("/processReportForm2")
-	public String processReportForm2(@RequestParam("image") MultipartFile multipartFile,
+	public String processReportForm2(@ModelAttribute("imageDto") ShowReportDto2 showReportDto2,
 			Model model) {
+//	@RequestMapping(path = "/processReportForm2", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE },
+//			method = RequestMethod.POST)
+//	public String processReportForm2(@RequestParam("file") CommonsMultipartFile multipartFile) {
+//	@PostMapping("/processReportForm2")
+//	public String processReportForm2(@RequestParam("file") MultipartFile multipartFile,
+//			Model model) {
 		
 		
-		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-		System.out.println("My logs: " + fileName);
-//		System.out.println("My logs: " + showReportDto2.getImage().getName());
+		MultipartFile image = showReportDto2.getImage();
 		
-//		MultipaCrtFile file = (MultipartFile) showReportDto2.getImage();
+		System.out.println("My logs: getContentType " +  image.getContentType());
+		System.out.println("My logs: getOriginalFilename " +  image.getOriginalFilename());
+		System.out.println("My logs: getSize " +  image.getSize());
+		
+		try {
+			byte[] imageByte = image.getBytes();
+			System.out.println("My logs: getSize " + imageByte);
+		} catch (IOException e) {
+			
+		}
 		
 		
+		
+//		System.out.println("My logs..." + multipartFile.getName());
 		
 		return "redirect:/report/showReportForm";
 	}

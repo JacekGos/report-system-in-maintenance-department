@@ -1,5 +1,6 @@
 package com.jacekg.reportSystem.config;
 
+
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class DispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -18,5 +19,5 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 	protected String[] getServletMappings() {
 		return new String[] { "/" };
 	}
-
+	
 }
