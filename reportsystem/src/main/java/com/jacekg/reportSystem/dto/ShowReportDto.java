@@ -25,6 +25,8 @@ public class ShowReportDto {
 	
 	MultipartFile[] images;
 	
+	List<Image> imagesListToShow;
+	
 	List<String> imagesNames;
 
 	List<String> failTypesNames;
@@ -35,7 +37,7 @@ public class ShowReportDto {
 	}
 	
 	public ShowReportDto(Long id, String userName, String productionLineName, String productionMachineName,
-			LocalDate date, Integer duration, String description, List<String> images, List<String> failTypesNames) {
+			LocalDate date, Integer duration, String description, List<Image> images, List<String> failTypesNames) {
 		this.id = id;
 		this.userName = userName;
 		this.productionLineName = productionLineName;
@@ -43,7 +45,7 @@ public class ShowReportDto {
 		this.date = date;
 		this.duration = duration;
 		this.description = description;
-		this.imagesNames = images;
+		this.imagesListToShow = images;
 		this.failTypesNames = failTypesNames;
 	}
 	
@@ -91,6 +93,14 @@ public class ShowReportDto {
 
 	public void setImages(MultipartFile[] images) {
 		this.images = images;
+	}
+	
+	public List<Image> getImagesListToShow() {
+		return imagesListToShow;
+	}
+
+	public void setImagesListToShow(List<Image> imagesListToShow) {
+		this.imagesListToShow = imagesListToShow;
 	}
 
 	public List<String> getImagesNames() {

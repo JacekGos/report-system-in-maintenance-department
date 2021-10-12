@@ -2,6 +2,7 @@ package com.jacekg.reportSystem.controller;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,6 +11,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.zip.Deflater;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,10 +50,10 @@ public class ReportController {
 
 	@Autowired
 	private ProductionService productionService;
-	
+
 	@Autowired
 	private ReportService reportService;
-	
+
 	@Autowired
 	private UserService userService;
 
@@ -66,98 +70,137 @@ public class ReportController {
 
 	@GetMapping("/showReportForm")
 	public String showReportForm(Model model, Principal principal) {
-		
+
 		Long userId = 0L;
-		
+
 		if (principal != null) {
 			String userName = principal.getName();
 			userId = userService.getUserId(userName);
 		}
-		
-//		String userName = principal.getName();
-		
+
+		//		String userName = principal.getName();
+
 		prodMachines = new LinkedHashMap<Integer, String>();
 		prodMachines = loadProdMachines();
-		
+
 		failTypes = new LinkedHashMap<Integer, String>();
 		failTypes = loadFailTypes();
-		
+
 		ReportDto reportDto = new ReportDto();
 		reportDto.setDate(LocalDate.now());
 		reportDto.setUserId(userId);
-			
+
 		model.addAttribute("prodMachines", prodMachines);
 		model.addAttribute("failTypes", failTypes);
 		model.addAttribute("reportDto", reportDto);
 
 		return "report-form";
 	}
-	
+
 	@PostMapping("/processReportForm")
 	public String processReportForm(@Valid @ModelAttribute("reportDto") ReportDto reportDto,
 			BindingResult bindingResult, @ModelAttribute("message") String message, Model model) throws IOException {
-		
+
 		MultipartFile[] images = reportDto.getImages();
-		
+
 		System.out.println("My logs: getContentType " +  images[0].getContentType());
 		System.out.println("My logs: getOriginalFilename " +  images[0].getOriginalFilename());
 		System.out.println("My logs: getSize " +  images[0].getSize());
-		
-		
-		
+
+
+
 		if (bindingResult.hasErrors()) {
-			
+
 			prodMachines = new LinkedHashMap<Integer, String>();
 			prodMachines = loadProdMachines();
-			
+
 			failTypes = new LinkedHashMap<Integer, String>();
 			failTypes = loadFailTypes();
-			
+
 			model.addAttribute("prodMachines", prodMachines);
 			model.addAttribute("failTypes", failTypes);
-			
+
 			return "report-form";
 		}
-		
+
 		try {
 			reportService.saveReport(reportDto);
 		} catch (Exception e) {
 			return "redirect:/report/showReportForm";
 		}
-		
+
 		return "redirect:/report/showReportForm";
 	}
-	
+
 	@GetMapping("/showReportList")
 	public String showReportList(Model model) {
-		
+
 		List<Report> reports = reportService.getReportsToShowList();
-		
+
 		List<ShowReportDto> reportsList = new ArrayList<ShowReportDto>();
-		
+
 		for (Report report : reports) {
 			reportsList.add(mapShowReportDtoToList(report));
 		}
-		
+
 		model.addAttribute("reportsList", reportsList);
-		
+
 		return "report-list";
 	}
-	
+
 	@GetMapping("/showReportDetails")
 	public String showReportDetails(@RequestParam("id") Long reportId, Model model) {
-		
+
 		Report report = reportService.getReportWithAllData(reportId);
-		
+
 		ShowReportDto showReportDto = mapShowReportDto(report);
-		System.out.println("My logs: " + showReportDto.toString());
+
 		model.addAttribute("showReportDto", showReportDto);
+
+		//add image to model
+
+		byte[] encode = java.util.Base64.getEncoder().encode(showReportDto.getImagesListToShow().get(0).getPicByte());
+		String base64Encoded = null;
+		try {
+			base64Encoded = new String(encode, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		mav.addObject("userImage", base64Encoded );
 		
+		
+		//		model.addAttribute("image", showReportDto.getImagesListToShow().get(0).getPicByte());
+		model.addAttribute("image", base64Encoded);
+
 		return "report-details";
 	}
-	
+
+	//	@GetMapping("/showImage")
+	//	public void showImage(@RequestParam("id") Integer itemId, HttpServletResponse response,HttpServletRequest request) 
+	//			throws ServletException, IOException{
+	@GetMapping("/showImage")
+	public void showImage(HttpServletResponse response,HttpServletRequest request) 
+			throws ServletException, IOException{
+
+
+		Report report = reportService.getReportWithAllData(31L);
+
+		ShowReportDto showReportDto = mapShowReportDto(report);
+
+//		byte[] encode = java.util.Base64.getEncoder().encode(showReportDto.getImagesListToShow().get(0).getPicByte());
+//		String base64Encoded = new String(encode, "UTF-8");
+//		mav.addObject("userImage", base64Encoded );
+//
+//		response.setContentType("image/jpeg, image/jpg, image/png");
+//		response.getOutputStream().write(encode);
+
+
+		response.getOutputStream().close();
+	}
+
 	private Map<Integer, String> loadProdMachines() {
-		
+
 		List<ProductionMachine> prodMachineList = productionService.getProdMachinesWithLines();
 
 		Map<Integer, String> prodMachines = new LinkedHashMap<Integer, String>();
@@ -168,7 +211,7 @@ public class ReportController {
 	}
 
 	private Map<Integer, String> getProdMachineNames(List<ProductionMachine> prodMachineList) {
-		
+
 		Map<Integer, String> prodMachineNames = new LinkedHashMap<Integer, String>();
 
 		for (ProductionMachine productionMachine : prodMachineList) {
@@ -180,7 +223,7 @@ public class ReportController {
 
 		return prodMachineNames;
 	}
-	
+
 	private Map<Integer, String> loadFailTypes() {
 
 		List<FailType> failTypeList = reportService.getFailTypes();
@@ -215,12 +258,12 @@ public class ReportController {
 				report.getDate(),
 				report.getDuration(),
 				report.getDescription(),
-				report.getImagesNames(),
+				report.getImages(),
 				report.getFailTypesNames());
-		
+
 		return showReportDto;
 	}
-	
+
 	private ShowReportDto mapShowReportDtoToList(Report report) {
 
 		ShowReportDto showReportDto = new ShowReportDto(
@@ -229,10 +272,10 @@ public class ReportController {
 				report.getProductionLine().getName(),
 				report.getProductionMachine().getName(),
 				report.getDate());
-		
+
 		return showReportDto;
 	}
-	
+
 }
 
 

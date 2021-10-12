@@ -96,7 +96,7 @@
 
 									<td><form:label path="images"></form:label></td>
 									<td><input type="file" name="images" class="form-control"
-										accept="image/png, image/jpeg" multiple /></td>
+										accept="image/png, image/jpeg, image/png" multiple /></td>
 
 									<c:if test="${message != null}">
 										<div class="alert alert-danger col-xs-offset-1 col-xs-10">
