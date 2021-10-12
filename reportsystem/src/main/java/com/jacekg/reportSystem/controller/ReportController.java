@@ -94,7 +94,7 @@ public class ReportController {
 	
 	@PostMapping("/processReportForm")
 	public String processReportForm(@Valid @ModelAttribute("reportDto") ReportDto reportDto,
-			BindingResult bindingResult, Model model) {
+			BindingResult bindingResult, Model model) throws IOException {
 		
 		MultipartFile[] images = reportDto.getImages();
 		
