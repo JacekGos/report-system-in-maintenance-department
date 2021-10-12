@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jacekg.reportSystem.dto.ReportDto;
 import com.jacekg.reportSystem.dto.ShowReportDto;
@@ -94,13 +95,15 @@ public class ReportController {
 	
 	@PostMapping("/processReportForm")
 	public String processReportForm(@Valid @ModelAttribute("reportDto") ReportDto reportDto,
-			BindingResult bindingResult, Model model) throws IOException {
+			BindingResult bindingResult, @ModelAttribute("message") String message, Model model) throws IOException {
 		
 		MultipartFile[] images = reportDto.getImages();
 		
 		System.out.println("My logs: getContentType " +  images[0].getContentType());
 		System.out.println("My logs: getOriginalFilename " +  images[0].getOriginalFilename());
 		System.out.println("My logs: getSize " +  images[0].getSize());
+		
+		
 		
 		if (bindingResult.hasErrors()) {
 			

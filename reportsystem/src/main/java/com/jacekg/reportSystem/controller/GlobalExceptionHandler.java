@@ -12,8 +12,8 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(MaxUploadSizeExceededException.class)
 	public String handleError2(MaxUploadSizeExceededException e, RedirectAttributes redirectAttributes) {
 		System.out.println("My log: in GlobalExceptionHandler");
-		redirectAttributes.addFlashAttribute("message", e.getCause().getMessage());
-		return "redirect:/showReportForm";
+		redirectAttributes.addFlashAttribute("message", "Przekroczono rozmiar plików");
+		return "redirect:/report/showReportForm";
 
 	}
 

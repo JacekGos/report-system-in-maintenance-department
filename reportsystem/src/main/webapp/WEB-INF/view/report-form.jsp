@@ -48,7 +48,7 @@
 
 								<div class="row g-3">
 
-<!-- 									Needed for modifying drop-down lists -->
+									<!-- 									Needed for modifying drop-down lists -->
 									<%-- <div class="col-md-6">
 										<label class="form-label">Linia</label>
 										<form:select id="first-choice" path="productionLineId"
@@ -95,8 +95,13 @@
 									<form:errors path="description" cssClass="error" />
 
 									<td><form:label path="images"></form:label></td>
-									<td><input type="file" name="images" class="form-control" 
-										accept="image/png, image/jpeg" multiple/></td>
+									<td><input type="file" name="images" class="form-control"
+										accept="image/png, image/jpeg" multiple /></td>
+
+									<c:if test="${message != null}">
+										<div class="alert alert-danger col-xs-offset-1 col-xs-10">
+											${message}</div>
+									</c:if>
 
 								</div>
 								<div class="col-12">
