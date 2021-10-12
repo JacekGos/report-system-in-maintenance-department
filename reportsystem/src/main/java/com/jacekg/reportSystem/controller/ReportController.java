@@ -96,9 +96,9 @@ public class ReportController {
 		
 		MultipartFile[] image = reportDto.getImages();
 		
-//		System.out.println("My logs: getContentType " +  image[0].getContentType());
-//		System.out.println("My logs: getOriginalFilename " +  image[0].getOriginalFilename());
-//		System.out.println("My logs: getSize " +  image[0].getSize());
+		System.out.println("My logs: getContentType " +  image[0].getContentType());
+		System.out.println("My logs: getOriginalFilename " +  image[0].getOriginalFilename());
+		System.out.println("My logs: getSize " +  image[0].getSize());
 //		System.out.println("======\nMy logs: getContentType " +  image[1].getContentType());
 //		System.out.println("My logs: getOriginalFilename " +  image[1].getOriginalFilename());
 //		System.out.println("My logs: getSize " +  image[1].getSize());

@@ -51,20 +51,23 @@ public class ReportServiceImpl implements ReportService {
 	@Transactional
 	public void saveReport(ReportDto reportDto) {
 		
+		Report report = new Report();
 		
 		User user = userDao.getUser(reportDto.getUserId());
+		
 		ProductionMachine productionMachine = productionMachineDao.getProdMachine(reportDto.getProductionMachineId());
 		ProductionLine productionLine = productionMachine.getProductionLine();
+		
 		List<FailType> failTypes = findFailTypes(reportDto.getFailTypes());
 		
 		MultipartFile[] imagesFromForm = reportDto.getImages();
 		List<Image> images = new ArrayList<Image>();
 		
 		if (imagesFromForm != null) {
+			System.out.println("My logs images not null");
 			images = new ArrayList<Image>();
 			
 			for (int i = 0; i < imagesFromForm.length; i++) {
-				
 				try {
 					images.add(new Image(
 							imagesFromForm[i].getName(),
@@ -74,24 +77,31 @@ public class ReportServiceImpl implements ReportService {
 				}catch (Exception e) {
 				}
 				
-				
 			}
-		}
-		
-		//TODO saving images and add to report
-		
-		Report report = new Report(
-				user,
-				reportDto.getDate(),
-				reportDto.getDuration(),
-				reportDto.getDescription(),
-				productionLine,
-				productionMachine,
-				images,
-				failTypes);
-		
-		for (Image image : images) {
-			image.setReport(report);
+			
+			report = new Report(
+					user,
+					reportDto.getDate(),
+					reportDto.getDuration(),
+					reportDto.getDescription(),
+					productionLine,
+					productionMachine,
+					images,
+					failTypes);
+			
+			for (Image image : images) {
+				image.setReport(report);
+			}
+		} else {
+			
+			report = new Report(
+					user,
+					reportDto.getDate(),
+					reportDto.getDuration(),
+					reportDto.getDescription(),
+					productionLine,
+					productionMachine,
+					failTypes);
 		}
 		
 		reportDao.saveReport(report);
