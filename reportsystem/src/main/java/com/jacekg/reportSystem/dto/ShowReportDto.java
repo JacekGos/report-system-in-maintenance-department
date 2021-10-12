@@ -23,7 +23,7 @@ public class ShowReportDto {
 
 	private String description;
 	
-	List<MultipartFile> images;
+	MultipartFile[] images;
 	
 	List<String> imagesNames;
 
@@ -85,11 +85,11 @@ public class ShowReportDto {
 		return description;
 	}
 	
-	public List<MultipartFile> getImages() {
+	public MultipartFile[] getImages() {
 		return images;
 	}
 
-	public void setImages(List<MultipartFile> images) {
+	public void setImages(MultipartFile[] images) {
 		this.images = images;
 	}
 

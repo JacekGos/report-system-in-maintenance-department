@@ -1,11 +1,13 @@
 package com.jacekg.reportSystem.service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jacekg.reportSystem.dao.FailTypeDao;
 import com.jacekg.reportSystem.dao.ProductionLineDao;
@@ -15,6 +17,7 @@ import com.jacekg.reportSystem.dao.UserDao;
 import com.jacekg.reportSystem.dao.UserDaoImpl;
 import com.jacekg.reportSystem.dto.ReportDto;
 import com.jacekg.reportSystem.entity.FailType;
+import com.jacekg.reportSystem.entity.Image;
 import com.jacekg.reportSystem.entity.ProductionLine;
 import com.jacekg.reportSystem.entity.ProductionMachine;
 import com.jacekg.reportSystem.entity.Report;
@@ -54,6 +57,27 @@ public class ReportServiceImpl implements ReportService {
 		ProductionLine productionLine = productionMachine.getProductionLine();
 		List<FailType> failTypes = findFailTypes(reportDto.getFailTypes());
 		
+		MultipartFile[] imagesFromForm = reportDto.getImages();
+		List<Image> images = new ArrayList<Image>();
+		
+		if (imagesFromForm != null) {
+			images = new ArrayList<Image>();
+			
+			for (int i = 0; i < imagesFromForm.length; i++) {
+				
+				try {
+					images.add(new Image(
+							imagesFromForm[i].getName(),
+							imagesFromForm[i].getContentType(),
+							imagesFromForm[i].getBytes()
+							));
+				}catch (Exception e) {
+				}
+				
+				
+			}
+		}
+		
 		//TODO saving images and add to report
 		
 		Report report = new Report(
@@ -63,7 +87,12 @@ public class ReportServiceImpl implements ReportService {
 				reportDto.getDescription(),
 				productionLine,
 				productionMachine,
+				images,
 				failTypes);
+		
+		for (Image image : images) {
+			image.setReport(report);
+		}
 		
 		reportDao.saveReport(report);
 	}

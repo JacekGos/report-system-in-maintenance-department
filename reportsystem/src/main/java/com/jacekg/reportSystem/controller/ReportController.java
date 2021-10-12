@@ -64,12 +64,14 @@ public class ReportController {
 	@GetMapping("/showReportForm")
 	public String showReportForm(Model model, Principal principal) {
 		
-//		if (principal != null) {
-//			String userName = principal.getName();
-//		}
+		Long userId = 0L;
 		
-		String userName = principal.getName();
-		Long userId = userService.getUserId(userName);
+		if (principal != null) {
+			String userName = principal.getName();
+			userId = userService.getUserId(userName);
+		}
+		
+//		String userName = principal.getName();
 		
 		prodMachines = new LinkedHashMap<Integer, String>();
 		prodMachines = loadProdMachines();
@@ -94,12 +96,12 @@ public class ReportController {
 		
 		MultipartFile[] image = reportDto.getImages();
 		
-		System.out.println("My logs: getContentType " +  image[0].getContentType());
-		System.out.println("My logs: getOriginalFilename " +  image[0].getOriginalFilename());
-		System.out.println("My logs: getSize " +  image[0].getSize());
-		System.out.println("======\nMy logs: getContentType " +  image[1].getContentType());
-		System.out.println("My logs: getOriginalFilename " +  image[1].getOriginalFilename());
-		System.out.println("My logs: getSize " +  image[1].getSize());
+//		System.out.println("My logs: getContentType " +  image[0].getContentType());
+//		System.out.println("My logs: getOriginalFilename " +  image[0].getOriginalFilename());
+//		System.out.println("My logs: getSize " +  image[0].getSize());
+//		System.out.println("======\nMy logs: getContentType " +  image[1].getContentType());
+//		System.out.println("My logs: getOriginalFilename " +  image[1].getOriginalFilename());
+//		System.out.println("My logs: getSize " +  image[1].getSize());
 		
 		if (bindingResult.hasErrors()) {
 			
@@ -116,42 +118,10 @@ public class ReportController {
 		}
 		
 		try {
-//			reportService.saveReport(reportDto);
+			reportService.saveReport(reportDto);
 		} catch (Exception e) {
 			return "redirect:/report/showReportForm";
 		}
-		
-		return "redirect:/report/showReportForm";
-	}
-	
-	//TODO delete after test
-	@PostMapping("/processReportForm2")
-	public String processReportForm2(@ModelAttribute("imageDto") ShowReportDto2 showReportDto2,
-			Model model) {
-//	@RequestMapping(path = "/processReportForm2", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE },
-//			method = RequestMethod.POST)
-//	public String processReportForm2(@RequestParam("file") CommonsMultipartFile multipartFile) {
-//	@PostMapping("/processReportForm2")
-//	public String processReportForm2(@RequestParam("file") MultipartFile multipartFile,
-//			Model model) {
-		
-		
-		MultipartFile image = showReportDto2.getImage();
-		
-		System.out.println("My logs: getContentType " +  image.getContentType());
-		System.out.println("My logs: getOriginalFilename " +  image.getOriginalFilename());
-		System.out.println("My logs: getSize " +  image.getSize());
-		
-		try {
-			byte[] imageByte = image.getBytes();
-			System.out.println("My logs: getSize " + imageByte);
-		} catch (IOException e) {
-			
-		}
-		
-		
-		
-//		System.out.println("My logs..." + multipartFile.getName());
 		
 		return "redirect:/report/showReportForm";
 	}

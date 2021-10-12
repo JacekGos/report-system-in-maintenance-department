@@ -1,10 +1,13 @@
 package com.jacekg.reportSystem.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +27,11 @@ public class Image {
 	
 	@Column(name = "pic_byte", length = 1000)
 	private byte[] picByte;
+	
+	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+			CascadeType.PERSIST, CascadeType.REFRESH})
+	@JoinColumn(name = "report_id")
+	private Report report;
 	
 	public Image() {
 		
@@ -65,6 +73,14 @@ public class Image {
 
 	public void setPicByte(byte[] picByte) {
 		this.picByte = picByte;
+	}
+
+	public Report getReport() {
+		return report;
+	}
+
+	public void setReport(Report report) {
+		this.report = report;
 	}
 	
 }

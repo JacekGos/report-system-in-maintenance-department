@@ -57,8 +57,8 @@ public class Report {
 	private ProductionMachine productionMachine;
 
 	@OneToMany(fetch = FetchType.LAZY,
+			mappedBy = "report",
 			cascade = CascadeType.ALL)
-	@JoinColumn(name = "report_id")
 	private List<Image> images;
 
 	@ManyToMany(fetch = FetchType.LAZY,

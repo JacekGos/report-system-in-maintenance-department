@@ -35,8 +35,6 @@ public class ReportDto {
 	
 	private int productionMachineId;
 	
-//	List<MultipartFile> images;
-	
 	MultipartFile[] images;
 	
 	@NotNull(message = "is required")
