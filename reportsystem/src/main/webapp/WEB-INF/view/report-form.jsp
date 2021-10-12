@@ -48,6 +48,7 @@
 
 								<div class="row g-3">
 
+<!-- 									Needed for modifying drop-down lists -->
 									<%-- <div class="col-md-6">
 										<label class="form-label">Linia</label>
 										<form:select id="first-choice" path="productionLineId"
@@ -103,8 +104,8 @@
 											id="file-upload" accept="image/png, image/jpeg" multiple/>
 									</div> --%>
 
-									<td><form:label path="images">Select a file to upload</form:label></td>
-									<td><input type="file" name="images" multiple/></td>
+									<td><form:label path="images"></form:label></td>
+									<td><input type="file" name="images" class="form-control" multiple/></td>
 
 								</div>
 								<div class="col-12">

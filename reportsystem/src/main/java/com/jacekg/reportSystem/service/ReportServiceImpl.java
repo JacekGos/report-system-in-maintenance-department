@@ -63,7 +63,7 @@ public class ReportServiceImpl implements ReportService {
 		MultipartFile[] imagesFromForm = reportDto.getImages();
 		List<Image> images = new ArrayList<Image>();
 		
-		if (imagesFromForm != null) {
+		if (imagesFromForm[0].getSize() > 0) {
 			System.out.println("My logs images not null");
 			images = new ArrayList<Image>();
 			
