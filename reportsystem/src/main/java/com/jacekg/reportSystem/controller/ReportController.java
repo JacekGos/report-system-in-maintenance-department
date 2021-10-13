@@ -157,28 +157,9 @@ public class ReportController {
 
 		model.addAttribute("showReportDto", showReportDto);
 
-		//add image to model
-
-		byte[] encode = java.util.Base64.getEncoder().encode(showReportDto.getImagesListToShow().get(0).getPicByte());
-		String base64Encoded = null;
-		try {
-			base64Encoded = new String(encode, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-//		mav.addObject("userImage", base64Encoded );
-		
-		
-		//		model.addAttribute("image", showReportDto.getImagesListToShow().get(0).getPicByte());
-		model.addAttribute("image", base64Encoded);
-
 		return "report-details";
 	}
 
-	//	@GetMapping("/showImage")
-	//	public void showImage(@RequestParam("id") Integer itemId, HttpServletResponse response,HttpServletRequest request) 
-	//			throws ServletException, IOException{
 	@GetMapping("/showImage")
 	public void showImage(@RequestParam("id") Long reportId, HttpServletResponse response,HttpServletRequest request) 
 			throws ServletException, IOException{
@@ -187,12 +168,11 @@ public class ReportController {
 
 		ShowReportDto showReportDto = mapShowReportDto(report);
 		
+		
+		
 		byte[] image = showReportDto.getImagesListToShow().get(0).getPicByte();
 
 		byte[] encode = java.util.Base64.getEncoder().encode(showReportDto.getImagesListToShow().get(0).getPicByte());
-//		String base64Encoded = new String(encode, "UTF-8");
-//		mav.addObject("userImage", base64Encoded );
-//		
 		
 		System.out.println("My logs image byte: " + encode);
 		System.out.println("My logs image byte: " + image);

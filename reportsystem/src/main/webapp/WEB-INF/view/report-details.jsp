@@ -111,23 +111,21 @@ textarea {
 
 							<div class="row g-3">
 								<div class="mb-3">
-									<!-- <label for="exampleFormControlTextarea1" class="form-label"><h6>Opis</h6></label> -->
-									<textarea class="form-control"
+<!-- 									<label for="exampleFormControlTextarea1" class="form-label"><h6>Opis</h6></label> -->
+									<%-- <textarea class="form-control"
 										placeholder="${showReportDto.description}"
-										id="exampleFormControlTextarea1" rows="20" disabled readonly></textarea>
+										id="exampleFormControlTextarea1" rows="20" disabled readonly></textarea> --%>
 
 								</div>
 							</div>
 						</form:form>
-						<%-- 						<img src="${image}" /> --%>
-						<%-- 						<img src="${pageContext.request.contextPath}/report/showImage?=${showReportDto.id}" /> --%>
-						<%-- 						<img src="data:image/jpg;base64, [${pageContext.request.contextPath}/report/showImage?=${31}]" > --%>
 
-						<img
-							src="${pageContext.request.contextPath}/report/showImage?id=${showReportDto.id}"
-							width="400" height="500"> <br>
-
-
+						<div contentEditable="false" class="form-control">
+							${showReportDto.description}
+							<br><img class="rounded"
+								src="${pageContext.request.contextPath}/report/showImage?id=${showReportDto.id}"
+								width="400" height="500">
+						</div>
 
 
 
