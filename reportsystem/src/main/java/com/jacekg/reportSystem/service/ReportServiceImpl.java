@@ -75,7 +75,7 @@ public class ReportServiceImpl implements ReportService {
 					images.add(new Image(
 							imagesFromForm[i].getName(),
 							imagesFromForm[i].getContentType(),
-							compressBytes(imagesFromForm[i].getBytes())
+							imagesFromForm[i].getBytes()
 							));
 				}catch (Exception e) {
 				}

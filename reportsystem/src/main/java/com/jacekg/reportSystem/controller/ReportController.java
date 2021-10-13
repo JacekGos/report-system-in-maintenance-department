@@ -184,16 +184,21 @@ public class ReportController {
 			throws ServletException, IOException{
 
 
-		Report report = reportService.getReportWithAllData(31L);
+		Report report = reportService.getReportWithAllData(36L);
 
 		ShowReportDto showReportDto = mapShowReportDto(report);
+		
+		byte[] image = showReportDto.getImagesListToShow().get(0).getPicByte();
 
-//		byte[] encode = java.util.Base64.getEncoder().encode(showReportDto.getImagesListToShow().get(0).getPicByte());
+		byte[] encode = java.util.Base64.getEncoder().encode(showReportDto.getImagesListToShow().get(0).getPicByte());
 //		String base64Encoded = new String(encode, "UTF-8");
 //		mav.addObject("userImage", base64Encoded );
-//
-//		response.setContentType("image/jpeg, image/jpg, image/png");
-//		response.getOutputStream().write(encode);
+//		
+		
+		System.out.println("My logs image byte: " + encode);
+		System.out.println("My logs image byte: " + image);
+		response.setContentType("image/jpeg, image/jpg, image/png");
+		response.getOutputStream().write(image);
 
 
 		response.getOutputStream().close();
