@@ -119,11 +119,13 @@ textarea {
 								</div>
 							</div>
 						</form:form>
-<%-- 						<img src="${image}" /> --%>
-<%-- 						<img src="${pageContext.request.contextPath}/report/showImage?=${showReportDto.id}" /> --%>
-<%-- 						<img src="data:image/jpg;base64, [${pageContext.request.contextPath}/report/showImage?=${31}]" > --%>
+						<%-- 						<img src="${image}" /> --%>
+						<%-- 						<img src="${pageContext.request.contextPath}/report/showImage?=${showReportDto.id}" /> --%>
+						<%-- 						<img src="data:image/jpg;base64, [${pageContext.request.contextPath}/report/showImage?=${31}]" > --%>
 
-						<img src="${pageContext.request.contextPath}/report/showImage?=${showReportDto.id}" >
+						<img
+							src="${pageContext.request.contextPath}/report/showImage?id=${showReportDto.id}"
+							width="400" height="500"> <br>
 
 
 

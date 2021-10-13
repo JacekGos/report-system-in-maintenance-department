@@ -180,11 +180,10 @@ public class ReportController {
 	//	public void showImage(@RequestParam("id") Integer itemId, HttpServletResponse response,HttpServletRequest request) 
 	//			throws ServletException, IOException{
 	@GetMapping("/showImage")
-	public void showImage(HttpServletResponse response,HttpServletRequest request) 
+	public void showImage(@RequestParam("id") Long reportId, HttpServletResponse response,HttpServletRequest request) 
 			throws ServletException, IOException{
 
-
-		Report report = reportService.getReportWithAllData(36L);
+		Report report = reportService.getReportWithAllData(reportId);
 
 		ShowReportDto showReportDto = mapShowReportDto(report);
 		
