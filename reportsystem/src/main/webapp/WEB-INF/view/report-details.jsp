@@ -109,25 +109,30 @@ textarea {
 							action="${pageContext.request.contextPath}/user/processSaveUser"
 							modelAttribute="showReportDto" accept-charset="UTF-8">
 
-							<div class="row g-3">
+							<%-- 		<div class="row g-3">
 								<div class="mb-3">
-<!-- 									<label for="exampleFormControlTextarea1" class="form-label"><h6>Opis</h6></label> -->
-									<%-- <textarea class="form-control"
+								<label for="exampleFormControlTextarea1" class="form-label"><h6>Opis</h6></label> 
+									<textarea class="form-control"
 										placeholder="${showReportDto.description}"
-										id="exampleFormControlTextarea1" rows="20" disabled readonly></textarea> --%>
+										id="exampleFormControlTextarea1" rows="20" disabled readonly></textarea>
 
 								</div>
-							</div>
+							</div> --%>
 						</form:form>
 
 						<div contentEditable="false" class="form-control">
 							${showReportDto.description}
-							<br><img class="rounded"
+							<%-- 	<br><img class="rounded"
 								src="${pageContext.request.contextPath}/report/showImage?id=${showReportDto.id}"
-								width="400" height="500">
+								width="400" height="500"><br> --%>
+							<br> <img class="rounded"
+								src="${pageContext.request.contextPath}/report/showImage?id=${showReportDto.id}"
+								style="max-width: 400px; height: auto;"><br>
+
+
 						</div>
 
-
+						<div class="mb-3"></div>
 
 					</aside>
 				</div>
