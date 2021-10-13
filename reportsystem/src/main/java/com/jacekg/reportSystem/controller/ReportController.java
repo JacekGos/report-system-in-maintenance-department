@@ -36,6 +36,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jacekg.reportSystem.dto.ReportDto;
+import com.jacekg.reportSystem.dto.SelectedReportsDto;
 import com.jacekg.reportSystem.dto.ShowReportDto;
 import com.jacekg.reportSystem.dto.ShowReportDto2;
 import com.jacekg.reportSystem.entity.FailType;
@@ -146,6 +147,7 @@ public class ReportController {
 		}
 
 		model.addAttribute("reportsList", reportsList);
+		model.addAttribute("selectedReports", new SelectedReportsDto());
 
 		return "report-list";
 	}

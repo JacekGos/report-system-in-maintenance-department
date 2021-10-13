@@ -53,6 +53,9 @@
 								</tr>
 							</thead>
 							<tbody>
+							<form:form
+								action="${pageContext.request.contextPath}/report/processReportForm"
+								modelAttribute="selectedReports">
 								<c:if test="${reportsList != null}">
 									<c:forEach var="report" items="${reportsList}">
 										<tr>
@@ -67,11 +70,13 @@
 											<td>${report.date}</td>
 											<td>
 												<a href="${detailsLink}"><i class="bi bi-search"></i></a>
+												&emsp;
+												<form:checkbox path="selectedReportsId" value="${report.id}"/>
 											</td>
-											
 										</tr>
 									</c:forEach>
 								</c:if>
+							</form:form>
 							</tbody>
 						</table>
 					</div>
