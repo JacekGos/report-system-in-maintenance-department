@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +39,7 @@ import com.jacekg.reportSystem.dto.ReportDto;
 import com.jacekg.reportSystem.dto.ShowReportDto;
 import com.jacekg.reportSystem.dto.ShowReportDto2;
 import com.jacekg.reportSystem.entity.FailType;
+import com.jacekg.reportSystem.entity.Image;
 import com.jacekg.reportSystem.entity.ProductionMachine;
 import com.jacekg.reportSystem.entity.Report;
 import com.jacekg.reportSystem.service.ProductionService;
@@ -167,8 +169,6 @@ public class ReportController {
 		Report report = reportService.getReportWithAllData(reportId);
 
 		ShowReportDto showReportDto = mapShowReportDto(report);
-		
-		
 		
 		byte[] image = showReportDto.getImagesListToShow().get(0).getPicByte();
 

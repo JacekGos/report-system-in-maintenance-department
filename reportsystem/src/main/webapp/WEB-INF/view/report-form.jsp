@@ -94,9 +94,10 @@
 									</div>
 									<form:errors path="description" cssClass="error" />
 
-									<td><form:label path="images"></form:label></td>
-									<td><input type="file" name="images" class="form-control"
-										accept="image/png, image/jpeg, image/png" multiple /></td>
+									<form:label path="images"></form:label>
+									<input type="file" name="images" class="form-control"
+										accept="image/png, image/jpeg, image/png"/>
+									<!--accept="image/png, image/jpeg, image/png" multiple /></td> -->
 
 									<c:if test="${message != null}">
 										<div class="alert alert-danger col-xs-offset-1 col-xs-10">
