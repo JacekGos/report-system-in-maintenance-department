@@ -38,8 +38,7 @@
 					<aside class="col-sm-2"></aside>
 					<aside class="col-sm-8">
 						<div contentEditable="false" class="form-control">
-
-							<c:forEach var="description" items="${summaryReportDescriptions}">
+								<c:forEach var="description" items="${summaryReportDescriptions}">
 								${description.getValue()} <br>
 
 								<img class="rounded"
@@ -48,18 +47,11 @@
 								<br>
 								<br>
 							</c:forEach>
+							
+							
 						</div>
 
 					</aside>
-
-					<div class="container">
-						<!-- <p class="lead">Pin a footer to the bottom of the viewport in
-							desktop browsers with this custom HTML and CSS.</p>
-						<p>
-							Use <a href="../examples/sticky-footer-navbar/">the sticky
-								footer with a fixed navbar</a> if need be, too.
-						</p> -->
-					</div>
 				</div>
 			</main>
 		</div>
