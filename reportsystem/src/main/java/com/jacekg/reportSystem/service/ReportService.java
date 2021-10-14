@@ -15,5 +15,4 @@ public interface ReportService {
 	List<Report> getReportsToShowList();
 
 	Report getReportWithAllData(Long reportId);
-
 }

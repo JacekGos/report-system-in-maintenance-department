@@ -60,7 +60,7 @@
 							<tbody>
 								<form:form
 									action="${pageContext.request.contextPath}/report/showReportsSummary"
-									modelAttribute="selectedReports" id="summaryForm">
+									modelAttribute="selectedReports" id="summaryForm" method="GET">
 									<c:if test="${reportsList != null}">
 										<c:forEach var="report" items="${reportsList}">
 											<tr>

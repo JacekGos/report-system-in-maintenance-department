@@ -6,6 +6,8 @@ public class SelectedReportsDto {
 	
 	private List<Long> selectedReportsId;
 	
+	private String summaryDescription;
+	
 	public SelectedReportsDto() {
 		
 	}
@@ -16,6 +18,14 @@ public class SelectedReportsDto {
 
 	public void setSelectedReportsId(List<Long> selectedReportsId) {
 		this.selectedReportsId = selectedReportsId;
+	}
+
+	public String getSummaryDescription() {
+		return summaryDescription;
+	}
+
+	public void setSummaryDescription(String summaryDescription) {
+		this.summaryDescription = summaryDescription;
 	}
 
 }

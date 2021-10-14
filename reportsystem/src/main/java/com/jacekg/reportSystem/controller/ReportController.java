@@ -1,16 +1,12 @@
 package com.jacekg.reportSystem.controller;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.Deflater;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +15,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,18 +24,13 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jacekg.reportSystem.dto.ReportDto;
 import com.jacekg.reportSystem.dto.SelectedReportsDto;
 import com.jacekg.reportSystem.dto.ShowReportDto;
-import com.jacekg.reportSystem.dto.ShowReportDto2;
 import com.jacekg.reportSystem.entity.FailType;
-import com.jacekg.reportSystem.entity.Image;
 import com.jacekg.reportSystem.entity.ProductionMachine;
 import com.jacekg.reportSystem.entity.Report;
 import com.jacekg.reportSystem.service.ProductionService;
@@ -62,6 +52,7 @@ public class ReportController {
 
 	private Map<Integer, String> prodMachines;
 	private Map<Integer, String> failTypes;
+	private Map<Long, String> summaryReportDescriptions;
 
 	@InitBinder
 	public void initBinder(WebDataBinder dataBinder) {
@@ -150,6 +141,41 @@ public class ReportController {
 		model.addAttribute("selectedReports", new SelectedReportsDto());
 
 		return "report-list";
+	}
+	
+	@GetMapping("/showReportsSummary")
+	public String showReportsSummary(@ModelAttribute("reportDto") SelectedReportsDto selectedReportsDto, Model model) {
+		
+		List<Long> selectedReportsId = selectedReportsDto.getSelectedReportsId();
+		List<Report> reportList = new ArrayList<>();
+		List<String> reportSummaryDescription = new ArrayList<>();
+		summaryReportDescriptions = new LinkedHashMap<Long, String>();
+		
+		Report report = null;
+		String summaryDescription = null;
+		
+		if (!selectedReportsId.isEmpty()) {
+			for (Long reportId : selectedReportsId) {
+				report = reportService.getReportWithAllData(reportId);
+				reportList.add(report);
+				
+				summaryDescription = report.getProductionLine().getName() 
+						+ " " + report.getProductionMachine().getName() 
+						+ "<br>" + report.getDescription();
+				
+				summaryReportDescriptions.put(report.getId(), summaryDescription);
+				
+				reportSummaryDescription.add(summaryDescription);
+				
+				System.out.println("My logs: reports " + summaryDescription);
+			}
+		}
+		
+//		System.out.println("My logs: reports " + reportList.get(0).toString());
+		
+		model.addAttribute("summaryReportDescriptions", summaryReportDescriptions);
+		
+		return "report-summary";
 	}
 
 	@GetMapping("/showReportDetails")

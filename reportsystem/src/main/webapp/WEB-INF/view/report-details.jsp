@@ -122,14 +122,9 @@ textarea {
 
 						<div contentEditable="false" class="form-control">
 							${showReportDto.description}
-							<%-- 	<br><img class="rounded"
-								src="${pageContext.request.contextPath}/report/showImage?id=${showReportDto.id}"
-								width="400" height="500"><br> --%>
 							<br> <img class="rounded"
 								src="${pageContext.request.contextPath}/report/showImage?id=${showReportDto.id}"
 								style="max-width: 400px; height: auto;"><br>
-
-
 						</div>
 
 						<div class="mb-3"></div>
