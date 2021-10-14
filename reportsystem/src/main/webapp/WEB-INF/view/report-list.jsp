@@ -76,6 +76,7 @@
 										</tr>
 									</c:forEach>
 								</c:if>
+								<
 							</form:form>
 							</tbody>
 						</table>
