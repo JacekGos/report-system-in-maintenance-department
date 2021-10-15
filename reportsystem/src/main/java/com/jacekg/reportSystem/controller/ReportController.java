@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Tuple;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jacekg.reportSystem.dto.ReportDto;
+import com.jacekg.reportSystem.dto.ReportSummaryDto;
 import com.jacekg.reportSystem.dto.SelectedReportsDto;
 import com.jacekg.reportSystem.dto.ShowReportDto;
 import com.jacekg.reportSystem.entity.FailType;
@@ -52,7 +54,7 @@ public class ReportController {
 
 	private Map<Integer, String> prodMachines;
 	private Map<Integer, String> failTypes;
-	private Map<Long, String> summaryReportDescriptions;
+	private Map<Long, ReportSummaryDto> summaryReportDescriptions;
 
 	@InitBinder
 	public void initBinder(WebDataBinder dataBinder) {
@@ -147,31 +149,35 @@ public class ReportController {
 	public String showReportsSummary(@ModelAttribute("reportDto") SelectedReportsDto selectedReportsDto, Model model) {
 		
 		List<Long> selectedReportsId = selectedReportsDto.getSelectedReportsId();
-		List<Report> reportList = new ArrayList<>();
-		List<String> reportSummaryDescription = new ArrayList<>();
-		summaryReportDescriptions = new LinkedHashMap<Long, String>();
+//		List<Report> reportList = new ArrayList<>();
+//		List<String> reportSummaryDescription = new ArrayList<>();
+		summaryReportDescriptions = new LinkedHashMap<Long, ReportSummaryDto>();
 		
 		Report report = null;
 		String summaryDescription = null;
 		
 		if (!selectedReportsId.isEmpty()) {
 			for (Long reportId : selectedReportsId) {
+				
 				report = reportService.getReportWithAllData(reportId);
-				reportList.add(report);
+//				reportList.add(report);
 				
 				summaryDescription = report.getProductionLine().getName() 
 						+ " " + report.getProductionMachine().getName() 
 						+ "<br>" + report.getDescription();
 				
-				summaryReportDescriptions.put(report.getId(), summaryDescription);
+				if (!report.getImages().isEmpty()) {
+					summaryReportDescriptions.put(
+							report.getId(), new ReportSummaryDto(summaryDescription, true));
+				} else {
+					summaryReportDescriptions.put(
+							report.getId(), new ReportSummaryDto(summaryDescription, false));
+				}
 				
-				reportSummaryDescription.add(summaryDescription);
-				
-				System.out.println("My logs: reports " + summaryDescription);
-			}
+				System.out.println("My logs hashmap data: " + summaryReportDescriptions.get(report.getId()).getIsImage());
+			}	
 		}
 		
-//		System.out.println("My logs: reports " + reportList.get(0).toString());
 		
 		model.addAttribute("summaryReportDescriptions", summaryReportDescriptions);
 		
@@ -198,16 +204,18 @@ public class ReportController {
 
 		ShowReportDto showReportDto = mapShowReportDto(report);
 		
-		byte[] image = showReportDto.getImagesListToShow().get(0).getPicByte();
-
-		byte[] encode = java.util.Base64.getEncoder().encode(showReportDto.getImagesListToShow().get(0).getPicByte());
-		
-		System.out.println("My logs image byte: " + encode);
-		System.out.println("My logs image byte: " + image);
-		response.setContentType("image/jpeg, image/jpg, image/png");
-		response.getOutputStream().write(image);
-
-
+		if (!showReportDto.getImagesListToShow().isEmpty()) {
+			byte[] image = showReportDto.getImagesListToShow().get(0).getPicByte();
+			byte[] encode = java.util.Base64.getEncoder().encode(showReportDto.getImagesListToShow().get(0).getPicByte());
+			
+			System.out.println("My logs image byte: " + encode);
+			System.out.println("My logs image byte: " + image);
+			response.setContentType("image/jpeg, image/jpg, image/png");
+			response.getOutputStream().write(image);
+			
+		}
+//		response.getOutputStream().write(null);
+		response.getOutputStream().nullOutputStream();
 		response.getOutputStream().close();
 	}
 

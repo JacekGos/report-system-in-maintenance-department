@@ -38,17 +38,20 @@
 					<aside class="col-sm-2"></aside>
 					<aside class="col-sm-8">
 						<div contentEditable="false" class="form-control">
-								<c:forEach var="description" items="${summaryReportDescriptions}">
-								${description.getValue()} <br>
+							<c:forEach var="description" items="${summaryReportDescriptions}">
+								${description.getValue().description} <br><br>
 
-								<img class="rounded"
-									src="${pageContext.request.contextPath}/report/showImage?id=${description.getKey()}"
-									style="max-width: 400px; height: auto;">
-								<br>
-								<br>
+								<c:if test="${description.getValue().isImage == true}">
+									<img class="rounded"
+										src="${pageContext.request.contextPath}/report/showImage?id=${description.getKey()}"
+										style="max-width: 400px; height: auto;">
+									<br>
+									<br>
+									
+								</c:if>
 							</c:forEach>
-							
-							
+
+
 						</div>
 
 					</aside>
