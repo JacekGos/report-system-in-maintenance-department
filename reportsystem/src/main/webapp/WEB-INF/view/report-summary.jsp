@@ -20,6 +20,22 @@
 }
 </style>
 
+<script>
+	function CopyToClipboard(containerid) {
+		if (document.selection) {
+			var range = document.body.createTextRange();
+			range.moveToElementText(document.getElementById(containerid));
+			range.select().createTextRange();
+			document.execCommand("copy");
+		} else if (window.getSelection) {
+			var range = document.createRange();
+			range.selectNode(document.getElementById(containerid));
+			window.getSelection().addRange(range);
+			document.execCommand("copy");
+		}
+	}
+</script>
+
 </head>
 <body>
 
@@ -36,8 +52,8 @@
 					<h1 class="h2">Podsumowanie raportów</h1>
 					<div class="btn-toolbar mb-2 mb-md-0">
 						<div class="btn-group me-2">
-							<button type="submit" class="btn btn-sm btn-outline-secondary"
-								form="summaryForm">Kopiuj</button>
+							<button class="btn btn-sm btn-outline-secondary"
+								id="copyButton" onclick="CopyToClipboard('summaryDescription')">Kopiuj</button>
 						</div>
 					</div>
 				</div>
@@ -45,7 +61,8 @@
 				<div class="row">
 					<aside class="col-sm-2"></aside>
 					<aside class="col-sm-8">
-						<div contentEditable="false" class="form-control">
+						<div contentEditable="false" class="form-control"
+							id="summaryDescription">
 							<c:forEach var="description" items="${summaryReportDescriptions}">
 								${description.getValue().description} <br>
 								<br>
