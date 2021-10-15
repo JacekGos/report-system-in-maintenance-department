@@ -121,10 +121,13 @@ textarea {
 						</form:form>
 
 						<div contentEditable="false" class="form-control">
-							${showReportDto.description}
-							<br> <img class="rounded"
-								src="${pageContext.request.contextPath}/report/showImage?id=${showReportDto.id}"
-								style="max-width: 400px; height: auto;"><br>
+							${showReportDto.description} <br>
+							<c:if test="${showReportDto.isImage == true}">
+								<img class="rounded"
+									src="${pageContext.request.contextPath}/report/showImage?id=${showReportDto.id}"
+									style="max-width: 400px; height: auto;">
+								<br>
+							</c:if>
 						</div>
 
 						<div class="mb-3"></div>

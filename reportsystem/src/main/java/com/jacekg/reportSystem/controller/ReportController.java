@@ -33,6 +33,7 @@ import com.jacekg.reportSystem.dto.ReportSummaryDto;
 import com.jacekg.reportSystem.dto.SelectedReportsDto;
 import com.jacekg.reportSystem.dto.ShowReportDto;
 import com.jacekg.reportSystem.entity.FailType;
+import com.jacekg.reportSystem.entity.Image;
 import com.jacekg.reportSystem.entity.ProductionMachine;
 import com.jacekg.reportSystem.entity.Report;
 import com.jacekg.reportSystem.service.ProductionService;
@@ -149,8 +150,6 @@ public class ReportController {
 	public String showReportsSummary(@ModelAttribute("reportDto") SelectedReportsDto selectedReportsDto, Model model) {
 		
 		List<Long> selectedReportsId = selectedReportsDto.getSelectedReportsId();
-//		List<Report> reportList = new ArrayList<>();
-//		List<String> reportSummaryDescription = new ArrayList<>();
 		summaryReportDescriptions = new LinkedHashMap<Long, ReportSummaryDto>();
 		
 		Report report = null;
@@ -160,7 +159,6 @@ public class ReportController {
 			for (Long reportId : selectedReportsId) {
 				
 				report = reportService.getReportWithAllData(reportId);
-//				reportList.add(report);
 				
 				summaryDescription = report.getProductionLine().getName() 
 						+ " " + report.getProductionMachine().getName() 
@@ -177,7 +175,6 @@ public class ReportController {
 				System.out.println("My logs hashmap data: " + summaryReportDescriptions.get(report.getId()).getIsImage());
 			}	
 		}
-		
 		
 		model.addAttribute("summaryReportDescriptions", summaryReportDescriptions);
 		
@@ -269,7 +266,11 @@ public class ReportController {
 	}
 
 	private ShowReportDto mapShowReportDto(Report report) {
-
+		
+		List<Image> images = report.getImages();
+		
+		boolean isImage = !images.isEmpty();
+		
 		ShowReportDto showReportDto = new ShowReportDto(
 				report.getId(),
 				report.getUser().getUserName(),
@@ -278,8 +279,9 @@ public class ReportController {
 				report.getDate(),
 				report.getDuration(),
 				report.getDescription(),
-				report.getImages(),
-				report.getFailTypesNames());
+				images,
+				report.getFailTypesNames(),
+				isImage);
 
 		return showReportDto;
 	}

@@ -4,13 +4,13 @@ public class ReportSummaryDto {
 	
 	private String description;
 	
-	private Boolean isImage;
+	private boolean isImage;
 	
 	public ReportSummaryDto() {
 		
 	}
 
-	public ReportSummaryDto(String description, Boolean isImage) {
+	public ReportSummaryDto(String description, boolean isImage) {
 		super();
 		this.description = description;
 		this.isImage = isImage;
@@ -24,11 +24,11 @@ public class ReportSummaryDto {
 		this.description = description;
 	}
 
-	public Boolean getIsImage() {
+	public boolean getIsImage() {
 		return isImage;
 	}
 
-	public void setIsImage(Boolean isImage) {
+	public void setIsImage(boolean isImage) {
 		this.isImage = isImage;
 	}
 	

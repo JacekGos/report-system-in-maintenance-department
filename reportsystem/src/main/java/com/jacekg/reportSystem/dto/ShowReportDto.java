@@ -31,13 +31,15 @@ public class ShowReportDto {
 
 	List<String> failTypesNames;
 	
+	boolean isImage;
 	
 	public ShowReportDto() {
 		
 	}
 	
 	public ShowReportDto(Long id, String userName, String productionLineName, String productionMachineName,
-			LocalDate date, Integer duration, String description, List<Image> images, List<String> failTypesNames) {
+			LocalDate date, Integer duration, String description, List<Image> images,
+			List<String> failTypesNames, boolean isImage) {
 		this.id = id;
 		this.userName = userName;
 		this.productionLineName = productionLineName;
@@ -47,6 +49,7 @@ public class ShowReportDto {
 		this.description = description;
 		this.imagesListToShow = images;
 		this.failTypesNames = failTypesNames;
+		this.isImage = isImage;
 	}
 	
 	public ShowReportDto(Long id, String userName, String productionLineName, String productionMachineName,
@@ -109,6 +112,14 @@ public class ShowReportDto {
 
 	public List<String> getFailTypesNames() {
 		return failTypesNames;
+	}
+	
+	public boolean getIsImage() {
+		return isImage;
+	}
+
+	public void setIsImage(boolean isImage) {
+		this.isImage = isImage;
 	}
 
 	@Override
