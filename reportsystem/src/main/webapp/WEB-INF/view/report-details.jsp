@@ -22,16 +22,15 @@
 	    element.style.height = (element.scrollHeight)+"px";
 	}
 	
-	</script>
+	</script> -->
 
 <style>
-textarea {
-	resize: none;
-	overflow: hidden;
-	min-height: 50px;
-	max-height: 100px;
+.form-control {
+	width: auto;
+	font-size: 18px;
+	word-break: break-all;
 }
-</style> -->
+</style>
 
 </head>
 
@@ -121,7 +120,7 @@ textarea {
 						</form:form>
 
 						<div contentEditable="false" class="form-control">
-							${showReportDto.description} <br>
+							${showReportDto.description} <br><br>
 							<c:if test="${showReportDto.isImage == true}">
 								<img class="rounded"
 									src="${pageContext.request.contextPath}/report/showImage?id=${showReportDto.id}"

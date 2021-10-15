@@ -12,6 +12,14 @@
 
 <%@ include file="/WEB-INF/view/sources.jsp"%>
 
+<style>
+.form-control {
+	width: auto;
+	font-size: 16px;
+	word-break: break-all;
+}
+</style>
+
 </head>
 <body>
 
@@ -29,7 +37,7 @@
 					<div class="btn-toolbar mb-2 mb-md-0">
 						<div class="btn-group me-2">
 							<button type="submit" class="btn btn-sm btn-outline-secondary"
-								form="summaryForm">Podsumowanie</button>
+								form="summaryForm">Kopiuj</button>
 						</div>
 					</div>
 				</div>
@@ -39,7 +47,8 @@
 					<aside class="col-sm-8">
 						<div contentEditable="false" class="form-control">
 							<c:forEach var="description" items="${summaryReportDescriptions}">
-								${description.getValue().description} <br><br>
+								${description.getValue().description} <br>
+								<br>
 
 								<c:if test="${description.getValue().isImage == true}">
 									<img class="rounded"
@@ -47,7 +56,7 @@
 										style="max-width: 400px; height: auto;">
 									<br>
 									<br>
-									
+
 								</c:if>
 							</c:forEach>
 
