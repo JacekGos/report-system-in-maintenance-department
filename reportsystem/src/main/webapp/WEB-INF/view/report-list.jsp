@@ -12,6 +12,12 @@
 
 <%@ include file="/WEB-INF/view/sources.jsp"%>
 
+<style>
+.modal fade {
+	width: 2000px;
+}
+</style>
+
 </head>
 <body>
 
@@ -27,19 +33,72 @@
 					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 					<h1 class="h2">Historia raportów</h1>
 					<div class="btn-toolbar mb-2 mb-md-0">
+
+						<div class="btn-group me-2">
+							<button type="button" class="btn btn-sm btn-outline-secondary"
+								data-bs-toggle="modal" data-bs-target="#exampleModal">
+								Wyszukaj</button>
+						</div>
+
 						<div class="btn-group me-2">
 							<button type="submit" class="btn btn-sm btn-outline-secondary"
 								form="summaryForm">Podsumowanie</button>
-<!--  							<button type="button" class="btn btn-sm btn-outline-secondary">Export</button> -->
 						</div>
-				<!-- 		<button type="button"
-							class="btn btn-sm btn-outline-secondary dropdown-toggle">
-							<span data-feather="calendar"></span> This week
-						</button> -->
-						<!-- <div class="col-12">
-							<button type="submit" class="btn btn-outline-primary"
-								form="summaryForm">Zatwierdź</button>
-						</div> -->
+
+
+						<div class="modal fade" id="exampleModal" tabindex="-1"
+							aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-lg">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Opcje
+											wyszukiwania</h5>
+										<button type="button" class="btn-close"
+											data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+
+									<div class="modal-body">
+
+										<%-- <form:form class="row g-3"
+											action="${pageContext.request.contextPath}/user/setUserRole"
+											modelAttribute="userDto" accept-charset="UTF-8">
+
+											<form:hidden path="id" />
+											<form:hidden path="firstName" />
+											<form:hidden path="lastName" />
+											<form:hidden path="password" />
+											<form:hidden path="userName" />
+											<form:hidden path="email" />
+											<form:hidden path="enabled" />
+											<form:hidden path="credentialsNonExpired" />
+											<form:hidden path="nonExpired" />
+											<form:hidden path="nonLocked" />
+
+											<div class="col-md-5">
+												<label class="form-label">Uprawnienia</label> <input
+													type="text" placeholder="${userDto.role}"
+													class="form-control" disabled readonly>
+
+												<form:select path="role" items="${roles}"
+													class="form-select" />
+												<br>
+												<button type="submit" class="btn btn-outline-primary">
+													Zapisz zmiany</button>
+
+											</div>
+
+										</form:form> --%>
+
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-bs-dismiss="modal">Zamknij</button>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
 					</div>
 				</div>
 

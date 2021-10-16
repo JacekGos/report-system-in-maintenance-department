@@ -12,17 +12,6 @@
 
 <%@ include file="/WEB-INF/view/sources.jsp"%>
 
-<!-- <script>
-	$('#exampleModal').on('shown.bs.modal', function() {
-		$('#myInput').trigger('focus')
-	})
-
-	$('#exampleModal').modal({
-		backdrop : 'static',
-		keyboard : false
-	})
-</script> -->
-
 </head>
 <body>
 
@@ -94,7 +83,6 @@
 							<c:url var="activateUserLink" value="/user/activateUserAccount">
 								<c:param name="id" value="${user.id}" />
 							</c:url>
-
 
 							<button type="button" class="btn btn-outline-primary"
 								data-bs-toggle="modal" data-bs-target="#submitModal">
