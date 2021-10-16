@@ -39,7 +39,6 @@
 					<aside class="col-sm-8">
 
 						<div class="col-md-7 col-lg-8">
-							<%-- 					<form class="needs-validation" novalidate> --%>
 							<form:form class="row g-3" enctype="multipart/form-data"
 								action="${pageContext.request.contextPath}/report/processReportForm?${_csrf.parameterName}=${_csrf.token}"
 								modelAttribute="reportDto" accept-charset="UTF-8">

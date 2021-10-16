@@ -82,7 +82,7 @@
 												<div class="input-append date" id="dp3"
 													data-date-format="dd-mm-yyyy">
 													<form:input path="startDate" class="form-control" size="16"
-														type="date" placeholder="DD-MM-RRRR" />
+														type="date" placeholder="DD-MM-RRRR"/>
 													<span class="add-on"><i class="icon-th"></i></span>
 												</div>
 												<form:errors path="startDate" cssClass="error" />
@@ -101,25 +101,25 @@
 											</div>
 
 											<div class="col-sm-6">
-												<label class="form-label"><h6>Słowo kluczowe</h6></label>
-												<form:input path="keyWord" placeholder="słowo kluczowe"
+												<label class="form-label"><h6>Słowa kluczowe</h6></label>
+												<form:input path="keyWord" placeholder="(max 100 znaków)"
 													class="form-control" />
 												<form:errors path="keyWord" cssClass="error" />
 											</div>
+											<div class="modal-footer">
 
+												<button type="submit" class="btn btn-outline-primary">
+													Wyszukaj</button>
+
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">Zamknij</button>
+
+											</div>
 
 										</form:form>
 
 									</div>
-									<div class="modal-footer">
 
-										<button type="submit" class="btn btn-outline-primary">
-											Wyszukaj</button>
-
-										<button type="button" class="btn btn-secondary"
-											data-bs-dismiss="modal">Zamknij</button>
-
-									</div>
 								</div>
 							</div>
 						</div>

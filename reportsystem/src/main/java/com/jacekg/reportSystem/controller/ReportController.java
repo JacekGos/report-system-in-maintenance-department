@@ -197,6 +197,22 @@ public class ReportController {
 
 		return "report-details";
 	}
+	
+	@PostMapping("/searchReport")
+	public String searchReport(@Valid @ModelAttribute("searchReportDto") SearchReportDto searchReportDto,
+			BindingResult bindingResult, Model model) {
+	
+		if (bindingResult.hasErrors()) {
+			
+			return "redirect:/report/showReportList";
+		}
+		
+		searchReportDto.dateValidation();
+		
+		System.out.println("My logs: date: " + searchReportDto.getStartDate() + " " + searchReportDto.getEndDate());
+		
+		return "report-list";
+	}
 
 	@GetMapping("/showImage")
 	public void showImage(@RequestParam("id") Long reportId, HttpServletResponse response,HttpServletRequest request) 
