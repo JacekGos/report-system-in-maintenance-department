@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.jacekg.reportSystem.dto.ReportDto;
 import com.jacekg.reportSystem.dto.ReportSummaryDto;
+import com.jacekg.reportSystem.dto.SearchReportDto;
 import com.jacekg.reportSystem.dto.SelectedReportsDto;
 import com.jacekg.reportSystem.dto.ShowReportDto;
 import com.jacekg.reportSystem.entity.FailType;
@@ -133,16 +134,20 @@ public class ReportController {
 	public String showReportList(Model model) {
 
 		List<Report> reports = reportService.getReportsToShowList();
-
 		List<ShowReportDto> reportsList = new ArrayList<ShowReportDto>();
+		
+		prodMachines = new LinkedHashMap<Integer, String>();
+		prodMachines = loadProdMachines();
 
 		for (Report report : reports) {
 			reportsList.add(mapShowReportDtoToList(report));
 		}
-
+		
 		model.addAttribute("reportsList", reportsList);
 		model.addAttribute("selectedReports", new SelectedReportsDto());
-
+		model.addAttribute("searchReportDto", new SearchReportDto());
+		model.addAttribute("prodMachines", prodMachines);
+		
 		return "report-list";
 	}
 	
@@ -201,21 +206,18 @@ public class ReportController {
 
 		ShowReportDto showReportDto = mapShowReportDto(report);
 		
-		if (!showReportDto.getImagesListToShow().isEmpty()) {
-			byte[] image = showReportDto.getImagesListToShow().get(0).getPicByte();
-			byte[] encode = java.util.Base64.getEncoder().encode(showReportDto.getImagesListToShow().get(0).getPicByte());
-			
-			System.out.println("My logs image byte: " + encode);
-			System.out.println("My logs image byte: " + image);
-			response.setContentType("image/jpeg, image/jpg, image/png");
-			response.getOutputStream().write(image);
-			
-		}
-//		response.getOutputStream().write(null);
-		response.getOutputStream().nullOutputStream();
+		byte[] image = showReportDto.getImagesListToShow().get(0).getPicByte();
+		byte[] encode = java.util.Base64.getEncoder().encode(showReportDto.getImagesListToShow().get(0).getPicByte());
+		
+		System.out.println("My logs image byte: " + encode);
+		System.out.println("My logs image byte: " + image);
+		response.setContentType("image/jpeg, image/jpg, image/png");
+		response.getOutputStream().write(image);
 		response.getOutputStream().close();
 	}
-
+	
+	
+	
 	private Map<Integer, String> loadProdMachines() {
 
 		List<ProductionMachine> prodMachineList = productionService.getProdMachinesWithLines();
