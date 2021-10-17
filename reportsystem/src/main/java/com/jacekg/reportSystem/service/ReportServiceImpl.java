@@ -159,6 +159,7 @@ public class ReportServiceImpl implements ReportService {
 		Long userId = null;
 		
 		if (searchReportDto.getUserName() != null) {
+			
 			User user = userDao.findByUserName(searchReportDto.getUserName());
 			
 			if (user != null) {

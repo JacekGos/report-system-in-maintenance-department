@@ -1,31 +1,24 @@
 package com.jacekg.reportSystem.dao;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Fetch;
-import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.validation.constraints.Size;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 
-import com.jacekg.reportSystem.dto.ReportDto;
 import com.jacekg.reportSystem.dto.SearchReportDto;
-import com.jacekg.reportSystem.entity.FailType;
-import com.jacekg.reportSystem.entity.ProductionMachine;
 import com.jacekg.reportSystem.entity.Report;
-import com.jacekg.reportSystem.entity.User;
 
 @Repository
 public class ReportDaoImpl implements ReportDao {
@@ -70,40 +63,41 @@ public class ReportDaoImpl implements ReportDao {
 		
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-//		int productionMachineId = searchReportDto.getProductionMachineId();
-//		LocalDate startDate = searchReportDto.getStartDate();
-//		LocalDate endDate = searchReportDto.getEndDate();
-//		String keyWord = searchReportDto.getKeyWord();
-//		
-//		Query<Report> query = 
-//				currentSession.createQuery("FROM Report WHERE "
-//						+ "user_id=:userId", Report.class);
-//		query.setParameter("userId", userId);
-//		
-//		return query.getResultList();
+		int productionMachineId = searchReportDto.getProductionMachineId();
+		LocalDate startDate = searchReportDto.getStartDate();
+		LocalDate endDate = searchReportDto.getEndDate();
+		String keyWord = searchReportDto.getKeyWord();
 		
-//		Criteria criteria = currentSession.createCriteria(Report.class);
+		List<Predicate> predicateList = new ArrayList<Predicate>();
+		
 		
 		CriteriaBuilder criteriaBuilder = currentSession.getCriteriaBuilder();
 		CriteriaQuery<Report> criteriaQuery = criteriaBuilder.createQuery(Report.class);
 		Root<Report> reportObject = criteriaQuery.from(Report.class);
-//		Join<Report, User> userObject = reportObject.join("user");
-//		Join<Report, ProductionMachine> prodMachineObject = reportObject.join("productionMachine");
 		
 		reportObject.fetch("user", JoinType.LEFT);
 		reportObject.fetch("productionLine", JoinType.LEFT);
 		reportObject.fetch("productionMachine", JoinType.LEFT);
 		
-//		Fetch<Report, User> userObject = reportObject.fetch("user", JoinType.LEFT);
+		Predicate userIdPredicate = null;
 		
-		
+		if (userId != null) {
+			System.out.println("My logs, userId: " + userId);
+
+			userIdPredicate = criteriaBuilder.equal(reportObject.get("user").get("id"), 30);
+			predicateList.add(userIdPredicate);
+		}
 		
 //		criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("productionLineId"), 1));
 		
 //		criteriaQuery.select(reportObject).where(userObject.get("id").in(31));
 		
-		criteriaQuery.where(criteriaBuilder.equal(reportObject.get("user").get("id"), 30));
-
+//		criteriaQuery.where(criteriaBuilder.equal(reportObject.get("user").get("id"), 30));
+		
+//		Predicate finalPredicate = criteriaBuilder.or(userIdPredicate);
+		
+		criteriaQuery.where(userIdPredicate);
+		
 	    TypedQuery<Report> query = currentSession.createQuery(criteriaQuery);
 		
 		List<Report> list = query.getResultList();
