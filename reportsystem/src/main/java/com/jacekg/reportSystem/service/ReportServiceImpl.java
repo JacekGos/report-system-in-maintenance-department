@@ -164,40 +164,11 @@ public class ReportServiceImpl implements ReportService {
 			
 			if (user != null) {
 				userId = user.getId();
-			} else {
-				userId = 0L;
-			}
-		} else {
-			userId = 0L;
+			} 
 		}
 		
 		System.out.println("My logs, userId: " + userId);
 		return reportDao.searchReports(searchReportDto, userId);
 	}
-	
-//	public static byte[] compressBytes(byte[] image) {
-//		
-//		Deflater deflater = new Deflater();
-//		deflater.setInput(image);
-//		deflater.finish();		
-//		
-//		ByteArrayOutputStream outputStream = new ByteArrayOutputStream(image.length);
-//		
-//		byte[] buffer = new byte[1024];
-//		
-//		while (!deflater.finished()) {
-//			int count = deflater.deflate(buffer);
-//			outputStream.write(buffer, 0, count);
-//		}
-//		try {
-//			outputStream.close();
-//		} catch (IOException e) {
-//		}
-//		
-//		System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);	
-//		
-//		return outputStream.toByteArray();
-//	}
-
 
 }

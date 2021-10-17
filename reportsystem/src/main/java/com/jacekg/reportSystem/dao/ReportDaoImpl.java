@@ -63,13 +63,12 @@ public class ReportDaoImpl implements ReportDao {
 		
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		int productionMachineId = searchReportDto.getProductionMachineId();
+		Integer productionMachineId = searchReportDto.getProductionMachineId();
 		LocalDate startDate = searchReportDto.getStartDate();
 		LocalDate endDate = searchReportDto.getEndDate();
 		String keyWord = searchReportDto.getKeyWord();
 		
 		List<Predicate> predicateList = new ArrayList<Predicate>();
-		
 		
 		CriteriaBuilder criteriaBuilder = currentSession.getCriteriaBuilder();
 		CriteriaQuery<Report> criteriaQuery = criteriaBuilder.createQuery(Report.class);
@@ -79,12 +78,18 @@ public class ReportDaoImpl implements ReportDao {
 		reportObject.fetch("productionLine", JoinType.LEFT);
 		reportObject.fetch("productionMachine", JoinType.LEFT);
 		
-		Predicate userIdPredicate = null;
+//		Predicate userIdPredicate = null;
 		
 		if (userId != null) {
-			System.out.println("My logs, userId: " + userId);
+			System.out.println("My logs reportDao, userId: " + userId);
 
-			userIdPredicate = criteriaBuilder.equal(reportObject.get("user").get("id"), 30);
+			Predicate userIdPredicate = criteriaBuilder.equal(reportObject.get("user").get("id"), userId);
+			predicateList.add(userIdPredicate);
+		}
+		if (productionMachineId != null) {
+			System.out.println("My logs reportDao, userId: " + productionMachineId);
+
+			Predicate userIdPredicate = criteriaBuilder.equal(reportObject.get("productionMachine").get("id"), productionMachineId);
 			predicateList.add(userIdPredicate);
 		}
 		
@@ -94,9 +99,10 @@ public class ReportDaoImpl implements ReportDao {
 		
 //		criteriaQuery.where(criteriaBuilder.equal(reportObject.get("user").get("id"), 30));
 		
-//		Predicate finalPredicate = criteriaBuilder.or(userIdPredicate);
+		Predicate finalPredicate = criteriaBuilder.and(predicateList.toArray(new Predicate[0]));
 		
-		criteriaQuery.where(userIdPredicate);
+		criteriaQuery.select(reportObject).where(finalPredicate);
+
 		
 	    TypedQuery<Report> query = currentSession.createQuery(criteriaQuery);
 		

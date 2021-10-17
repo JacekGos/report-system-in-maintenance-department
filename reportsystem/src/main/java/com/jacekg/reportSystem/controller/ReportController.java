@@ -208,9 +208,9 @@ public class ReportController {
 		
 		searchReportDto.dateValidation();
 		
-		List<Report> searchedReportsList = reportService.searchReports(searchReportDto);
+		System.out.println("My logs userName: " + searchReportDto.getUserName());
 		
-		System.out.println(searchedReportsList.get(0).getUser().getUserName());
+		List<Report> searchedReportsList = reportService.searchReports(searchReportDto);
 		
 		prodMachines = new LinkedHashMap<Integer, String>();
 		prodMachines = loadProdMachines();
