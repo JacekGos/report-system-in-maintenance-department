@@ -203,13 +203,10 @@ public class ReportController {
 			BindingResult bindingResult, Model model) {
 	
 		if (bindingResult.hasErrors()) {
-			System.out.println("My logs searchReport error");
 			return "redirect:/report/showReportList";
 		}
 		
 		searchReportDto.dateValidation();
-		
-		System.out.println("My logs userName: " + searchReportDto.getUserName());
 		
 		List<Report> searchedReportsList = reportService.searchReports(searchReportDto);
 		
@@ -228,7 +225,6 @@ public class ReportController {
 		model.addAttribute("prodMachines", prodMachines);
 		
 		return "report-list";
-
 	}
 
 	@GetMapping("/showImage")

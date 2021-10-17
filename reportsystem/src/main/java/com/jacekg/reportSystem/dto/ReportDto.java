@@ -33,6 +33,7 @@ public class ReportDto {
 	
 	private int productionLineId;
 	
+	@Min(value = 1)
 	private int productionMachineId;
 	
 	MultipartFile[] images;

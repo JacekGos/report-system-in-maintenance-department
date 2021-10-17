@@ -58,6 +58,7 @@
 										<label class="form-label"><h6>Stacja</h6></label>
 										<form:select id="second-choice" path="productionMachineId"
 											items="${prodMachines}" class="form-select" />
+										<form:errors path="productionMachineId" cssClass="error" />
 									</div>
 									<br>
 
@@ -95,7 +96,7 @@
 
 									<form:label path="images"></form:label>
 									<input type="file" name="images" class="form-control"
-										accept="image/png, image/jpeg, image/png"/>
+										accept="image/png, image/jpeg, image/png" />
 									<!--accept="image/png, image/jpeg, image/png" multiple /></td> -->
 
 									<c:if test="${message != null}">
