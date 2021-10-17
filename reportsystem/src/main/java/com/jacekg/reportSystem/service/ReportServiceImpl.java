@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.zip.Deflater;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +21,7 @@ import com.jacekg.reportSystem.dao.ReportDao;
 import com.jacekg.reportSystem.dao.UserDao;
 import com.jacekg.reportSystem.dao.UserDaoImpl;
 import com.jacekg.reportSystem.dto.ReportDto;
+import com.jacekg.reportSystem.dto.SearchReportDto;
 import com.jacekg.reportSystem.entity.FailType;
 import com.jacekg.reportSystem.entity.Image;
 import com.jacekg.reportSystem.entity.ProductionLine;
@@ -133,7 +136,7 @@ public class ReportServiceImpl implements ReportService {
 		
 		return report;
 	}
-
+	
 	private List<FailType> findFailTypes(List<Integer> failTypes) {
 		
 		List<FailType> failTypeList = new ArrayList<FailType>();
@@ -149,28 +152,51 @@ public class ReportServiceImpl implements ReportService {
 		return failTypeList;
 	}
 	
-	public static byte[] compressBytes(byte[] image) {
+	@Override
+	@Transactional
+	public List<Report> searchReports(SearchReportDto searchReportDto) {
 		
-		Deflater deflater = new Deflater();
-		deflater.setInput(image);
-		deflater.finish();		
+		Long userId = null;
 		
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream(image.length);
-		
-		byte[] buffer = new byte[1024];
-		
-		while (!deflater.finished()) {
-			int count = deflater.deflate(buffer);
-			outputStream.write(buffer, 0, count);
+		if (searchReportDto.getUserName() != null) {
+			User user = userDao.findByUserName(searchReportDto.getUserName());
+			
+			if (user != null) {
+				userId = user.getId();
+			} else {
+				userId = 0L;
+			}
+		} else {
+			userId = 0L;
 		}
-		try {
-			outputStream.close();
-		} catch (IOException e) {
-		}
 		
-		System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);	
-		
-		return outputStream.toByteArray();
+		System.out.println("My logs, userId: " + userId);
+		return reportDao.searchReports(searchReportDto, userId);
 	}
+	
+//	public static byte[] compressBytes(byte[] image) {
+//		
+//		Deflater deflater = new Deflater();
+//		deflater.setInput(image);
+//		deflater.finish();		
+//		
+//		ByteArrayOutputStream outputStream = new ByteArrayOutputStream(image.length);
+//		
+//		byte[] buffer = new byte[1024];
+//		
+//		while (!deflater.finished()) {
+//			int count = deflater.deflate(buffer);
+//			outputStream.write(buffer, 0, count);
+//		}
+//		try {
+//			outputStream.close();
+//		} catch (IOException e) {
+//		}
+//		
+//		System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);	
+//		
+//		return outputStream.toByteArray();
+//	}
+
 
 }

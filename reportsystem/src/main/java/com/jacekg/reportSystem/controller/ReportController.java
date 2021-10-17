@@ -203,15 +203,31 @@ public class ReportController {
 			BindingResult bindingResult, Model model) {
 	
 		if (bindingResult.hasErrors()) {
-			
 			return "redirect:/report/showReportList";
 		}
 		
 		searchReportDto.dateValidation();
 		
-		System.out.println("My logs: date: " + searchReportDto.getStartDate() + " " + searchReportDto.getEndDate());
+		List<Report> searchedReportsList = reportService.searchReports(searchReportDto);
+		
+		System.out.println(searchedReportsList.get(0).getUser().getUserName());
+		
+		prodMachines = new LinkedHashMap<Integer, String>();
+		prodMachines = loadProdMachines();
+		
+		List<ShowReportDto> reportsList = new ArrayList<ShowReportDto>();
+		
+		for (Report report : searchedReportsList) {
+			reportsList.add(mapShowReportDtoToList(report));
+		}
+		
+		model.addAttribute("reportsList", reportsList);
+		model.addAttribute("selectedReports", new SelectedReportsDto());
+		model.addAttribute("searchReportDto", new SearchReportDto());
+		model.addAttribute("prodMachines", prodMachines);
 		
 		return "report-list";
+
 	}
 
 	@GetMapping("/showImage")
