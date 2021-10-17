@@ -105,6 +105,7 @@ public class ReportDaoImpl implements ReportDao {
 		}
 		
 	    TypedQuery<Report> query = currentSession.createQuery(criteriaQuery);
+	    
 		
 		List<Report> list = query.getResultList();
 		
