@@ -203,6 +203,7 @@ public class ReportController {
 			BindingResult bindingResult, Model model) {
 	
 		if (bindingResult.hasErrors()) {
+			System.out.println("My logs searchReport error");
 			return "redirect:/report/showReportList";
 		}
 		
@@ -264,7 +265,8 @@ public class ReportController {
 	private Map<Integer, String> getProdMachineNames(List<ProductionMachine> prodMachineList) {
 
 		Map<Integer, String> prodMachineNames = new LinkedHashMap<Integer, String>();
-
+		prodMachineNames.put(-1, "Wybierz");
+		
 		for (ProductionMachine productionMachine : prodMachineList) {
 
 			prodMachineNames.put(

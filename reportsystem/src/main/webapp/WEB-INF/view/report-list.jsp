@@ -76,13 +76,18 @@
 													items="${prodMachines}" class="form-select" />
 											</div>
 
+<%-- 											<form:select path="productionMachineId"> --%>
+<%-- 												<form:options items="${prodMachines}" /> --%>
+<%-- 											</form:select> --%>
+
+
 											<div class="col-sm-6">
 												<label for="exampleFormControlTextarea1" class="form-label"><h6>Data
 														początkowa</h6></label>
 												<div class="input-append date" id="dp3"
 													data-date-format="dd-mm-yyyy">
 													<form:input path="startDate" class="form-control" size="16"
-														type="date" placeholder="DD-MM-RRRR"/>
+														type="date" placeholder="DD-MM-RRRR" />
 													<span class="add-on"><i class="icon-th"></i></span>
 												</div>
 												<form:errors path="startDate" cssClass="error" />

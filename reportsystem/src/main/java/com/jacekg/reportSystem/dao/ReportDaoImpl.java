@@ -81,28 +81,28 @@ public class ReportDaoImpl implements ReportDao {
 //		Predicate userIdPredicate = null;
 		
 		if (userId != null) {
-			System.out.println("My logs reportDao, userId: " + userId);
-
-			Predicate userIdPredicate = criteriaBuilder.equal(reportObject.get("user").get("id"), userId);
-			predicateList.add(userIdPredicate);
+			Predicate predicate = criteriaBuilder.equal(reportObject.get("user").get("id"), userId);
+			predicateList.add(predicate);
 		}
-		if (productionMachineId != null) {
-			System.out.println("My logs reportDao, userId: " + productionMachineId);
-
-			Predicate userIdPredicate = criteriaBuilder.equal(reportObject.get("productionMachine").get("id"), productionMachineId);
-			predicateList.add(userIdPredicate);
+		if (productionMachineId != -1) {
+			Predicate predicate = criteriaBuilder.equal(reportObject.get("productionMachine").get("id"), productionMachineId);
+			predicateList.add(predicate);
+		}
+		if (startDate != null && endDate != null) {
+			Predicate predicate = criteriaBuilder.between(reportObject.get("date"), startDate, endDate);
+			predicateList.add(predicate);
+		}
+		if (keyWord != null) {
+			Predicate predicate = criteriaBuilder.like(reportObject.get("description"), "%" + keyWord + "%");
+			predicateList.add(predicate);
 		}
 		
-//		criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("productionLineId"), 1));
-		
-//		criteriaQuery.select(reportObject).where(userObject.get("id").in(31));
-		
-//		criteriaQuery.where(criteriaBuilder.equal(reportObject.get("user").get("id"), 30));
-		
-		Predicate finalPredicate = criteriaBuilder.and(predicateList.toArray(new Predicate[0]));
-		
-		criteriaQuery.select(reportObject).where(finalPredicate);
-
+		if (predicateList.size() > 0) {
+			Predicate finalPredicate = criteriaBuilder.and(predicateList.toArray(new Predicate[0]));
+			criteriaQuery.select(reportObject).where(finalPredicate);
+		} else {
+			criteriaQuery.select(reportObject);
+		}
 		
 	    TypedQuery<Report> query = currentSession.createQuery(criteriaQuery);
 		
