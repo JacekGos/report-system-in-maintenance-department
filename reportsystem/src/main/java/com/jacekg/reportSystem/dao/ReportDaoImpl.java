@@ -8,6 +8,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -43,7 +44,7 @@ public class ReportDaoImpl implements ReportDao {
 				currentSession.createQuery("FROM Report r"
 						+ " JOIN FETCH r.user"
 						+ " JOIN FETCH r.productionLine"
-						+ " JOIN FETCH r.productionMachine ORDER BY r.date DESC", Report.class);
+						+ " JOIN FETCH r.productionMachine ORDER BY r.date DESC", Report.class).setMaxResults(20);
 		
 		return query.getResultList();
 	}
@@ -78,8 +79,6 @@ public class ReportDaoImpl implements ReportDao {
 		reportObject.fetch("productionLine", JoinType.LEFT);
 		reportObject.fetch("productionMachine", JoinType.LEFT);
 		
-//		Predicate userIdPredicate = null;
-		
 		if (userId != null) {
 			Predicate predicate = criteriaBuilder.equal(reportObject.get("user").get("id"), userId);
 			predicateList.add(predicate);
@@ -104,9 +103,13 @@ public class ReportDaoImpl implements ReportDao {
 			criteriaQuery.select(reportObject);
 		}
 		
-	    TypedQuery<Report> query = currentSession.createQuery(criteriaQuery);
-	    
+		List<Order> orderList = new ArrayList();
+		orderList.add(criteriaBuilder.desc(reportObject.get("date")));
 		
+		criteriaQuery.orderBy(orderList);
+		
+	    TypedQuery<Report> query = currentSession.createQuery(criteriaQuery).setFirstResult(0).setMaxResults(20);
+	    
 		List<Report> list = query.getResultList();
 		
 		return list;
