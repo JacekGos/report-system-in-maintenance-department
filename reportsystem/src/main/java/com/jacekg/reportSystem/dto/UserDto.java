@@ -14,17 +14,17 @@ public class UserDto {
 	
 	private String password;
 	
-	@NotNull(message = "is required")
-	@Size(min = 1, message = "is required")
+	@NotNull(message = "wymagane")
+	@Size(min = 1, max = 50, message = "za długie imię")
 	private String firstName;
 	
-	@NotNull(message = "is required")
-	@Size(min = 1, message = "is required")
+	@NotNull(message = "wymagane")
+	@Size(min = 1, max = 50, message = "za długie nazwisko")
 	private String lastName;
 	
 	@ValidEmail
-	@NotNull(message = "is required")
-	@Size(min = 1, message = "is required")
+	@NotNull(message = "wymagane")
+	@Size(min = 1, max = 50, message = "za długi email")
 	private String email;
 	
 	private String role;

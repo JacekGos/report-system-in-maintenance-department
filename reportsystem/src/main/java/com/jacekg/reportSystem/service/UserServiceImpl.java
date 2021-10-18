@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 		user.setFirstName(StringUtils.capitalize(formUser.getFirstName()));
 		user.setLastName(StringUtils.capitalize(formUser.getLastName()));
 		user.setEmail(formUser.getEmail());
-		user.setEnabled(true);
+		user.setEnabled(false);
 		user.setNonExpired(true);
 		user.setCredentialsNonExpired(true);
 		user.setNonLocked(true);
