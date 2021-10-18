@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.w3c.dom.Text;
 
 import com.jacekg.reportSystem.dto.ChangePasswordDto;
 import com.jacekg.reportSystem.dto.UserDto;
@@ -201,6 +202,8 @@ public class UserController {
 		if (bindingResult.hasErrors()) {
 			return "change-password";
 		}
+		System.out.println("My logs password: " + changePasswordDto.getPassword());
+//		changePasswordDto.setPassword(changePasswordDto.getPassword().replaceAll("\\s+", ""));
 		
 		User user = userService.getUserWithRoles(changePasswordDto.getId());
 		

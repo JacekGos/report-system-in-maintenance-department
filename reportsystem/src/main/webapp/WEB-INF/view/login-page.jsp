@@ -91,10 +91,6 @@
 									<button type="submit" class="btn btn-primary btn-block">
 										Login</button>
 								</div>
-
-								<p class="text-center">
-									<a href="#" class="btn">Zapomniałeś hasła?</a>
-								</p>
 							</form:form>
 
 						</article>
