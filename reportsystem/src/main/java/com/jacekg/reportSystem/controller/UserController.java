@@ -102,9 +102,16 @@ public class UserController {
 			
 			return "user-form";
 		}
-
-		userDto.setFirstName(StringUtils.capitalize(userDto.getFirstName()));
-		userDto.setLastName(StringUtils.capitalize(userDto.getLastName()));
+		
+		String firstName = userDto.getFirstName();
+		String lastName = userDto.getLastName();
+		
+		firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1).toLowerCase().replaceAll("\\s+", "");
+		lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1).toLowerCase().trim().replaceAll("\\s+", "");
+		
+		userDto.setFirstName(firstName);
+		userDto.setLastName(lastName);
+		
 		userDto.setUserName(generateUserName(userDto.getFirstName(), userDto.getLastName()));
 		userDto.setPassword("password");
 		userDto.setId(0L);
@@ -227,7 +234,12 @@ public class UserController {
 	}
 	
 	private String generateUserName(String firstName, String lastName) {
-
+		System.out.println("My logs username: " + firstName + " " + lastName);
+		
+		
+		
+		System.out.println("My logs username: " + firstName + " " + lastName);
+		
 		char firstPart = firstName.toLowerCase().charAt(0);
 
 		String userName = firstPart + lastName.toLowerCase();
