@@ -234,11 +234,6 @@ public class UserController {
 	}
 	
 	private String generateUserName(String firstName, String lastName) {
-		System.out.println("My logs username: " + firstName + " " + lastName);
-		
-		
-		
-		System.out.println("My logs username: " + firstName + " " + lastName);
 		
 		char firstPart = firstName.toLowerCase().charAt(0);
 
