@@ -8,7 +8,7 @@ public class ProductionMachineDto {
 	private int id;
 	
 	@NotNull(message = "wymagane")
-	@Size(min = 1, max = 20, message = "za długa/krótka nazwa")
+	@Size(min = 1, max = 20, message = "za długa nazwa")
 	private String name;
 	
 	private int prodLineId;

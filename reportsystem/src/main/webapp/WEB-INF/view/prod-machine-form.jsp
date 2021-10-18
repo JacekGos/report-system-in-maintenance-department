@@ -52,13 +52,11 @@
 								<form:hidden path="id" />
 								<form:hidden path="prodLineName" />
 
-								<label class="form-label">Nazwa stacji</label>
+								<label class="form-label">Nazwa stacji</label><br>
 								<form:input path="name" placeholder="Nazwa" class="form-control" />
-
 								<form:errors path="name" cssClass="error" />
 
 								<div class="col-md-4">
-
 									<label class="form-label">Linia</label>
 									<c:if test="${prodLineName != null}">
 
@@ -66,13 +64,13 @@
 											class="form-control" disabled readonly>
 
 									</c:if>
-					
+
 									<form:select path="prodLineId" items="${prodLines}"
 										class="form-select" />
 								</div>
 
 							</div>
-							
+
 							<div class="col-12">
 								<button type="submit" class="btn btn-outline-primary">Zatwierdź</button>
 							</div>
