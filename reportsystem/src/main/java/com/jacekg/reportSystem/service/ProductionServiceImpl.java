@@ -24,10 +24,9 @@ public class ProductionServiceImpl implements ProductionService {
 	@Transactional
 	public void save(ProductionLineDto formProductionLine) {
 		
-		ProductionLine productionLine = new ProductionLine();
+		ProductionLine productionLine = new ProductionLine(formProductionLine.getName());
 		
 		productionLine.setId(formProductionLine.getId());
-		productionLine.setName(formProductionLine.getName());
 		
 		productionLineDao.save(productionLine);
 	}
@@ -37,14 +36,14 @@ public class ProductionServiceImpl implements ProductionService {
 	public void save(ProductionMachineDto formProductionMachine) {
 		
 		ProductionMachine productionMachine = new ProductionMachine();
+		
 		ProductionLine productionLine = productionLineDao.findProdLineById(formProductionMachine.getProdLineId());
 		
-		productionMachine.setId(formProductionMachine.getId());
-		productionMachine.setName(formProductionMachine.getName());
-
 		if (productionLine != null) {
 			
-			productionMachine.setProductionLine(productionLine);
+			productionMachine = new ProductionMachine(formProductionMachine.getName(), productionLine);
+			
+			productionMachine.setId(formProductionMachine.getId());
 		}
 		
 		productionMachineDao.save(productionMachine);
