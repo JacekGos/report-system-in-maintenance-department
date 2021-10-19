@@ -32,13 +32,12 @@ import com.jacekg.reportSystem.dto.ReportSummaryDto;
 import com.jacekg.reportSystem.dto.SearchReportDto;
 import com.jacekg.reportSystem.dto.SelectedReportsDto;
 import com.jacekg.reportSystem.dto.ShowReportDto;
-import com.jacekg.reportSystem.entity.FailType;
 import com.jacekg.reportSystem.entity.Image;
-import com.jacekg.reportSystem.entity.ProductionMachine;
 import com.jacekg.reportSystem.entity.Report;
 import com.jacekg.reportSystem.service.ProductionService;
 import com.jacekg.reportSystem.service.ReportService;
 import com.jacekg.reportSystem.service.UserService;
+import com.jacekg.reportSystem.utilities.Utilities;
 
 @Controller
 @RequestMapping("/report")
@@ -76,10 +75,10 @@ public class ReportController {
 		}
 
 		prodMachines = new LinkedHashMap<Integer, String>();
-		prodMachines = loadProdMachines();
+		prodMachines = Utilities.loadProdMachines(productionService.getProdMachinesWithLines());
 
 		failTypes = new LinkedHashMap<Integer, String>();
-		failTypes = loadFailTypes();
+		failTypes = Utilities.loadFailTypes(reportService.getFailTypes());
 
 		ReportDto reportDto = new ReportDto();
 		reportDto.setDate(LocalDate.now());
@@ -105,10 +104,10 @@ public class ReportController {
 		if (bindingResult.hasErrors()) {
 
 			prodMachines = new LinkedHashMap<Integer, String>();
-			prodMachines = loadProdMachines();
+			prodMachines = Utilities.loadProdMachines(productionService.getProdMachinesWithLines());
 
 			failTypes = new LinkedHashMap<Integer, String>();
-			failTypes = loadFailTypes();
+			failTypes = Utilities.loadFailTypes(reportService.getFailTypes());
 
 			model.addAttribute("prodMachines", prodMachines);
 			model.addAttribute("failTypes", failTypes);
@@ -132,10 +131,10 @@ public class ReportController {
 		List<ShowReportDto> reportsList = new ArrayList<ShowReportDto>();
 		
 		prodMachines = new LinkedHashMap<Integer, String>();
-		prodMachines = loadProdMachines();
+		prodMachines = Utilities.loadProdMachines(productionService.getProdMachinesWithLines());
 
 		for (Report report : reports) {
-			reportsList.add(mapShowReportDtoToList(report));
+			reportsList.add(Utilities.mapShowReportDtoToList(report));
 		}
 		
 		model.addAttribute("reportsList", reportsList);
@@ -186,7 +185,7 @@ public class ReportController {
 
 		Report report = reportService.getReportWithAllData(reportId);
 
-		ShowReportDto showReportDto = mapShowReportDto(report);
+		ShowReportDto showReportDto = Utilities.mapShowReportDto(report);
 
 		model.addAttribute("showReportDto", showReportDto);
 
@@ -206,12 +205,12 @@ public class ReportController {
 		List<Report> searchedReportsList = reportService.searchReports(searchReportDto);
 		
 		prodMachines = new LinkedHashMap<Integer, String>();
-		prodMachines = loadProdMachines();
+		prodMachines = Utilities.loadProdMachines(productionService.getProdMachinesWithLines());
 		
 		List<ShowReportDto> reportsList = new ArrayList<ShowReportDto>();
 		
 		for (Report report : searchedReportsList) {
-			reportsList.add(mapShowReportDtoToList(report));
+			reportsList.add(Utilities.mapShowReportDtoToList(report));
 		}
 		
 		model.addAttribute("reportsList", reportsList);
@@ -228,7 +227,7 @@ public class ReportController {
 
 		Report report = reportService.getReportWithAllData(reportId);
 
-		ShowReportDto showReportDto = mapShowReportDto(report);
+		ShowReportDto showReportDto = Utilities.mapShowReportDto(report);
 		
 		byte[] image = showReportDto.getImagesListToShow().get(0).getPicByte();
 		byte[] encode = java.util.Base64.getEncoder().encode(showReportDto.getImagesListToShow().get(0).getPicByte());
@@ -238,89 +237,6 @@ public class ReportController {
 		response.setContentType("image/jpeg, image/jpg, image/png");
 		response.getOutputStream().write(image);
 		response.getOutputStream().close();
-	}
-	
-	private Map<Integer, String> loadProdMachines() {
-
-		List<ProductionMachine> prodMachineList = productionService.getProdMachinesWithLines();
-
-		Map<Integer, String> prodMachines = new LinkedHashMap<Integer, String>();
-
-		prodMachines = getProdMachineNames(prodMachineList);
-
-		return prodMachines;
-	}
-
-	private Map<Integer, String> getProdMachineNames(List<ProductionMachine> prodMachineList) {
-
-		Map<Integer, String> prodMachineNames = new LinkedHashMap<Integer, String>();
-		prodMachineNames.put(-1, "Wybierz");
-		
-		for (ProductionMachine productionMachine : prodMachineList) {
-
-			prodMachineNames.put(
-					productionMachine.getId(), 
-					productionMachine.getProductionLine().getName() + "-" + productionMachine.getName());
-		}
-
-		return prodMachineNames;
-	}
-
-	private Map<Integer, String> loadFailTypes() {
-
-		List<FailType> failTypeList = reportService.getFailTypes();
-
-		Map<Integer, String> failTypes = new LinkedHashMap<Integer, String>();
-
-		failTypes = getFailTypeNames(failTypeList);
-
-		return failTypes;
-	}
-
-	private Map<Integer, String> getFailTypeNames(List<FailType> failTypeList) {
-
-		LinkedHashMap<Integer, String> failTypeNames = new LinkedHashMap<Integer, String>();
-
-		for (FailType failType : failTypeList) {
-
-			failTypeNames.put(failType.getId(), failType.getName());
-		}
-
-		return failTypeNames;
-
-	}
-
-	private ShowReportDto mapShowReportDto(Report report) {
-		
-		List<Image> images = report.getImages();
-		
-		boolean isImage = !images.isEmpty();
-		
-		ShowReportDto showReportDto = new ShowReportDto(
-				report.getId(),
-				report.getUser().getUserName(),
-				report.getProductionLine().getName(),
-				report.getProductionMachine().getName(),
-				report.getDate(),
-				report.getDuration(),
-				report.getDescription(),
-				images,
-				report.getFailTypesNames(),
-				isImage);
-
-		return showReportDto;
-	}
-
-	private ShowReportDto mapShowReportDtoToList(Report report) {
-
-		ShowReportDto showReportDto = new ShowReportDto(
-				report.getId(),
-				report.getUser().getUserName(),
-				report.getProductionLine().getName(),
-				report.getProductionMachine().getName(),
-				report.getDate());
-
-		return showReportDto;
 	}
 }
 

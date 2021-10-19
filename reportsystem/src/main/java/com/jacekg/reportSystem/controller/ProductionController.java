@@ -22,6 +22,7 @@ import com.jacekg.reportSystem.dto.ProductionMachineDto;
 import com.jacekg.reportSystem.entity.ProductionLine;
 import com.jacekg.reportSystem.entity.ProductionMachine;
 import com.jacekg.reportSystem.service.ProductionService;
+import com.jacekg.reportSystem.utilities.Utilities;
 
 @Controller
 @RequestMapping("/production")
@@ -101,7 +102,7 @@ public class ProductionController {
 		model.addAttribute("productionMachineDto", new ProductionMachineDto());
 		
 		prodLines = new LinkedHashMap<Integer, String>();
-		prodLines = loadProdLines();
+		prodLines = Utilities.loadProdLines(productionService.getProdLines());
 		
 		model.addAttribute("prodLines", prodLines);
 		
@@ -121,7 +122,7 @@ public class ProductionController {
 		System.out.println("prodLineName: " + productionMachineDto.getProdLineName());
 		
 		prodLines = new LinkedHashMap<Integer, String>();
-		prodLines = loadProdLines();
+		prodLines = Utilities.loadProdLines(productionService.getProdLines());
 		
 		model.addAttribute("prodLines", prodLines);
 		model.addAttribute("prodLineName", productionMachineDto.getProdLineName());
@@ -137,7 +138,7 @@ public class ProductionController {
 		if (bindingResult.hasErrors()) {
 			
 			prodLines = new LinkedHashMap<Integer, String>();
-			prodLines = loadProdLines();
+			prodLines = Utilities.loadProdLines(productionService.getProdLines());
 			
 			model.addAttribute("prodLines", prodLines);
 			
@@ -154,7 +155,7 @@ public class ProductionController {
 		if (productionMachine != null && productionMachine.getId() != formProdMachineId) {
 			
 			prodLines = new LinkedHashMap<Integer, String>();
-			prodLines = loadProdLines();
+			prodLines = Utilities.loadProdLines(productionService.getProdLines());
 			
 			model.addAttribute("prodLines", prodLines);
 			model.addAttribute("productionMachineDto", productionMachineDto);
@@ -201,28 +202,8 @@ public class ProductionController {
 		
 		return "production/prod-line-details";
 	}
-	
-	private Map<Integer, String> loadProdLines() {
-
-		List<ProductionLine> prodLineList = productionService.getProdLines();
-
-		Map<Integer, String> prodLines = new LinkedHashMap<Integer, String>();
-
-		prodLines = getProdLineNames(prodLineList);
-
-		return prodLines;
-	}
-
-	private Map<Integer, String> getProdLineNames(List<ProductionLine> prodLineList) {
-
-		LinkedHashMap<Integer, String> prodLineNames = new LinkedHashMap();
-
-		for (ProductionLine productionLine : prodLineList) {
-
-			prodLineNames.put(productionLine.getId(), productionLine.getName());
-		}
-
-		return prodLineNames;
-	}
-
 }
+
+
+
+

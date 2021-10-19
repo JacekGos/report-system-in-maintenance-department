@@ -25,6 +25,7 @@ import com.jacekg.reportSystem.dto.ChangePasswordDto;
 import com.jacekg.reportSystem.dto.UserDto;
 import com.jacekg.reportSystem.entity.User;
 import com.jacekg.reportSystem.service.UserService;
+import com.jacekg.reportSystem.utilities.Utilities;
 
 @Controller
 @RequestMapping("/user")
@@ -68,7 +69,7 @@ public class UserController {
 		
 		User user = userService.getUserWithRoles(userId);
 
-		UserDto userDto = fillUserDto(user);
+		UserDto userDto = Utilities.fillUserDto(user);
 		
 		String currentUserName = principal.getName();
 
@@ -214,7 +215,7 @@ public class UserController {
 		if (user != null) {
 			
 			UserDto userDto = new UserDto();
-			userDto = fillUserDto(user);
+			userDto = Utilities.fillUserDto(user);
 			userDto.setPassword(changePasswordDto.getPassword());
 			
 			userService.save(userDto);
@@ -245,21 +246,21 @@ public class UserController {
 		return userName + ++userNumber;
 	}
 
-	private UserDto fillUserDto(User user) {
-
-		UserDto userDto = new UserDto();
-		userDto.setId(user.getId());
-		userDto.setFirstName(user.getFirstName());
-		userDto.setLastName(user.getLastName());
-		userDto.setUserName(user.getUserName());
-		userDto.setPassword(user.getPassword());
-		userDto.setEmail(user.getEmail());
-		userDto.setRole(user.getRoleName());
-		userDto.setEnabled(user.isEnabled());
-		userDto.setCredentialsNonExpired(user.isCredentialsNonExpired());
-		userDto.setNonExpired(user.isNonExpired());
-		userDto.setNonLocked(user.isNonLocked());
-
-		return userDto;
-	}
+//	private UserDto fillUserDto(User user) {
+//
+//		UserDto userDto = new UserDto();
+//		userDto.setId(user.getId());
+//		userDto.setFirstName(user.getFirstName());
+//		userDto.setLastName(user.getLastName());
+//		userDto.setUserName(user.getUserName());
+//		userDto.setPassword(user.getPassword());
+//		userDto.setEmail(user.getEmail());
+//		userDto.setRole(user.getRoleName());
+//		userDto.setEnabled(user.isEnabled());
+//		userDto.setCredentialsNonExpired(user.isCredentialsNonExpired());
+//		userDto.setNonExpired(user.isNonExpired());
+//		userDto.setNonLocked(user.isNonLocked());
+//
+//		return userDto;
+//	}
 }
