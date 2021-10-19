@@ -122,7 +122,7 @@
 											<div class="modal-body">Jesteś pewny?</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary"
-													data-bs-dismiss="modal">Close</button>
+													data-bs-dismiss="modal">Zamknij</button>
 												<button type="submit" class="btn btn-outline-primary">Zatwierdź</button>
 											</div>
 										</div>
