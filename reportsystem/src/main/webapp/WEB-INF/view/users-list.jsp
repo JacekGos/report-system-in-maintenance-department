@@ -26,18 +26,9 @@
 				<div
 					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 					<h1 class="h2">Lista użytkowników</h1>
-					<div class="btn-toolbar mb-2 mb-md-0">
-						<div class="btn-group me-2">
-							<button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-							<button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-						</div>
-						<button type="button"
-							class="btn btn-sm btn-outline-secondary dropdown-toggle">
-							<span data-feather="calendar"></span> This week
-						</button>
-					</div>
+					<div class="btn-toolbar mb-2 mb-md-0"></div>
 				</div>
-			
+
 				<div class="row">
 					<div class="table-responsive">
 						<table
@@ -58,8 +49,7 @@
 								<c:if test="${users != null}">
 									<c:forEach var="user" items="${users}">
 										<tr>
-											<c:url var="detailsLink"
-												value="/user/showUserDetails">
+											<c:url var="detailsLink" value="/user/showUserDetails">
 												<c:param name="id" value="${user.id}" />
 											</c:url>
 
@@ -70,8 +60,7 @@
 											<td>${user.email}</td>
 											<td>${user.getRoleName()}</td>
 											<td>${user.isEnabledStatus()}</td>
-											<td>
-												<a href="${detailsLink}"><i class="bi bi-search"></i></a>
+											<td><a href="${detailsLink}"><i class="bi bi-search"></i></a>
 											</td>
 										</tr>
 									</c:forEach>
