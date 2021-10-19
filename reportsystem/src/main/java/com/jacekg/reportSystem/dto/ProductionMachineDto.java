@@ -50,5 +50,4 @@ public class ProductionMachineDto {
 	public void setProdLineName(String prodLineName) {
 		this.prodLineName = prodLineName;
 	}
-	
 }

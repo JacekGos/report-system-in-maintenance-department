@@ -124,7 +124,4 @@ public class ReportDto {
 				+ ", description=" + description + ", productionLineId=" + productionLineId + ", productionMachineId="
 				+ productionMachineId + ", images=" + images + ", failTypes=" + failTypes + "]";
 	}
-	
-	
-	
 }

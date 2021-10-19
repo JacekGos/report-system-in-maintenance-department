@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
-import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -69,27 +68,6 @@ public class AppConfig implements WebMvcConfigurer {
 	    resolver.setMaxUploadSize(20000000);
 	    return resolver;
 	}
-	
-//	@Override
-//	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-//	    converters.add(byteArrayHttpMessageConverter());
-//	}
-//
-//	@Bean
-//	public ByteArrayHttpMessageConverter byteArrayHttpMessageConverter() {
-//	    ByteArrayHttpMessageConverter arrayHttpMessageConverter = new ByteArrayHttpMessageConverter();
-//	    arrayHttpMessageConverter.setSupportedMediaTypes(getSupportedMediaTypes());
-//	    return arrayHttpMessageConverter;
-//	}
-//
-//	private List<MediaType> getSupportedMediaTypes() {
-//	    List<MediaType> list = new ArrayList<MediaType>();
-//	    list.add(MediaType.IMAGE_JPEG);
-//	    list.add(MediaType.IMAGE_PNG);
-//	    list.add(MediaType.APPLICATION_OCTET_STREAM);
-//	    return list;
-//	}
-
 	
 	@Bean
 	public DataSource appDataSource() {

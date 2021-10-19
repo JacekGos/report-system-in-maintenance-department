@@ -33,8 +33,5 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 		session.setAttribute("user", user);
 		
 		response.sendRedirect(request.getContextPath() + "/");
-		
-		
 	}
-
 }

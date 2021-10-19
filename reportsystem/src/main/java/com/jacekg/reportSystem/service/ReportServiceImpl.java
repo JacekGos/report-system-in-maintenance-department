@@ -1,13 +1,7 @@
 package com.jacekg.reportSystem.service;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.zip.Deflater;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +13,6 @@ import com.jacekg.reportSystem.dao.ProductionLineDao;
 import com.jacekg.reportSystem.dao.ProductionMachineDao;
 import com.jacekg.reportSystem.dao.ReportDao;
 import com.jacekg.reportSystem.dao.UserDao;
-import com.jacekg.reportSystem.dao.UserDaoImpl;
 import com.jacekg.reportSystem.dto.ReportDto;
 import com.jacekg.reportSystem.dto.SearchReportDto;
 import com.jacekg.reportSystem.entity.FailType;
@@ -43,9 +36,6 @@ public class ReportServiceImpl implements ReportService {
 	
 	@Autowired
 	private ProductionMachineDao productionMachineDao;
-	
-	@Autowired
-	private ProductionLineDao productionLineDao;
 	
 	@Override
 	@Transactional
@@ -170,5 +160,4 @@ public class ReportServiceImpl implements ReportService {
 		System.out.println("My logs, userId: " + userId);
 		return reportDao.searchReports(searchReportDto, userId);
 	}
-
 }

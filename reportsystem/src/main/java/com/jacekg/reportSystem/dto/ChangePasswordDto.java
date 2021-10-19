@@ -59,7 +59,6 @@ public class ChangePasswordDto {
 
 		this.matchingPassword = matchingPassword;
 	}
-	
 }
 
 

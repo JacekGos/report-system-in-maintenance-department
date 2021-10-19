@@ -45,11 +45,9 @@ public class ProductionServiceImpl implements ProductionService {
 		if (productionLine != null) {
 			
 			productionMachine.setProductionLine(productionLine);
-//			productionLine.addProductionMachine(productionMachine);
 		}
 		
 		productionMachineDao.save(productionMachine);
-//		productionLineDao.save(productionLine);
 	}
 	
 	@Override

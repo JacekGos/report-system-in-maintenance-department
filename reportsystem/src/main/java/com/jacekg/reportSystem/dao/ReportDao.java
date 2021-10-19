@@ -2,7 +2,6 @@ package com.jacekg.reportSystem.dao;
 
 import java.util.List;
 
-import com.jacekg.reportSystem.dto.ReportDto;
 import com.jacekg.reportSystem.dto.SearchReportDto;
 import com.jacekg.reportSystem.entity.Report;
 

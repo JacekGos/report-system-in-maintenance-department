@@ -82,5 +82,4 @@ public class Image {
 	public void setReport(Report report) {
 		this.report = report;
 	}
-	
 }

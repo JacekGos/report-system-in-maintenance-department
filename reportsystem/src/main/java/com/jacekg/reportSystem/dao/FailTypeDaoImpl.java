@@ -41,5 +41,4 @@ public class FailTypeDaoImpl implements FailTypeDao {
 		
 		return failType;
 	}
-
 }

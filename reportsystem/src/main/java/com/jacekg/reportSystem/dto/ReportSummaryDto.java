@@ -31,5 +31,4 @@ public class ReportSummaryDto {
 	public void setIsImage(boolean isImage) {
 		this.isImage = isImage;
 	}
-	
 }

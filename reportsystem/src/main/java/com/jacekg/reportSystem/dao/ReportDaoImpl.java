@@ -103,7 +103,7 @@ public class ReportDaoImpl implements ReportDao {
 			criteriaQuery.select(reportObject);
 		}
 		
-		List<Order> orderList = new ArrayList();
+		List<Order> orderList = new ArrayList<Order>();
 		orderList.add(criteriaBuilder.desc(reportObject.get("date")));
 		
 		criteriaQuery.orderBy(orderList);
@@ -113,9 +113,7 @@ public class ReportDaoImpl implements ReportDao {
 		List<Report> list = query.getResultList();
 		
 		return list;
-		
 	}
-
 }
 
 

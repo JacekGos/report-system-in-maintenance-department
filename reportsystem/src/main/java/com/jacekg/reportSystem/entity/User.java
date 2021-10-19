@@ -207,20 +207,6 @@ public class User {
 				
 		return convertedName;
 	}
-	
-
-	
-	private void addReport(Report report) {
-		
-		if (reports == null) {
-			reports = new ArrayList<>();
-		}
-		
-		reports.add(report);
-		
-		report.setUser(this);
-	}
-	
 }
 
 

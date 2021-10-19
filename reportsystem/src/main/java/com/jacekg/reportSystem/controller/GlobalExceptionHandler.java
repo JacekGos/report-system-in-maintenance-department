@@ -13,7 +13,5 @@ public class GlobalExceptionHandler {
 		System.out.println("My log: in GlobalExceptionHandler");
 		redirectAttributes.addFlashAttribute("message", "Przekroczono rozmiar plików (maksymalnie 20MB)");
 		return "redirect:/report/showReportForm";
-
 	}
-
 }

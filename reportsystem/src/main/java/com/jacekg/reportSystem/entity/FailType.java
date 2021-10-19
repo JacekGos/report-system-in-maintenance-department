@@ -63,14 +63,4 @@ public class FailType {
 	public void setReports(List<Report> reports) {
 		this.reports = reports;
 	}
-	
-	private void addReport(Report report) {
-		
-		if (reports == null) {
-			reports = new ArrayList<>();
-		}
-		
-		reports.add(report);
-	}
-	
 }

@@ -70,17 +70,4 @@ public class ProductionMachine {
 	public void setProductionLine(ProductionLine productionLine) {
 		this.productionLine = productionLine;
 	}
-	
-	private void addReport(Report report) {
-		
-		if (reports == null) {
-			reports = new ArrayList<>();
-		}
-		
-		reports.add(report);
-		
-		report.setProductionMachine(this);
-	}
-	
-	
 }

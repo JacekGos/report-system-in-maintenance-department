@@ -8,7 +8,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.jacekg.reportSystem.entity.ProductionLine;
 import com.jacekg.reportSystem.entity.ProductionMachine;
 
 @Repository
@@ -78,5 +77,4 @@ public class ProductionMachineDaoImpl implements ProductionMachineDao {
 
 		return query.getResultList();
 	}
-
 }

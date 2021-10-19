@@ -94,7 +94,5 @@ public class ProductionLineDaoImpl implements ProductionLineDao {
 						+ " LEFT JOIN FETCH p.productionMachines ORDER BY p.id", ProductionLine.class);
 
 		return query.getResultList();
-
 	}
-
 }

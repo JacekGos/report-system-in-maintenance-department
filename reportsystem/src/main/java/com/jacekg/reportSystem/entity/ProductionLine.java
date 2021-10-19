@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "prod_line")
@@ -99,5 +98,4 @@ public class ProductionLine {
 		
 		report.setProductionLine(this);
 	}
-	
 }

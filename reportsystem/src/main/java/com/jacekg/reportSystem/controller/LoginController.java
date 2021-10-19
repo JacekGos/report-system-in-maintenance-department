@@ -15,5 +15,4 @@ public class LoginController {
 	public String showAccessDenied() {
 		return "navigation/access-denied";
 	}
-
 }

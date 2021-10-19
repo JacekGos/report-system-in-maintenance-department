@@ -18,7 +18,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import net.bytebuddy.asm.Advice.This;
 
 @Entity
 @Table(name = "report")
@@ -196,9 +195,6 @@ public class Report {
 		return "Report [id=" + id + ", user=" + user.getUserName() + ", date=" + date + ", duration=" + duration + ", description="
 				+ description + ", productionLine=" + productionLine.getName() + ", productionMachine=" + productionMachine.getName() + "]";
 	}
-
-
-
 }
 
 

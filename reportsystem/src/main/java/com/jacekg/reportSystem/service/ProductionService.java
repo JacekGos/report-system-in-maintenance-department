@@ -2,8 +2,6 @@ package com.jacekg.reportSystem.service;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import com.jacekg.reportSystem.dto.ProductionLineDto;
 import com.jacekg.reportSystem.dto.ProductionMachineDto;
 import com.jacekg.reportSystem.entity.ProductionLine;

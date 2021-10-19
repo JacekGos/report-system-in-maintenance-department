@@ -134,7 +134,4 @@ public class UserDto {
 		return "FormUser [userName=" + userName + ", password=" + password + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", email=" + email + ", role=" + role + "]";
 	}
-	
-	
-
 }

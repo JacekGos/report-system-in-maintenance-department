@@ -27,5 +27,4 @@ public class SelectedReportsDto {
 	public void setSummaryDescription(String summaryDescription) {
 		this.summaryDescription = summaryDescription;
 	}
-
 }

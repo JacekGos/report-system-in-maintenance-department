@@ -129,6 +129,4 @@ public class ShowReportDto {
 				+ ", description=" + description + ", imagesNames=" + imagesNames + ", failTypesNames=" + failTypesNames
 				+ "]";
 	}
-
-
 }
