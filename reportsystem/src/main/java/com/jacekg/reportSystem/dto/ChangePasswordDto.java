@@ -39,7 +39,11 @@ public class ChangePasswordDto {
 	}
 
 	public void setPassword(String password) {
-		password = password.replaceAll("\\s+", "");
+		
+		if (password != null) {
+			password = password.replaceAll("\\s+", "");
+		}
+		
 		this.password = password;
 	}
 
@@ -48,7 +52,11 @@ public class ChangePasswordDto {
 	}
 
 	public void setMatchingPassword(String matchingPassword) {
-		matchingPassword = matchingPassword.replaceAll("\\s+", "");
+
+		if (matchingPassword != null) {
+			matchingPassword = matchingPassword.replaceAll("\\s+", "");
+		}
+
 		this.matchingPassword = matchingPassword;
 	}
 	

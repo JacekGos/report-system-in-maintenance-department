@@ -63,7 +63,7 @@ public class UserController {
 
 		model.addAttribute("users", users);
 
-		return "users-list";
+		return "user/users-list";
 	}
 
 	@GetMapping("/showUserDetails")
@@ -80,7 +80,7 @@ public class UserController {
 		model.addAttribute("roles", roles);
 		model.addAttribute("userDto", userDto);
 
-		return "user-details";
+		return "user/user-details";
 	}
 
 	@GetMapping("/showUserForm")
@@ -89,7 +89,7 @@ public class UserController {
 		model.addAttribute("userDto", new UserDto());
 		model.addAttribute("roles", roles);
 
-		return "user-form";
+		return "user/user-form";
 	}
 
 	@PostMapping("/processUserForm")
@@ -100,7 +100,7 @@ public class UserController {
 			
 			model.addAttribute("roles", roles);
 			
-			return "user-form";
+			return "user/user-form";
 		}
 		
 		String firstName = userDto.getFirstName();
@@ -116,7 +116,7 @@ public class UserController {
 		userDto.setPassword("password");
 		userDto.setId(0L);
 
-		return "user-confirmation";
+		return "user/user-confirmation";
 	}
 
 	@PostMapping("/processSaveUser")
@@ -128,7 +128,7 @@ public class UserController {
 
 			model.addAttribute("registrationError", "Wystąpił błąd - nazwa konta zajęta.");
 
-			return "user-confirmation";
+			return "user/user-confirmation";
 		}
 
 		userService.save(userDto);
@@ -187,7 +187,7 @@ public class UserController {
 		
 		System.out.println(userName);
 		
-		return "user-options";
+		return "user/user-options";
 	}
 	
 	@GetMapping("/changeUserPassword")
@@ -198,7 +198,7 @@ public class UserController {
 		
 		model.addAttribute("changePasswordDto", changePasswordDto);
 		
-		return "change-password";
+		return "user/change-password";
 	}
 	
 	@PostMapping("/processChangePassword")
@@ -207,10 +207,10 @@ public class UserController {
 			BindingResult bindingResult, Model model) {
 		
 		if (bindingResult.hasErrors()) {
-			return "change-password";
+			System.out.println("my logs, change password ");
+			return "user/change-password";
 		}
 		System.out.println("My logs password: " + changePasswordDto.getPassword());
-//		changePasswordDto.setPassword(changePasswordDto.getPassword().replaceAll("\\s+", ""));
 		
 		User user = userService.getUserWithRoles(changePasswordDto.getId());
 		
@@ -230,7 +230,7 @@ public class UserController {
 		
 		model.addAttribute("changePasswordDto", new ChangePasswordDto());
 		
-		return "change-password";
+		return "user/change-password";
 	}
 	
 	private String generateUserName(String firstName, String lastName) {
