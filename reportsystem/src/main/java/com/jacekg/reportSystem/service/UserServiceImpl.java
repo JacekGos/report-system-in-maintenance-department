@@ -58,18 +58,6 @@ public class UserServiceImpl implements UserService {
 				true,
 				true);
 		
-		
-//		user.setId(formUser.getId());
-//		user.setUserName(formUser.getUserName());
-//		user.setPassword(passwordEncoder.encode(formUser.getPassword()));
-//		user.setFirstName(StringUtils.capitalize(formUser.getFirstName()));
-//		user.setLastName(StringUtils.capitalize(formUser.getLastName()));
-//		user.setEmail(formUser.getEmail());
-//		user.setEnabled(formUser.isEnabled());
-//		user.setNonExpired(true);
-//		user.setCredentialsNonExpired(true);
-//		user.setNonLocked(true);
-		
 		if (formUser.getRole().equals("EMPLOYEE")) {
 			user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_EMPLOYEE")));
 		} 
@@ -135,7 +123,7 @@ public class UserServiceImpl implements UserService {
 	public void setUserPassword(long userId, String password) {
 		
 		User user = userDao.getUserWithRoles(userId);
-		user.getRoles();
+//		user.getRoles();
 		user.setPassword(passwordEncoder.encode(password));
 		
 		userDao.save(user);

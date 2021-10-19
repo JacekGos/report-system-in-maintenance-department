@@ -245,22 +245,4 @@ public class UserController {
 
 		return userName + ++userNumber;
 	}
-
-//	private UserDto fillUserDto(User user) {
-//
-//		UserDto userDto = new UserDto();
-//		userDto.setId(user.getId());
-//		userDto.setFirstName(user.getFirstName());
-//		userDto.setLastName(user.getLastName());
-//		userDto.setUserName(user.getUserName());
-//		userDto.setPassword(user.getPassword());
-//		userDto.setEmail(user.getEmail());
-//		userDto.setRole(user.getRoleName());
-//		userDto.setEnabled(user.isEnabled());
-//		userDto.setCredentialsNonExpired(user.isCredentialsNonExpired());
-//		userDto.setNonExpired(user.isNonExpired());
-//		userDto.setNonLocked(user.isNonLocked());
-//
-//		return userDto;
-//	}
 }
