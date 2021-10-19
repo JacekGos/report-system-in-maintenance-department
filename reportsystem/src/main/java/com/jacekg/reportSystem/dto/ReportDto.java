@@ -19,27 +19,27 @@ public class ReportDto {
 	private Long userId;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@NotNull(message = "is required")
+	@NotNull(message = "wymagane")
 	private LocalDate date;
 	
-	@NotNull(message = "is required")
+	@NotNull(message = "wymagane")
 	@Min(value = 0)
 	@Max(value = 10000)
 	private Integer duration;
 	
-	@NotNull(message = "is required")
-	@Size(min = 1, max = 2100, message = "is required")
+	@NotNull(message = "wymagane")
+	@Size(min = 1, max = 2100, message = "przekroczono ilośc znaków (max 2100)")
 	private String description;
 	
 	private int productionLineId;
 	
-	@Min(value = 1)
+	@Min(value = 1, message = "wybierz stacje")
 	private int productionMachineId;
 	
 	MultipartFile[] images;
 	
-	@NotNull(message = "is required")
-	@Size(min = 1, message = "Co najmniej jedno pole")
+	@NotNull(message = "wymagane")
+	@Size(min = 1, message = "wybierz rodzaj awarii")
 	List<Integer> failTypes;
 	
 	public ReportDto() {

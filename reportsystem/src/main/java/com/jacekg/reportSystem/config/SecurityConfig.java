@@ -40,9 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.addFilterBefore(filter, CsrfFilter.class);
 		
-		
 		http.authorizeRequests()
 			.antMatchers("/").hasRole("EMPLOYEE")
+			.antMatchers("/logout").hasRole("EMPLOYEE")
 			.antMatchers("/report/**").hasRole("EMPLOYEE")
 			.antMatchers("/user/showUserOptions").hasRole("EMPLOYEE")
 			.antMatchers("/user/changeUserPassword").hasRole("EMPLOYEE")

@@ -91,15 +91,15 @@
 										<label for="exampleFormControlTextarea1" class="form-label"><h6>Opis</h6></label>
 										<form:textarea class="form-control" path="description"
 											id="exampleFormControlTextarea1" rows="5"></form:textarea>
-									</div>
 									<form:errors path="description" cssClass="error" />
+									</div>
 
 									<form:label path="images"></form:label>
 									<input type="file" name="images" class="form-control"
 										accept="image/png, image/jpeg, image/png" />
 									<!--accept="image/png, image/jpeg, image/png" multiple /></td> -->
 
-									<c:if test="${message != null}">
+									<c:if test="${ (message != null) and (message != '') }">
 										<div class="alert alert-danger col-xs-offset-1 col-xs-10">
 											${message}</div>
 									</c:if>
