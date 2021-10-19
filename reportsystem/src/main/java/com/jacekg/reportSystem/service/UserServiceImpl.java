@@ -46,16 +46,29 @@ public class UserServiceImpl implements UserService {
 		
 		User user = new User();
 		
-		user.setId(formUser.getId());
-		user.setUserName(formUser.getUserName());
-		user.setPassword(passwordEncoder.encode(formUser.getPassword()));
-		user.setFirstName(StringUtils.capitalize(formUser.getFirstName()));
-		user.setLastName(StringUtils.capitalize(formUser.getLastName()));
-		user.setEmail(formUser.getEmail());
-		user.setEnabled(formUser.isEnabled());
-		user.setNonExpired(true);
-		user.setCredentialsNonExpired(true);
-		user.setNonLocked(true);
+		user = new User(
+				formUser.getId(),
+				formUser.getUserName(),
+				passwordEncoder.encode(formUser.getPassword()),
+				StringUtils.capitalize(formUser.getFirstName()),
+				StringUtils.capitalize(formUser.getLastName()),
+				formUser.getEmail(),
+				formUser.isEnabled(),
+				true,
+				true,
+				true);
+		
+		
+//		user.setId(formUser.getId());
+//		user.setUserName(formUser.getUserName());
+//		user.setPassword(passwordEncoder.encode(formUser.getPassword()));
+//		user.setFirstName(StringUtils.capitalize(formUser.getFirstName()));
+//		user.setLastName(StringUtils.capitalize(formUser.getLastName()));
+//		user.setEmail(formUser.getEmail());
+//		user.setEnabled(formUser.isEnabled());
+//		user.setNonExpired(true);
+//		user.setCredentialsNonExpired(true);
+//		user.setNonLocked(true);
 		
 		if (formUser.getRole().equals("EMPLOYEE")) {
 			user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_EMPLOYEE")));
