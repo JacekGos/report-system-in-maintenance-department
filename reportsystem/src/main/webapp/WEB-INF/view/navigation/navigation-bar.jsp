@@ -8,14 +8,9 @@
 <html>
 <head>
 
-<style>
-	
-
-</style>
-
 </head>
 <body>
-	
+
 	<div>
 	<header
 		class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
@@ -23,13 +18,7 @@
 			href="${pageContext.request.contextPath}/"> <i
 			class="bi bi-house-door"></i> Strona główna
 		</a>
-		
-		
-		
 		<div class="btn-group">
-		
-<%-- 		<h1 class="display-6">użytkownik: <sec:authentication property="principal.username" /></h1>&nbsp;&nbsp;  --%>
-
 			<button type="button" class="btn btn-secondary dropdown-toggle"
 				data-bs-toggle="dropdown" aria-expanded="false">
 				<i class="bi bi-person"></i>&nbsp;
@@ -45,19 +34,16 @@
 						</button>
 					</li>
 				</form:form>
-
 				<form:form action="${pageContext.request.contextPath}/logout"
 					method="POST">
-
 					<button class="dropdown-item" type="submit">
 						<i class="bi bi-power"></i> Wyloguj
 					</button>
-
 				</form:form>
-
 			</ul>
 		</div>
 	</header>
 </div>
+
 </body>
 </html>

@@ -24,46 +24,31 @@
 </head>
 
 <body>
-
 	<div>
 		<br>
-
 		<div class="container">
 			<br>
 			<hr>
-
 			<div class="row">
 				<aside class="col-sm-4"></aside>
-				<!-- col.// -->
 				<aside class="col-sm-4">
 					<div class="card">
-
 						<article class="card-body">
-
 							<h4 class="card-title text-center mb-4 mt-1">Zaloguj się</h4>
 							<hr>
 							<p class="text-success text-center">
-
 								<c:if test="${param.error != null}">
-
 									<div class="alert alert-danger col-xs-offset-1 col-xs-10">
 										Zły login lub hasło.</div>
-
 								</c:if>
-
 								<c:if test="${param.logout != null}">
-
 									<div class="alert alert-success col-xs-offset-1 col-xs-10">
 										Zostałeś wylogowany.</div>
-
 								</c:if>
-
 							</p>
-
 							<form:form
 								action="${pageContext.request.contextPath}/authenticateTheUser"
 								method="POST" class="form-horizontal">
-
 								<div class="form-group">
 									<div class="input-group">
 										<div class="input-group-prepend">
@@ -74,7 +59,6 @@
 											placeholder="Username" type="text">
 									</div>
 								</div>
-
 								<div class="form-group">
 									<div class="input-group">
 										<div class="input-group-prepend">
@@ -84,28 +68,18 @@
 										<input name="password" class="form-control"
 											placeholder="******" type="password">
 									</div>
-
 								</div>
-
 								<div class="form-group">
 									<button type="submit" class="btn btn-primary btn-block">
 										Login</button>
 								</div>
 							</form:form>
-
 						</article>
-
 					</div>
-
 				</aside>
 				<aside class="col-sm-4"></aside>
 			</div>
 		</div>
-
 	</div>
-
-
-
-
 </body>
 </html>

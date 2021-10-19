@@ -4,15 +4,17 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+	
 <!DOCTYPE html>
+
 <html>
 <head>
+
 <meta charset="ISO-8859-1">
 
 </head>
-<body>
 
-	<!-- 	<div class="test"> -->
+<body>
 
 	<nav id="sidebarMenu"
 		class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
@@ -22,7 +24,6 @@
 					class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted ">
 					<span>Raporty</span>
 				</h5>
-
 				<security:authorize
 					access="hasAnyRole('EMPLOYEE', 'MANAGER', 'ADMIN')">
 					<li class="nav-item"><a class="nav-link active"
@@ -37,15 +38,12 @@
 							<span data-feather="home"></span> <i
 							class="bi bi-calendar2-minus"></i> Historia raportów
 					</a></li>
-
 				</security:authorize>
 				<security:authorize access="hasAnyRole('ADMIN')">
-
 					<h5
 						class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted ">
 						<span>Użytkownicy</span>
 					</h5>
-
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page"
 						href="${pageContext.request.contextPath}/user/showUserForm"> <span
@@ -59,14 +57,11 @@
 							class="bi bi-person-lines-fill"></i> Dane użytkowników
 					</a></li>
 				</security:authorize>
-
 				<security:authorize access="hasAnyRole('MANAGER', 'ADMIN')">
-
 					<h5
 						class="sidebar-heading d-flex justify-content-betwe	en align-items-center px-3 mt-4 mb-1 text-muted ">
 						<span>Produkcja</span>
 					</h5>
-
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page"
 						href="${pageContext.request.contextPath}/production/showAddProdLineForm">
@@ -85,12 +80,10 @@
 							<span data-feather="home"></span><i
 							class="bi bi-grid-3x3-gap-fill"></i> Dane linii
 					</a></li>
-
 				</security:authorize>
-
 			</ul>
 		</div>
 	</nav>
-
+	
 </body>
 </html>
