@@ -45,7 +45,7 @@ public class ProductionController {
 		
 		model.addAttribute("productionLineDto", new ProductionLineDto());
 		
-		return "prod-line-form";
+		return "production/prod-line-form";
 	}
 	
 	@GetMapping("/showUpdateProdLineForm")
@@ -59,7 +59,7 @@ public class ProductionController {
 		
 		model.addAttribute("productionLineDto", productionLineDto);
 		
-		return "prod-line-form";
+		return "production/prod-line-form";
 	}
 	
 	@PostMapping("/processProdLineForm")
@@ -67,7 +67,7 @@ public class ProductionController {
 			BindingResult bindingResult, Model model) {
 		
 		if (bindingResult.hasErrors()) {
-			return "prod-line-form";
+			return "production/prod-line-form";
 		}
 		
 		ProductionLine productionLine = productionService.findProdLineByName(productionLineDto.getName());
@@ -79,7 +79,7 @@ public class ProductionController {
 			model.addAttribute("productionLineDto", productionLineDto);
 			model.addAttribute("errorMessage", "Podana linia już istnieje");
 			
-			return "prod-line-form";
+			return "production/prod-line-form";
 		}
 		
 		try {
@@ -92,7 +92,7 @@ public class ProductionController {
 			model.addAttribute("errorMessage", errorMessage);
 		}
 		
-		return "home";
+		return "navigation/home";
 	}
 	
 	@GetMapping("/showAddProdMachineForm")
@@ -105,7 +105,7 @@ public class ProductionController {
 		
 		model.addAttribute("prodLines", prodLines);
 		
-		return "prod-machine-form";
+		return "production/prod-machine-form";
 	}
 	
 	@GetMapping("/showUpdateProdMachineForm")
@@ -127,7 +127,7 @@ public class ProductionController {
 		model.addAttribute("prodLineName", productionMachineDto.getProdLineName());
 		model.addAttribute("productionMachineDto", productionMachineDto);
 		
-		return "prod-machine-form";
+		return "production/prod-machine-form";
 	}
 	
 	@PostMapping("/processProdMachineForm")
@@ -141,7 +141,7 @@ public class ProductionController {
 			
 			model.addAttribute("prodLines", prodLines);
 			
-			return "prod-machine-form";
+			return "production/prod-machine-form";
 		}
 		
 		ProductionMachine productionMachine = 
@@ -161,7 +161,7 @@ public class ProductionController {
 			model.addAttribute("prodLineName", productionMachineDto.getProdLineName());
 			model.addAttribute("errorMessage", "Podana maszyna już istnieje");
 			
-			return "prod-machine-form";
+			return "production/prod-machine-form";
 		}
 		
 		try {
@@ -175,7 +175,7 @@ public class ProductionController {
 			model.addAttribute("errorMessage", errorMessage);
 		}
 		
-		return "home";
+		return "navigation/home";
 	}
 	
 	@GetMapping("/showProdLinesList")
@@ -185,7 +185,7 @@ public class ProductionController {
 		
 		model.addAttribute("prodLines", prodLines);
 		
-		return "prod-lines-list";
+		return "production/prod-lines-list";
 	}
 	
 	@GetMapping("/showProdLineDetails")
@@ -199,7 +199,7 @@ public class ProductionController {
 		model.addAttribute("productionMachines", productionMachines);
 		model.addAttribute("productionLine", productionLine);
 		
-		return "prod-line-details";
+		return "production/prod-line-details";
 	}
 	
 	private Map<Integer, String> loadProdLines() {

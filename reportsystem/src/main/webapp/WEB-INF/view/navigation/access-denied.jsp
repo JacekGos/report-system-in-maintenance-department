@@ -9,12 +9,12 @@
 <head>
 	<title>Home Page</title>
 	
-	<%@ include file="/WEB-INF/view/sources.jsp"%>
+	<%@ include file="/WEB-INF/view/navigation/sources.jsp"%>
 
 </head>
 <body>
 
-	<%@ include file="/WEB-INF/view/navigation-bar.jsp"%>
+	<%@ include file="/WEB-INF/view/navigation/navigation-bar.jsp"%>
 
 	<div class="container-fluid">
 		<div class="row">

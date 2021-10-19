@@ -9,17 +9,17 @@
 <head>
 	<title>Home Page</title>
 	
-	<%@ include file="/WEB-INF/view/sources.jsp"%>
+	<%@ include file="/WEB-INF/view/navigation/sources.jsp"%>
 
 </head>
 <body>
 
-	<%@ include file="/WEB-INF/view/navigation-bar.jsp"%>
+	<%@ include file="/WEB-INF/view/navigation/navigation-bar.jsp"%>
 
 	<div class="container-fluid">
 		<div class="row">
 			
-			<%@ include file="/WEB-INF/view/side-bar-menu.jsp"%>
+			<%@ include file="/WEB-INF/view/navigation/side-bar-menu.jsp"%>
 			
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 				<div

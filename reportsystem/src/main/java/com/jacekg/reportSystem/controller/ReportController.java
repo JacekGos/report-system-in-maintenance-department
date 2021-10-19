@@ -76,8 +76,6 @@ public class ReportController {
 			userId = userService.getUserId(userName);
 		}
 
-		//		String userName = principal.getName();
-
 		prodMachines = new LinkedHashMap<Integer, String>();
 		prodMachines = loadProdMachines();
 
@@ -92,7 +90,7 @@ public class ReportController {
 		model.addAttribute("failTypes", failTypes);
 		model.addAttribute("reportDto", reportDto);
 
-		return "report-form";
+		return "report/report-form";
 	}
 
 	@PostMapping("/processReportForm")
@@ -105,8 +103,6 @@ public class ReportController {
 		System.out.println("My logs: getOriginalFilename " +  images[0].getOriginalFilename());
 		System.out.println("My logs: getSize " +  images[0].getSize());
 
-
-
 		if (bindingResult.hasErrors()) {
 
 			prodMachines = new LinkedHashMap<Integer, String>();
@@ -118,7 +114,7 @@ public class ReportController {
 			model.addAttribute("prodMachines", prodMachines);
 			model.addAttribute("failTypes", failTypes);
 
-			return "report-form";
+			return "report/report-form";
 		}
 
 		try {
@@ -148,7 +144,7 @@ public class ReportController {
 		model.addAttribute("searchReportDto", new SearchReportDto());
 		model.addAttribute("prodMachines", prodMachines);
 		
-		return "report-list";
+		return "report/report-list";
 	}
 	
 	@GetMapping("/showReportsSummary")
@@ -183,7 +179,7 @@ public class ReportController {
 		
 		model.addAttribute("summaryReportDescriptions", summaryReportDescriptions);
 		
-		return "report-summary";
+		return "report/report-summary";
 	}
 
 	@GetMapping("/showReportDetails")
@@ -195,7 +191,7 @@ public class ReportController {
 
 		model.addAttribute("showReportDto", showReportDto);
 
-		return "report-details";
+		return "report/report-details";
 	}
 	
 	@PostMapping("/searchReport")
@@ -224,7 +220,7 @@ public class ReportController {
 		model.addAttribute("searchReportDto", new SearchReportDto());
 		model.addAttribute("prodMachines", prodMachines);
 		
-		return "report-list";
+		return "report/report-list";
 	}
 
 	@GetMapping("/showImage")
