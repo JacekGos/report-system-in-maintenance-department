@@ -10,6 +10,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,6 +36,9 @@ public class UserController {
 	private UserService userService;
 
 	private Map<String, String> roles;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	@PostConstruct
 	protected void loadRoles() {
@@ -111,7 +115,8 @@ public class UserController {
 		userDto.setLastName(lastName);
 		
 		userDto.setUserName(generateUserName(userDto.getFirstName(), userDto.getLastName()));
-		userDto.setPassword("password");
+//		userDto.setPassword("password");
+		userDto.setPassword(passwordEncoder.encode("password"));
 		userDto.setId(0L);
 
 		return "user/user-confirmation";
@@ -137,8 +142,9 @@ public class UserController {
 	@GetMapping("/resetUserPassword")
 	public String resetPassword(@RequestParam("id") long userId, Model model) {
 
-		userService.setUserPassword(userId, "password");
-
+//		userService.setUserPassword(userId, "password");
+		userService.setUserPassword(userId, passwordEncoder.encode("password"));
+		
 		model.addAttribute("id", userId);	
 
 		return "redirect:/user/showUserDetails";
@@ -216,7 +222,7 @@ public class UserController {
 			
 			UserDto userDto = new UserDto();
 			userDto = Utilities.fillUserDto(user);
-			userDto.setPassword(changePasswordDto.getPassword());
+			userDto.setPassword(passwordEncoder.encode(changePasswordDto.getPassword()));
 			
 			userService.save(userDto);
 			

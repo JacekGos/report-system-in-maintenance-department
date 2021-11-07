@@ -49,7 +49,8 @@ public class UserServiceImpl implements UserService {
 		user = new User(
 				formUser.getId(),
 				formUser.getUserName(),
-				passwordEncoder.encode(formUser.getPassword()),
+//				passwordEncoder.encode(formUser.getPassword()),
+				formUser.getPassword(),
 				StringUtils.capitalize(formUser.getFirstName()),
 				StringUtils.capitalize(formUser.getLastName()),
 				formUser.getEmail(),
@@ -124,7 +125,8 @@ public class UserServiceImpl implements UserService {
 		
 		User user = userDao.getUserWithRoles(userId);
 //		user.getRoles();
-		user.setPassword(passwordEncoder.encode(password));
+//		user.setPassword(passwordEncoder.encode(password));
+		user.setPassword(password);
 		
 		userDao.save(user);
 	}
