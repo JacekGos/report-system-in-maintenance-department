@@ -21,6 +21,7 @@ An appliation designed to report on activities in the maintenance department.
 
 <h2 align="left">Demo</h2>
 
+https://user-images.githubusercontent.com/46130249/140650649-f2c98a71-60fa-47a8-8551-26aaffe40f8e.mp4
 
 
 
