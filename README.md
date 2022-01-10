@@ -19,7 +19,7 @@ An appliation designed to report on activities in the maintenance department.
 - Spring 5
 - Spring Security 5
 - Hibernate 5
-- PostgeSQL 13
+- PostgreSQL 13
 - JSTL
 - Bootstrap 5
 
